@@ -12,9 +12,9 @@
   <% for remote_app in @remote_apps %>
     <tr>
       <td><%= remote_app.app_id %></td>
-      <td><%= remote_app.entry_id %></td>
+      <td><%= remote_app.entry.name %></td>
       <td><%= remote_app.name %></td>
-      <td><%= remote_app.web_url %></td>
+      <td><%= link_to remote_app.web_url, remote_app.web_url %></td>
       <td><%= remote_app.create_status %></td>
       <td><%= remote_app.configuration %></td>
       <td><%= link_to "Show", remote_app %></td>

@@ -6,7 +6,7 @@
 </p>
 <p>
   <strong>Entry:</strong>
-  <%= @remote_app.entry_id %>
+  <%= @remote_app.entry.name %>
 </p>
 <p>
   <strong>Name:</strong>
@@ -14,7 +14,7 @@
 </p>
 <p>
   <strong>Web Url:</strong>
-  <%= @remote_app.web_url %>
+  <%= link_to @remote_app.web_url, @remote_app.web_url %>
 </p>
 <p>
   <strong>Create Status:</strong>
