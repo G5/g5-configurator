@@ -1,0 +1,24 @@
+<% title "Remote Apps" %>
+
+<table>
+  <tr>
+    <th>App</th>
+    <th>Entry</th>
+    <th>Name</th>
+    <th>Web Url</th>
+    <th>Create Status</th>
+    <th>Configuration</th>
+  </tr>
+  <% for remote_app in @remote_apps %>
+    <tr>
+      <td><%= remote_app.app_id %></td>
+      <td><%= remote_app.entry_id %></td>
+      <td><%= remote_app.name %></td>
+      <td><%= remote_app.web_url %></td>
+      <td><%= remote_app.create_status %></td>
+      <td><%= remote_app.configuration %></td>
+      <td><%= link_to "Show", remote_app %></td>
+    </tr>
+  <% end %>
+</table>
+

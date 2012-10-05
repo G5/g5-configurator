@@ -1,0 +1,30 @@
+<% title "Remote App" %>
+
+<p>
+  <strong>App:</strong>
+  <%= @remote_app.app_id %>
+</p>
+<p>
+  <strong>Entry:</strong>
+  <%= @remote_app.entry_id %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @remote_app.name %>
+</p>
+<p>
+  <strong>Web Url:</strong>
+  <%= @remote_app.web_url %>
+</p>
+<p>
+  <strong>Create Status:</strong>
+  <%= @remote_app.create_status %>
+</p>
+<p>
+  <strong>Configuration:</strong>
+  <%= @remote_app.configuration %>
+</p>
+
+<p>
+  <%= link_to "View All", remote_apps_path %>
+</p>
