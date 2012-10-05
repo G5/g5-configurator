@@ -59,7 +59,7 @@ GEM
       guard (>= 1.1)
       spork (>= 0.8.4)
       sys-proctable
-    hentry_consumer (0.1.1)
+    hentry_consumer (0.1.2)
       nokogiri
     heroku (2.32.6)
       heroku-api (~> 0.3.5)
@@ -167,7 +167,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   guard-rspec
   guard-spork
-  hentry_consumer
+  hentry_consumer (~> 0.1.2)
   heroku (~> 2.32.6)
   heroku-api
   jquery-rails

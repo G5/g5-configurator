@@ -3,7 +3,7 @@ source :rubygems
 gem "rails", "3.2.7"
 gem "pg"
 gem "jquery-rails"
-gem "hentry_consumer"
+gem "hentry_consumer", "~> 0.1.2"
 gem "heroku-api"
 
 group :assets do
