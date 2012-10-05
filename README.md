@@ -17,6 +17,11 @@ vi config/database.yml # edit username
 rake db:create db:schema:load db:seed
 ```
 
+2. Add HEROKU_API_KEY to ENV
+in .bash_profile (or whatever you use)
+```ruby
+export HEROKU_API_KEY="some_key_here"
+```
 
 ## Authors
 
