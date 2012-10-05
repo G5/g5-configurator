@@ -33,6 +33,11 @@ describe RemoteApp do
       app.new_record?.should be_true
     end
     
+    it "delete the app on destroy" do
+      app.destroy
+      puts heroku.get_apps.body.should be_empty
+    end
+    
     its(:name)          { should eq "mock-app" }
     its(:web_url)       { should eq "http://mock-app.herokuapp.com/" }
     its(:create_status) { should eq "complete"}
