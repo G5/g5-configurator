@@ -1,4 +1,6 @@
 Configurator::Application.routes.draw do
-  resources :remote_apps, path: "/remote-app/"
-    root :to => 'remote_apps#index'
+  resources :remote_apps do
+    get :migrate, on: :member
+  end
+  root :to => 'remote_apps#index'
 end
