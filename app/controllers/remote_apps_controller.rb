@@ -6,4 +6,10 @@ class RemoteAppsController < ApplicationController
   def show
     @remote_app = RemoteApp.find(params[:id])
   end
+  
+  def migrate
+    @remote_app = RemoteApp.find(params[:id])
+    @remote_app.migrate
+  end
+  
 end

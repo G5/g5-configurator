@@ -15,12 +15,23 @@ class RemoteApp < ActiveRecord::Base
   
   def spin_up
     response = heroku.post_app(name: name)
-    puts "*" * 80
-    puts response.inspect
     create_from_response(response)
+    add_addon('deployhooks:http', url: "https://g5-configurator.herokuapp.com/remote_apps/#{r.id}/migrate")
   rescue Heroku::API::Errors::RequestFailed => e
     self.errors[:base] = JSON.parse(e.response.body)["error"]
     false
+  end
+  
+  def migrate
+    heroku.post_ps(name, 'rake db:migrate') 
+  end
+  
+  def add_addon(addon, options={})
+    heroku.post_addon(name, addon, options)
+  end
+  
+  def delete_addon(addon)
+    heroku.delete_addon(name, addon)
   end
   
   private
@@ -28,7 +39,9 @@ class RemoteApp < ActiveRecord::Base
   def create_from_response(response)
     self.web_url       = response.body["web_url"]
     self.create_status = response.body["create_status"]
-    self.save
+    if self.save
+      Resque.enqueue(Deployer, self.id)
+    end
   end
   
   def delete_remote_app
