@@ -16,7 +16,7 @@ class RemoteApp < ActiveRecord::Base
   def spin_up
     response = heroku.post_app(name: name)
     create_from_response(response)
-    add_addon('deployhooks:http', url: "https://g5-configurator.herokuapp.com/remote_apps/#{r.id}/migrate")
+    add_addon('deployhooks:http', url: "https://g5-configurator.herokuapp.com/remote_apps/#{self.id}/migrate")
   rescue Heroku::API::Errors::RequestFailed => e
     self.errors[:base] = JSON.parse(e.response.body)["error"]
     false
