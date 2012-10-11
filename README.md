@@ -1,6 +1,6 @@
-# h-entry Publisher
+# Configurator
 
-A proof of concept Rails application that publishes a feed consisting of h-entry posts as defined by [Microformats 2](http://microformats.org/wiki/microformats-2#h-entry). See the demo at [hentry-publisher.herokuapp.com](http://hentry-publisher.herokuapp.com).
+TODO: Write Todo
 
 
 ## Setup
