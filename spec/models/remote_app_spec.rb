@@ -35,7 +35,7 @@ describe RemoteApp do
     
     it "delete the app on destroy" do
       app.destroy
-      puts heroku.get_apps.body.should be_empty
+      heroku.get_apps.body.should be_empty
     end
     
     its(:name)          { should eq "mock-app" }

@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Entry do
   before do
     Entry.stub(:feed) { HentryConsumer.parse(File.open('spec/support/feed.html')) }
+    Entry.any_instance.stub(:spin_up_app) { true }
   end
   
   describe "consuming feed" do
@@ -20,9 +21,6 @@ describe Entry do
         entry.save
       end
       
-      it "should spin up an app for each feed" do
-        entry.remote_app.create_status.should eq "complete"
-      end
     end
   end
   it "opens the file in support" do

@@ -10,7 +10,6 @@ class Entry < ActiveRecord::Base
     entries = feed.entries.map do |hentry|
       find_or_initialize_from_entry(hentry)
     end
-    puts "******"
     entries.each(&:save)
   end
   

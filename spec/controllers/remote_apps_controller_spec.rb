@@ -1,16 +1,15 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe RemoteAppsController do
-  fixtures :all
-  render_views
-
+  let(:app) { RemoteApp.create(name: "mock-app")  }
+  before { app.stub(:heroku) {  } }
   it "index action should render index template" do
     get :index
     response.should render_template(:index)
   end
 
   it "show action should render show template" do
-    get :show, :id => RemoteApp.first
+    get :show, :id => app.id
     response.should render_template(:show)
   end
 end
