@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121005190019) do
+ActiveRecord::Schema.define(:version => 20121018215227) do
 
   create_table "entries", :force => true do |t|
     t.string   "bookmark"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(:version => 20121005190019) do
     t.datetime "published_at"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "instructions", :force => true do |t|
+    t.string   "target"
+    t.text     "body"
+    t.integer  "deployer_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "instructions", ["deployer_id"], :name => "index_instructions_on_deployer_id"
+
+  create_table "posts", :force => true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.string   "username"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "remote_apps", :force => true do |t|

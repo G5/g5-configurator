@@ -1,0 +1,19 @@
+<% title "Configurations" %>
+
+<table>
+  <tr>
+    <th>Target</th>
+    <th>Body</th>
+  </tr>
+  <% for instruction in @instructions %>
+    <tr>
+      <td><%= instruction.target %></td>
+      <td><%= instruction.body %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p>
+  <%= link_to "Back", root_path %>
+  <%= link_to "New Configuration", new_remote_app_instruction_path(@remote_app) %>
+</p>

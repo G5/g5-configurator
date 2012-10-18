@@ -3,6 +3,7 @@ class RemoteApp < ActiveRecord::Base
   validates :name, uniqueness: true
   before_destroy :delete_remote_app
   belongs_to :entry
+  has_many :instructions, foreign_key: :deployer_id
   # {"name":"luna-sandals","released_at":"2012/10/04 16:05:10 -0700","repo_migrate_status":"complete","create_status":"complete","requested_stack":null,"stack":"bamboo-mri-1.9.2","slug_size":46575616,"created_at":"2010/06/14 11:40:07 -0700","updated_at":"2012/10/05 10:34:55 -0700","buildpack_provided_description":"Ruby/Rails","git_url":"git@heroku.com:luna-sandals.git","owner_name":null,"id":211652,"database_size":null,"owner_email":"vegan.bookis@gmail.com","repo_size":154157056,"web_url":"http://luna-sandals.heroku.com/","domain_name":{"default":true,"base_domain":"heroku.com","created_at":null,"updated_at":null,"app_id":211652,"domain":"luna-sandals.heroku.com","id":null},"dynos":2,"workers":0}
   
   def app

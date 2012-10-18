@@ -1,0 +1,9 @@
+one:
+  target: MyString
+  body: MyText
+  deployer_id: 1
+
+two:
+  target: MyString
+  body: MyText
+  deployer_id: 1
