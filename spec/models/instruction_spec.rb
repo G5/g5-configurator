@@ -10,9 +10,6 @@ describe Instruction do
     let(:instruction) { Instruction.new }
     before { instruction.save }
     
-    it "isn't valid without a target" do
-      instruction.errors.full_messages.should include "Target can't be blank"
-    end
     it "isn't valid without a body" do
       instruction.errors.full_messages.should include "Body can't be blank"
     end

@@ -1,5 +1,5 @@
 Configurator::Application.routes.draw do
-  resources :instructions
+  resources :instructions, path: :configurations
   resources :remote_apps do
     post :migrate, on: :member
   end
