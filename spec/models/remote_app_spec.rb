@@ -5,7 +5,7 @@ describe RemoteApp do
   let(:app) { RemoteApp.new(remote_attrs) }
   let(:heroku) { Heroku::API.new(mock: true) }
   before { 
-    heroku.delete_app('g5-client-deployer-mock-app') if heroku.get_apps.body.first
+    heroku.delete_app('g5-cd-mock-app') if heroku.get_apps.body.first
     app.stub(:heroku) { heroku }
   }
   
@@ -39,9 +39,15 @@ describe RemoteApp do
     end
     
     its(:name)          { should eq "mock-app" }
-    its(:canonical_name) { should eq "g5-client-deployer-mock-app"}
-    its(:web_url)       { should eq "http://g5-client-deployer-mock-app.herokuapp.com/" }
+    its(:canonical_name) { should eq "g5-cd-mock-app"}
+    its(:web_url)       { should eq "http://g5-cd-mock-app.herokuapp.com/" }
     its(:create_status) { should eq "complete"}
+    
+    context "deployer has a really long name" do
+      before { app.stub(:name) { "twenty-five-chars-loooong"}}
+      its(:canonical_name) { should eq "g5-cd-twenty-five-chars-loooon"}
+      it { subject.canonical_name.size.should eq 30}
+    end
   end
   
 end
