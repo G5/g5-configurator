@@ -1,7 +1,7 @@
 class InstructionsController < ApplicationController
   
   def index
-    @instructions = Instruction.all
+    @instructions = Instruction.order('created_at desc')
   end
   
   def show
