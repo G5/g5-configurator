@@ -5,7 +5,7 @@ describe RemoteApp do
   let(:app) { RemoteApp.new(remote_attrs) }
   let(:heroku) { Heroku::API.new(mock: true) }
   before { 
-    heroku.delete_app('mock-app') if heroku.get_apps.body.first
+    heroku.delete_app('g5-client-deployer-mock-app') if heroku.get_apps.body.first
     app.stub(:heroku) { heroku }
   }
   
@@ -39,7 +39,8 @@ describe RemoteApp do
     end
     
     its(:name)          { should eq "mock-app" }
-    its(:web_url)       { should eq "http://mock-app.herokuapp.com/" }
+    its(:canonical_name) { should eq "g5-client-deployer-mock-app"}
+    its(:web_url)       { should eq "http://g5-client-deployer-mock-app.herokuapp.com/" }
     its(:create_status) { should eq "complete"}
   end
   
