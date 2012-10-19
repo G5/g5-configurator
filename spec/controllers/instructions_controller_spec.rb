@@ -20,6 +20,12 @@ describe InstructionsController do
     response.should render_template(:new)
   end
 
+  it "create action should render new template when model is invalid" do
+    Instruction.any_instance.stubs(:valid?).returns(false)
+    post :create
+    response.should render_template(:new)
+  end
+
   it "create action should redirect when model is valid" do
     Instruction.any_instance.stubs(:valid?).returns(true)
     post :create, :remote_app_id => 1, instruction: {target: "example.com", body: "blah"}

@@ -1,0 +1,37 @@
+<hr/>
+<article class="h-entry">
+  <h1 class="p-name">
+    <a href="<%= instruction_url(instruction) %>" rel="bookmark">
+      <%= instruction.remote_app.name %>
+    </a>
+  </h1>
+  
+  <p class="p-summary">New Configuration for Deployer <%= instruction.remote_app.name %></p>
+  <time datetime="<%= computer_readable_time(instruction.created_at) %>" class="dt-published">
+    <%= human_readable_time instruction.created_at %>
+  </time>
+  <a class="p-category" href="http://g5.com/tag/new-configuration" rel="tag">
+    New Configuration
+  </a>
+  <a class="u-url u-uid" href="<%= instruction_url(instruction) %>">
+    <%= instruction_url(instruction) %>
+  </a>
+
+  <dl class="e-content">
+    <dt class='target'>Target Apps</dt> 
+    <dd class="app">
+      <p class="p-name"><%= instruction.remote_app.name %></p>
+      <a class="u-url u-uid" href="<%= instruction.remote_app.web_url %>">
+        <%= instruction.remote_app.web_url %>
+      </a>
+    </dd>
+    
+    <dt class='configuration'>Configuration</dt>
+    <dd>
+      <code>
+        <%= simple_format instruction.body %>
+      </code>
+    </dd>
+  </dl>
+  
+</article>

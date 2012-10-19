@@ -1,17 +1,19 @@
 <% title "New Configuration" %>
 
-<%= form_for [@remote_app, @instruction] do |f| %>
+<%= form_for @instruction do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :target %><br />
-    <%= f.text_field :target %>
+    <%= f.label :deployer_id, "Deployer" %>
+    <%= f.collection_select :deployer_id, RemoteApp.all, :id, :name %>
   </p>
+  
   <p>
     <%= f.label :body %><br />
-    <%= f.text_area :body %>
+    <%= f.text_area :body, rows: 5 %>
   </p>
+  
   <p><%= f.submit "Save" %></p>
 <% end %>
 
 
-<p><%= link_to "Back to List", remote_app_instructions_path(@remote_app) %></p>
+<p><%= link_to "Back to Feed", instructions_path %></p>

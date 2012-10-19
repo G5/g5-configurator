@@ -1,5 +1,6 @@
 class Instruction < ActiveRecord::Base
-  attr_accessible :target, :body
-  belongs_to :remote_app
-  validates :target, :body, :deployer_id, presence: true
+  default_scope order('created_at desc')
+  attr_accessible :target, :body, :deployer_id
+  belongs_to :remote_app, foreign_key: :deployer_id
+  validates :body, :deployer_id, presence: true
 end

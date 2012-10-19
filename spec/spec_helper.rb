@@ -13,6 +13,10 @@ Spork.prefork do
     config.use_transactional_fixtures = true
     config.infer_base_class_for_anonymous_controllers = false
     config.order = "random"
+    config.before(:each) do 
+      RemoteApp.delete_all
+      Instruction.delete_all
+    end
   end
   Spork.trap_method(Rails::Application, :eager_load!)
   require File.expand_path("../../config/environment", __FILE__)

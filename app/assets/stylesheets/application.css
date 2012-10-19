@@ -12,6 +12,15 @@ a {
   color: #0000FF;
 }
 
+code {
+  font-style: italic;
+  display: block;
+  background-color: #DCE7F0;
+  border: 1px solid #ddd;
+  padding: 0 10px;
+  margin: 5px 0;
+}
+
 .clear {
   clear: both;
   height: 0;
@@ -77,3 +86,4 @@ a {
 .h-entry a {
   display: block;
 }
+
