@@ -1,7 +1,7 @@
 class RemoteApp < ActiveRecord::Base
   class AppTypeError < RuntimeError; end
   attr_accessible :name, :app_type
-  validates :name, uniqueness: true
+  validates :name, uniqueness: {scope: :app_type}
   validates :app_type, presence: true
   before_destroy :delete_remote_app
   belongs_to :entry
