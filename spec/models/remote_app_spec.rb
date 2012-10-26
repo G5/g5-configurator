@@ -5,13 +5,10 @@ describe RemoteApp do
   let(:app) { RemoteApp.new(remote_attrs) }
   let(:heroku) { Heroku::API.new(mock: true) }
   before { 
+    app.app_type = "ClientDeployer"
     heroku.delete_app('g5-cd-mock-app') if heroku.get_apps.body.first
     app.stub(:heroku) { heroku }
   }
-  
-  it "is a mock app" do
-    app.mock?.should be_true
-  end
   
   describe "creates an app" do
     before { app.spin_up }
@@ -27,6 +24,7 @@ describe RemoteApp do
     
     it "doesn't save if it's a duplicate" do
       app = RemoteApp.new(name: "mock-app")
+      app.app_type = "ClientDeployer"
       app.stub(:heroku) { heroku }
       app.spin_up
       app.errors.full_messages.should include "Name is already taken"
@@ -42,6 +40,16 @@ describe RemoteApp do
     its(:canonical_name) { should eq "g5-cd-mock-app"}
     its(:web_url)       { should eq "http://g5-cd-mock-app.herokuapp.com/" }
     its(:create_status) { should eq "complete"}
+    
+    it "has a different canonical name with a different app type" do
+      app.stub(:app_type) { "ClientHub" }
+      app.canonical_name.should eq "g5-ch-mock-app"
+    end
+
+    it "raises an error if it doesn't recongnize the app type" do
+      app.stub(:app_type) { "Blah" }
+      expect { app.canonical_name }.to raise_error RemoteApp::AppTypeError
+    end
     
     context "deployer has a really long name" do
       before { app.stub(:name) { "twenty-five-chars-loooong"}}

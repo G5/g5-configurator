@@ -1,7 +1,7 @@
 class Entry < ActiveRecord::Base
   # attr_accessible :title, :body
   validates :bookmark, uniqueness: true
-  has_one :remote_app, dependent: :destroy
+  has_many :remote_apps
   after_create :spin_up_app
   
   HUB_URL = "http://g5-hub.herokuapp.com/"
@@ -25,9 +25,11 @@ class Entry < ActiveRecord::Base
   private
   
   def spin_up_app
-    app = build_remote_app(name: self.name.parameterize)
-    app.save
-    app.spin_up
+    %w(ClientHub ClientDeployer).each do |app_type|
+      app = remote_apps.build(name: self.name.parameterize, app_type: app_type)
+      app.save
+      app.spin_up
+    end
   end
   
   def self.feed

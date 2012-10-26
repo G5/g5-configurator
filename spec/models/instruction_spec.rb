@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Instruction do
-  let(:remote_app) { RemoteApp.create(name: "mock-app") }
+  let(:remote_app) { RemoteApp.create(name: "mock-app", app_type: "ClientHub") }
   it "should be valid" do
     remote_app.instructions.new(:target => "http://blah.com", body: "blah").should be_valid
   end

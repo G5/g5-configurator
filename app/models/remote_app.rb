@@ -1,6 +1,8 @@
 class RemoteApp < ActiveRecord::Base
-  attr_accessible :name
+  class AppTypeError < RuntimeError; end
+  attr_accessible :name, :app_type
   validates :name, uniqueness: true
+  validates :app_type, presence: true
   before_destroy :delete_remote_app
   belongs_to :entry
   has_many :instructions, foreign_key: :deployer_id
@@ -9,12 +11,14 @@ class RemoteApp < ActiveRecord::Base
     heroku.get_app(canonical_name)
   end
   
-  def mock?
-    heroku.as_json["connection"].connection[:mock]
-  end
-  
   def canonical_name
-    "g5-cd-" + name[0,24]
+    prefix = case self.app_type
+    when "ClientDeployer" then "g5-cd-"
+    when "ClientHub"      then "g5-ch-"
+    else
+      raise AppTypeError, "Unrecongnized App Type"
+    end
+    prefix + truncated_name
   end
   
   def spin_up
@@ -39,6 +43,10 @@ class RemoteApp < ActiveRecord::Base
   end
   
   private
+  
+  def truncated_name
+    name[0,24]
+  end
   
   def create_from_response(response)
     self.web_url       = response.body["web_url"]
