@@ -6,6 +6,7 @@ TODO: Write Todo
 ## Setup
 
 1. Install all the required gems
+
 ```bash
 bundle
 ```
@@ -26,6 +27,7 @@ export HEROKU_API_KEY="some_key_here"
 ## Authors
 
   * Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
+  * Bookis Smuin / [@bookis](https://github.com/bookis)
 
 
 ## Contributing
