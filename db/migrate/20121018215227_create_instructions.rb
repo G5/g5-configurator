@@ -3,14 +3,12 @@ class CreateInstructions < ActiveRecord::Migration
     create_table :instructions do |t|
       t.string :target
       t.text :body
-      t.integer :entry_id
+      t.integer :remote_app_id
       t.timestamps
     end
-    add_index :instructions, :deployer_id
   end
 
   def self.down
-    remove_index :instructions, :deployer_id
     drop_table :instructions
   end
 end

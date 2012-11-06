@@ -1,4 +1,5 @@
-r = RemoteApp.new
-r.web_url = "http://g5-client-app-creator.herokuapp.com"
-r.name    = "g5-client-app-creator"
+RemoteApp.skip_callback(:create, :after, :create_instruction)
+r      = RemoteApp.new
+r.name = "g5-client-app-creator"
 r.save
+RemoteApp.set_callback(:create, :after, :create_instruction)

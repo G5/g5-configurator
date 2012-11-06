@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(:version => 20121026214201) do
   create_table "instructions", :force => true do |t|
     t.string   "target"
     t.text     "body"
-    t.integer  "deployer_id"
+    t.integer  "remote_app_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  add_index "instructions", ["deployer_id"], :name => "index_instructions_on_deployer_id"
+  add_index "instructions", ["remote_app_id"], :name => "index_instructions_on_remote_app_id"
 
   create_table "posts", :force => true do |t|
     t.string   "name"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(:version => 20121026214201) do
     t.integer  "app_id"
     t.integer  "entry_id"
     t.string   "name"
-    t.string   "web_url"
+    t.string   "app_url"
     t.string   "create_status", :default => "pending"
     t.text     "configuration"
     t.datetime "created_at",                           :null => false
