@@ -3,7 +3,7 @@ class CreateInstructions < ActiveRecord::Migration
     create_table :instructions do |t|
       t.string :target
       t.text :body
-      t.integer :deployer_id
+      t.integer :entry_id
       t.timestamps
     end
     add_index :instructions, :deployer_id
