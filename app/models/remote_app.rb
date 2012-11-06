@@ -10,11 +10,11 @@ class RemoteApp < ActiveRecord::Base
   end
   
   def instruction_body
-    "<p class='p-name'>#{name}</p>"
+    "<p class='p-name'>#{truncated_name}</p>"
   end
   
   def app_url
-    "http://#{name}.herokuapp.com"
+    "http://#{truncated_name}.herokuapp.com"
   end
   
   private
