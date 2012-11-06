@@ -1,8 +1,8 @@
 class Entry < ActiveRecord::Base
   validates :bookmark, uniqueness: true
-  has_one :remote_app
-  accepts_nested_attributes_for :remote_app
-
+  has_many :remote_apps
+  accepts_nested_attributes_for :remote_apps
+  PREFIXES = %w(g5-chd g5-ch)
   HUB_URL = "http://g5-hub.herokuapp.com/"
 
 
@@ -13,12 +13,15 @@ class Entry < ActiveRecord::Base
   end
 
   def self.find_or_create_from_entry(hentry)
-    a=self.find_or_create_by_bookmark(hentry.bookmark) do |entry|
+    self.find_or_create_by_bookmark(hentry.bookmark) do |entry|
       entry.name         = hentry.name
       entry.summary      = hentry.summary
       entry.content      = hentry.content
       entry.published_at = hentry.published_at
-      entry.remote_app_attributes = {name: hentry.name.parameterize}
+      entry.remote_apps_attributes = [
+        {name: "g5-chd-#{hentry.name.parameterize}"},
+        {name: "g5-ch-#{hentry.name.parameterize}"}
+      ]
     end
   end
 

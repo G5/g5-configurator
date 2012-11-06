@@ -27,25 +27,15 @@ ActiveRecord::Schema.define(:version => 20121026214201) do
     t.string   "target"
     t.text     "body"
     t.integer  "remote_app_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "instructions", ["remote_app_id"], :name => "index_instructions_on_remote_app_id"
-
-  create_table "posts", :force => true do |t|
-    t.string   "name"
-    t.text     "content"
-    t.string   "username"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "remote_apps", :force => true do |t|
     t.integer  "app_id"
     t.integer  "entry_id"
     t.string   "name"
-    t.string   "app_url"
+    t.string   "uid"
     t.string   "create_status", :default => "pending"
     t.text     "configuration"
     t.datetime "created_at",                           :null => false
