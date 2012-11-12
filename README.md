@@ -1,12 +1,12 @@
 # G5 Configurator
 
-Pulls atom feed from g5-hub, publishes feed of instructions to targets (g5-client-app-creator, g5-ch-*, g5-chd-*)
+* Consumes g5-hub's feed
+* Publishes feed of instructions to targets (g5-client-app-creator, g5-ch-*, g5-chd-*)
 
 
 ## Setup
 
 1. Install all the required gems
-
 ```bash
 bundle
 ```
@@ -26,8 +26,8 @@ export HEROKU_API_KEY="some_key_here"
 
 ## Authors
 
-  * Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
-  * Bookis Smuin / [@bookis](https://github.com/bookis)
+* Jessica Lynn Suttles / [@jlsuttles](https://github.com/jlsuttles)
+* Bookis Smuin / [@bookis](https://github.com/bookis)
 
 
 ## Contributing
