@@ -26,5 +26,4 @@ describe RemoteApp do
       its(:truncated_name) { should eq "twenty-five-chars-loooon"}
     end
   end
-
 end

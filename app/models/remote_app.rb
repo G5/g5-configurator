@@ -7,11 +7,11 @@ class RemoteApp < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   
-  after_create :create_instruction
-  
-  def create_instruction
-    client_app_creator.instructions.create(body: instruction_body)
-  end
+  # after_create :create_instruction
+  # 
+  # def create_instruction
+  #   client_app_creator.instructions.create(body: instruction_body)
+  # end
   
   def instruction_body
     "<p class='p-name'>#{truncated_name}</p><a class='u-url u-uid' href='#{git_repo}'>#{git_repo}</a>"

@@ -10,12 +10,12 @@ class Entry < ActiveRecord::Base
   validates :bookmark, uniqueness: true
 
   class << self
-    def feed
-      HentryConsumer.parse(FEED_URL)
+    def feed(file_or_url=FEED_URL)
+      HentryConsumer.parse(file_or_url)
     end
 
-    def consume_feed
-      feed.entries.each do |hentry|
+    def consume_feed(file_or_url=FEED_URL)
+      feed(file_or_url).entries.each do |hentry|
         find_or_create_from_hentry(hentry)
       end
     end
