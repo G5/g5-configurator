@@ -5,10 +5,6 @@ gem "pg"
 gem "jquery-rails"
 
 gem "hentry_consumer", "~> 0.1.2"
-gem "heroku-api"
-gem "git"
-gem "resque", "~> 1.22.0"
-gem "typhoeus"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"
