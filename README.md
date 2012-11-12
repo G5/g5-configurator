@@ -1,6 +1,6 @@
-# Configurator
+# G5 Configurator
 
-TODO: Write Todo
+Pulls atom feed from g5-hub, publishes feed of instructions to targets (g5-client-app-creator, g5-ch-*, g5-chd-*)
 
 
 ## Setup
@@ -18,11 +18,11 @@ vi config/database.yml # edit username
 rake db:create db:schema:load db:seed
 ```
 
-2. Add HEROKU_API_KEY to ENV
-in .bash_profile (or whatever you use)
-```ruby
+1. Add HEROKU_API_KEY to ENV in .bash_profile (or whatever you use)
+```bash
 export HEROKU_API_KEY="some_key_here"
 ```
+
 
 ## Authors
 
@@ -41,7 +41,7 @@ export HEROKU_API_KEY="some_key_here"
 1. Create new Pull Request
 
 If you find bugs, have feature requests or questions, please
-[file an issue](https://github.com/G5/configurator/issues).
+[file an issue](https://github.com/g5search/g5-configurator/issues).
 
 
 ## License
