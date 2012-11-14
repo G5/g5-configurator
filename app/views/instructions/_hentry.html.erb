@@ -1,0 +1,53 @@
+<dl class="h-entry">
+  <dt>Name</dt>
+  <dd>
+    <span class="p-name"><%= instruction.remote_app.name %></span>
+  </dd>
+  <dt>Bookmark/UID</dt>
+  <dd>
+    <a href="<%= instruction_url(instruction) %>" rel="bookmark" class="u-url u-uid">
+      <%= instruction_url(instruction) %>
+    </a>
+  </dd>
+  <dt>Summary</dt>
+  <dd>
+    <span class="p-summary">New Configuration for 1 Deployer</span>
+  </dd>
+  <dt>Published</dt>
+  <dd>
+    <time datetime="<%= instruction.created_at_computer_readable %>" class="dt-published">
+      <%= instruction.created_at_human_readable %>
+    </time>
+  </dd>
+  <dt>Category</dt>
+  <dd>
+    <a class="p-category" href="#" rel="tag">
+      New Configuration
+    </a>
+  </dd>
+  <dt>Author</dt>
+  <dd>
+    <dl class="p-author h-card">
+      <dt>UID</dt>
+      <dd>
+        <a class="u-url u-uid" href="<%= root_url %>">
+          <%= root_url %>
+        </a>
+      </dd>
+      <dt>Name</dt>
+      <dd>
+        <span class="p-name">g5-configurator</span>
+      </dd>
+    </dl>
+  </dd>
+  <dt>Content</dt>
+  <dd>
+    <dl class="e-content">
+      <dt>Instruction</dt>
+      <dd>
+        <%= render instruction %>
+      </dd>
+    </dl>
+  </dd>
+</dl>
+<hr/>

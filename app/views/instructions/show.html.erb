@@ -1,6 +1,6 @@
-<% title "Configuration for " + @instruction.remote_app.name %>
-<p><%= link_to "New Configuration", new_instruction_path %></p>
+<% title "Instruction" %>
+<% header_right link_to("All Instructions", instructions_path, class: "btn") %>
 
-<%= render @instruction %>
-
-<p><%= link_to "Back", instructions_path %></p>
+<section class="well">
+  <%= render @instruction %>
+</section>

@@ -1,0 +1,11 @@
+/*
+ *= require_self
+ *= require_tree .
+*/
+
+/* Import "bootstrap" in your SCSS file of choice to get all of Bootstrap's 
+ * styles, mixins and variables! We recommend against using //= require 
+ * directives, since none of your other stylesheets will be able to use the 
+ * awesome mixins that Bootstrap has defined. */
+@import "bootstrap";
+@import "bootstrap-responsive";

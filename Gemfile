@@ -5,6 +5,9 @@ gem "rails", "3.2.7"
 gem "pg"
 gem "jquery-rails"
 
+gem "quiet_assets", "~> 1.0.1"
+gem "bootstrap-sass", "~> 2.1.0.1"
+
 gem "hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer"
 gem "g5_hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/g5_hentry_consumer"
 
@@ -15,7 +18,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem "heroku", "~> 2.32.6"
   gem "rspec-rails"
   gem "guard-rspec"
   gem "guard-spork"
