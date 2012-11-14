@@ -1,4 +1,5 @@
 <% title "Remote App" %>
+<% header_right link_to("All Remote Apps", remote_apps_path, class: "btn") %>
 
 <p>
   <strong>App:</strong>
@@ -6,7 +7,7 @@
 </p>
 <p>
   <strong>Entry:</strong>
-  <%= @remote_app.entry.name %>
+  <%= @remote_app.entry.try :name %>
 </p>
 <p>
   <strong>Name:</strong>
