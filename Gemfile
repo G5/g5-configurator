@@ -1,10 +1,12 @@
 source :rubygems
+source "https://gems.gemfury.com/88yeKzEGfizstwBaXVqj/"
 
 gem "rails", "3.2.7"
 gem "pg"
 gem "jquery-rails"
 
-gem "hentry_consumer", "~> 0.1.2"
+gem "hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer"
+gem "g5_hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/g5_hentry_consumer"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"
