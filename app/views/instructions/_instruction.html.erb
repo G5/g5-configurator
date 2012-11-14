@@ -1,14 +1,25 @@
 <dl>
-  <dt class="target">Target Apps</dt> 
-  <dd class="app">
-    <p class="p-name"><%= instruction.remote_app.name %></p>
-    <a class="u-url u-uid" href="<%= instruction.remote_app.app_url %>">
-      <%= instruction.remote_app.app_url %>
+  <dt>UID</dt>
+  <dd>
+    <a class="u-url u-uid" href="<%= instruction_url(instruction) %>">
+      <%= instruction_url(instruction) %>
     </a>
   </dd>
-
-  <dt class="configuration">Body</dt>
+  <dt>Targets</dt> 
+  <dd>
+    <%= render instruction.remote_app %>
+  </dd>
+  <dt>Body</dt>
   <dd>
     <%= simple_format instruction.body %>
+  </dd>
+  <dt>Actions</dt>
+  <dd>
+    <dl>
+      <dt>All</dt>
+      <dd>
+        <%= link_to instructions_url, instructions_url %>
+      </dd>
+    </dl>
   </dd>
 </dl>
