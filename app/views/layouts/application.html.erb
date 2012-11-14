@@ -41,7 +41,7 @@
         <%= flash_div name %>
       <% end %>
 
-      <div class="row page-header">
+      <div class="row-fluid page-header">
         <%= content_tag :h1, yield(:title), class: "span10" if show_title? %>
         <%= content_tag :span, yield(:header_right), class: "span2" if show_header_right? %>
       </div>
