@@ -1,19 +1,26 @@
-<% title "New Configuration" %>
+<% title "New Instruction" %>
+<% header_right link_to("Cancel", instructions_path, class: "btn") %>
 
-<%= form_for @instruction do |f| %>
+<%= form_for @instruction, html: { class: "form-horizontal" } do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :remote_app_id, "Deployer" %>
-    <%= f.collection_select :remote_app_id, RemoteApp.all, :id, :name %>
-  </p>
-  
-  <p>
-    <%= f.label :body %><br />
-    <%= f.text_area :body, rows: 5 %>
-  </p>
-  
-  <p><%= f.submit "Save" %></p>
+  <fieldset class="well">
+    <legend>Instruction</legend>
+    <div class="control-group">
+      <%= f.label :remote_app_id, "Target", class: "control-label" %>
+      <div class="controls">
+        <%= f.collection_select :remote_app_id, RemoteApp.all, :id, :name %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :body, "Body", class: "control-label" %>
+      <div class="controls">
+        <%= f.text_area :body, rows: 5 %>
+      </div>
+    </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit class: "btn btn-success" %></p>
+      </div>
+    </div>
+  </fieldset>
 <% end %>
-
-
-<p><%= link_to "Back to Feed", instructions_path %></p>
