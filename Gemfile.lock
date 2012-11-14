@@ -1,5 +1,19 @@
+PATH
+  remote: /Users/jlsuttles/Dropbox/Projects/g5/g5_hentry_consumer
+  specs:
+    g5_hentry_consumer (0.1.3)
+      hentry_consumer (~> 0.5.0)
+
+PATH
+  remote: /Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer
+  specs:
+    hentry_consumer (0.5.1)
+      json
+      nokogiri
+
 GEM
   remote: http://rubygems.org/
+  remote: https://gems.gemfury.com/***REMOVED***/
   specs:
     actionmailer (3.2.7)
       actionpack (= 3.2.7)
@@ -59,8 +73,6 @@ GEM
       guard (>= 1.1)
       spork (>= 0.8.4)
       sys-proctable
-    hentry_consumer (0.1.2)
-      nokogiri
     heroku (2.32.6)
       heroku-api (~> 0.3.5)
       launchy (>= 0.3.2)
@@ -161,9 +173,10 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  g5_hentry_consumer!
   guard-rspec
   guard-spork
-  hentry_consumer (~> 0.1.2)
+  hentry_consumer!
   heroku (~> 2.32.6)
   jquery-rails
   pg

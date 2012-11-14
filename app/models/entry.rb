@@ -11,7 +11,7 @@ class Entry < ActiveRecord::Base
 
   class << self
     def feed(file_or_url=FEED_URL)
-      HentryConsumer.parse(file_or_url)
+      G5HentryConsumer.parse(file_or_url)
     end
 
     def consume_feed(file_or_url=FEED_URL)
@@ -22,14 +22,14 @@ class Entry < ActiveRecord::Base
 
     def find_or_create_from_hentry(hentry)
       find_or_create_by_bookmark(hentry.bookmark) do |entry|
-        entry.name         = hentry.name
-        entry.summary      = hentry.summary
+        entry.name         = hentry.name.first
+        entry.summary      = hentry.summary.first
         entry.content      = hentry.content
-        entry.published_at = hentry.published_at
+        entry.published_at = hentry.published_at.first
         entry.remote_apps_attributes = [
-          { name: "#{PREFIXES[0]}-#{hentry.name.parameterize}",
+          { name: "#{PREFIXES[0]}-#{hentry.name.first.parameterize}",
             git_repo: REPOS[0] },
-          {name: "#{PREFIXES[1]}-#{hentry.name.parameterize}",
+          {name: "#{PREFIXES[1]}-#{hentry.name.first.parameterize}",
             git_repo: REPOS[0] }
         ]
       end
