@@ -5,5 +5,5 @@ Configurator::Application.routes.draw do
   end
   
   post 'webhook' => 'webhook#index'
-  root :to => 'remote_apps#index'
+  root :to => 'instructions#index'
 end
