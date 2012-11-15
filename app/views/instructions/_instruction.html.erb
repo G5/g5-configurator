@@ -1,17 +1,19 @@
-<dl>
+<dl class="e-g5-instruction">
   <dt>UID</dt>
   <dd>
-    <a class="u-url u-uid" href="<%= instruction_url(instruction) %>">
+    <a class="u-uid" href="<%= instruction_url(instruction) %>">
       <%= instruction_url(instruction) %>
     </a>
   </dd>
   <dt>Targets</dt> 
   <dd>
-    <%= render instruction.remote_app %>
+    <a class="u-g5-target-uid" href="<%= instruction.remote_app.try :uid %>">
+      <%= instruction.remote_app.try :uid %>
+    </a>
   </dd>
   <dt>Body</dt>
   <dd>
-    <%= simple_format instruction.body %>
+    <span class="p-g5-body"><%= simple_format instruction.body %></span>
   </dd>
   <dt>Actions</dt>
   <dd>

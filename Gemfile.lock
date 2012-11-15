@@ -7,7 +7,7 @@ PATH
 PATH
   remote: /Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer
   specs:
-    hentry_consumer (0.5.0)
+    hentry_consumer (0.5.1)
       json
       nokogiri
 
