@@ -4,12 +4,16 @@ class RemoteApp < ActiveRecord::Base
   attr_accessible :name, :git_repo
 
   belongs_to :entry
-
   has_many :instructions
 
   validates :name, presence: true, uniqueness: true
   
+  before_create :assign_uid
   after_create :create_instruction
+
+  def assign_uid
+    self.uid = app_url
+  end
   
   def create_instruction
     client_app_creator.instructions.create(body: instruction_body)
