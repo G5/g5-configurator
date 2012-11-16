@@ -61,7 +61,7 @@ GEM
       guard (>= 1.1)
       spork (>= 0.8.4)
       sys-proctable
-    hentry_consumer (0.5.2)
+    hentry_consumer (0.5.3)
       json
       nokogiri
     hike (1.2.1)
@@ -156,7 +156,7 @@ DEPENDENCIES
   g5_hentry_consumer (~> 0.2.0)
   guard-rspec
   guard-spork
-  hentry_consumer (~> 0.5.2)
+  hentry_consumer (~> 0.5.3)
   jquery-rails
   pg
   quiet_assets (~> 1.0.1)
