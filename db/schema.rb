@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121115233605) do
+ActiveRecord::Schema.define(:version => 20121115230745) do
 
   create_table "entries", :force => true do |t|
     t.string   "bookmark"
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(:version => 20121115233605) do
   end
 
   create_table "instructions", :force => true do |t|
-    t.string   "target"
     t.text     "body"
     t.integer  "remote_app_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "target_app_id"
   end
 
   create_table "remote_apps", :force => true do |t|
