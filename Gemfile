@@ -8,8 +8,7 @@ gem "jquery-rails"
 gem "quiet_assets", "~> 1.0.1"
 gem "bootstrap-sass", "~> 2.1.0.1"
 
-gem "hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/hentry_consumer"
-gem "g5_hentry_consumer", path: "/Users/jlsuttles/Dropbox/Projects/g5/g5_hentry_consumer"
+gem "g5_hentry_consumer", "~> 0.2.0"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"
