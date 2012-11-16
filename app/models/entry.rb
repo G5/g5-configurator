@@ -19,7 +19,7 @@ class Entry < ActiveRecord::Base
       entry.content      = hentry.content
       entry.published_at = hentry.published_at
       entry.remote_apps_attributes = [
-        {name: "g5-chd-#{hentry.name.parameterize}", git_repo: "git@github.com/g5search/g5-client-hub-deployer"},
+        {name: "g5-chd-#{hentry.name.parameterize}", git_repo: "git@github.com:g5search/g5-client-hub-deployer"},
         {name: "g5-ch-#{hentry.name.parameterize}",  git_repo: "git@github.com:g5search/g5-client-hub"}
       ]
     end
