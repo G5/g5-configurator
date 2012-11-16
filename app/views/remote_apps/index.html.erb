@@ -10,7 +10,7 @@
   <% for remote_app in @remote_apps %>
     <tr>
       <td><%= remote_app.name %></td>
-      <td><%= link_to remote_app.app_url, remote_app.app_url %></td>
+      <td><%= link_to remote_app.uid, remote_app.uid %></td>
       <td><%= remote_app.create_status %></td>
       <td>
         <%= link_to "Show", remote_app %>

@@ -27,12 +27,22 @@ class Entry < ActiveRecord::Base
         entry.content      = hentry.content
         entry.published_at = hentry.published_at.first
         entry.remote_apps_attributes = [
-          { name: "#{PREFIXES[0]}-#{hentry.name.first.parameterize}",
+          { name: app_name(hentry, PREFIXES[0]),
+            uid: app_uid(hentry, PREFIXES[0]),
             git_repo: REPOS[0] },
-          {name: "#{PREFIXES[1]}-#{hentry.name.first.parameterize}",
-            git_repo: REPOS[0] }
+          { name: app_name(hentry, PREFIXES[1]),
+            uid: app_uid(hentry, PREFIXES[1]),
+            git_repo: REPOS[1] }
         ]
       end
+    end
+
+    def app_name(hentry, prefix)
+     "#{prefix}-#{hentry.name.first.parameterize}"[0,30]
+    end
+
+    def app_uid(hentry, prefix)
+      "http://#{app_name(hentry, prefix)}.herokuapp.com"
     end
   end # class << self
 end

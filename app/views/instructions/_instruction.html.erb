@@ -5,58 +5,53 @@
       <%= instruction_url(instruction) %>
     </a>
   </dd>
-  <dt>Targets</dt> 
+  <dt>Targets (Performs Instruction)</dt> 
   <dd>
-    <a class="u-g5-target-uid" href="<%= instruction.remote_app.try :uid %>">
-      <%= instruction.remote_app.try :uid %>
+    <a class="u-g5-target-uid" href="<%= instruction.target_app.try :uid %>">
+      <%= instruction.target_app.try :uid %>
     </a>
   </dd>
-  <dt>Body</dt>
+  <dt>Apps (Instruction Effects)</dt>
   <dd>
-    <dl class="e-g5-instruction-body">
-      <dt>App</dt>
+    <dl class="e-g5-app">
+      <dt>UID</dt>
       <dd>
-        <dl class="e-g5-app">
-          <dt>UID</dt>
-          <dd>
-            <a class="u-uid" href="">
-             ? 
-            </a>
-          </dd>
-          <dt>Name</dt>
-          <dd>
-            <span class="p-name">?</span>
-          </dd>
-        </dl>
+        <a class="u-uid" href="<%= instruction.remote_app.try :uid %>">
+         <%= instruction.remote_app.try :uid %>
+        </a>
       </dd>
-      <dt>Tasks</dt>
+      <dt>Name</dt>
       <dd>
-        <dl class="e-g5-instruction-task">
-          <dt>UID</dt>
-          <dd>
-            <a class="u-uid" href="http://foo.bar/provision-heroku-app">
-              http://foo.bar/provision-heroku-app
-            </a>
-          </dd>
-          <dt>Name</dt>
-          <dd>
-            <span class="p-name">Provision Heroku App</span>
-          </dd>
-        </dl>
+        <span class="p-name"><%= instruction.remote_app.try :name %></span>
       </dd>
+    </dl>
+  </dd>
+  <dt>Tasks</dt>
+  <dd>
+    <dl class="e-g5-instruction-task">
+      <dt>UID</dt>
       <dd>
-        <dl class="e-g5-instruction-task">
-          <dt>UID</dt>
-          <dd>
-            <a class="u-uid" href="http://foo.bar/initial-github-to-heroku-deploy">
-              http://foo.bar/initial-github-to-heroku-deploy
-            </a>
-          </dd>
-          <dt>Name</dt>
-          <dd>
-            <span class="p-name">Initial GitHub to Heroku Deploy</span>
-          </dd>
-        </dl>
+        <a class="u-uid" href="http://foo.bar/provision-heroku-app">
+          http://foo.bar/provision-heroku-app
+        </a>
+      </dd>
+      <dt>Name</dt>
+      <dd>
+        <span class="p-name">Provision Heroku App</span>
+      </dd>
+    </dl>
+  </dd>
+  <dd>
+    <dl class="e-g5-instruction-task">
+      <dt>UID</dt>
+      <dd>
+        <a class="u-uid" href="http://foo.bar/initial-github-to-heroku-deploy">
+          http://foo.bar/initial-github-to-heroku-deploy
+        </a>
+      </dd>
+      <dt>Name</dt>
+      <dd>
+        <span class="p-name">Initial GitHub to Heroku Deploy</span>
       </dd>
     </dl>
   </dd>

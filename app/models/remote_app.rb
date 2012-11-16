@@ -1,30 +1,18 @@
 class RemoteApp < ActiveRecord::Base
-  CLIENT_APP_CREATOR = "g5-client-app-creator"
+  CLIENT_APP_CREATOR_NAME = "g5-client-app-creator"
+  CLIENT_APP_CREATOR_UID = "http://g5-client-app-creator.herokuapp.com"
 
-  attr_accessible :name, :git_repo
+  attr_accessible :uid, :name, :git_repo
 
   belongs_to :entry
   has_many :instructions
 
   validates :name, presence: true, uniqueness: true
   
-  before_create :assign_uid
   after_create :create_instruction
-
-  def assign_uid
-    self.uid = app_url
-  end
   
   def create_instruction
-    client_app_creator.instructions.create(body: instruction_body)
-  end
-  
-  def instruction_body
-    "<p class='p-name'>#{truncated_name}</p><a class='u-url u-uid' href='#{git_repo}'>#{git_repo}</a>"
-  end
-  
-  def app_url
-    "http://#{truncated_name}.herokuapp.com"
+    self.instructions.create(target_app_id: client_app_creator.id)
   end
   
   private
@@ -34,17 +22,6 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def self.client_app_creator
-    @@client_app_creator ||= find_or_create_client_app_creator
-  end
-
-  def self.find_or_create_client_app_creator
-    RemoteApp.skip_callback(:create, :after, :create_instruction)
-    client_app_creator = find_or_create_by_name(CLIENT_APP_CREATOR)
-    RemoteApp.set_callback(:create, :after, :create_instruction)
-    client_app_creator
-  end
-  
-  def truncated_name
-    name[0,24]
+    @@client_app_creator ||= find_or_create_by_name(CLIENT_APP_CREATOR_NAME)
   end
 end

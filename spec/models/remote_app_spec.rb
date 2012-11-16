@@ -12,18 +12,12 @@ describe RemoteApp do
   describe "creates an app" do
     subject { app }
     its(:name)             { should eq "mock-app" }
-    its(:instruction_body) { should eq "<p class='p-name'>mock-app</p><a class='u-url u-uid' href='git@git'>git@git</a>"}
 
     it "has a unique name" do
       app
       app = RemoteApp.create(name: "mock-app", git_repo: "git@git")
       app.errors.full_messages.should include "Name has already been taken"
       app.new_record?.should be_true
-    end
-
-    context "deployer has a really long name" do
-      before { app.stub(:name) { "twenty-five-chars-loooong"}}
-      its(:truncated_name) { should eq "twenty-five-chars-loooon"}
     end
   end
 end
