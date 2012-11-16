@@ -156,6 +156,7 @@ DEPENDENCIES
   g5_hentry_consumer (~> 0.2.0)
   guard-rspec
   guard-spork
+  hentry_consumer (~> 0.5.2)
   jquery-rails
   pg
   quiet_assets (~> 1.0.1)
