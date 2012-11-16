@@ -1,7 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe RemoteAppsController do
-  let(:app) { RemoteApp.create(name: "mock-app")  }
+  
+  let(:app) { RemoteApp.create(name: "mock-app", git_repo: "git@git")  }
   before { app.stub(:heroku) { Heroku::API.new(mock: true) } }
   it "index action should render index template" do
     get :index

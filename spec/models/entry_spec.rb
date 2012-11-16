@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe Entry do
+  
   before do
-    
     Entry.stub(:feed) { HentryConsumer.parse(File.open('spec/support/feed.html')) }
   end
   
@@ -17,7 +17,7 @@ describe Entry do
       before do
         entry
       end
-      it { entry.remote_app.should_not be_nil }
+      it { entry.remote_apps.should_not be_blank }
     end
   end
 end

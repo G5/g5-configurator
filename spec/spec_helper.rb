@@ -16,6 +16,9 @@ Spork.prefork do
     config.before(:each) do 
       RemoteApp.delete_all
       Instruction.delete_all
+      RemoteApp.skip_callback(:create, :after, :create_instruction)
+      RemoteApp.create(name: "g5-client-app-creator", git_repo: "git@git")
+      RemoteApp.set_callback(:create, :after, :create_instruction)
     end
   end
   Spork.trap_method(Rails::Application, :eager_load!)
