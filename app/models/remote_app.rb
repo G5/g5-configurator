@@ -2,7 +2,7 @@ class RemoteApp < ActiveRecord::Base
   CLIENT_APP_CREATOR_NAME = "g5-client-app-creator"
   CLIENT_APP_CREATOR_UID = "http://g5-client-app-creator.herokuapp.com"
 
-  attr_accessible :uid, :name, :git_repo
+  attr_accessible :uid, :client_uid, :name, :git_repo
 
   belongs_to :entry
   has_many :instructions
