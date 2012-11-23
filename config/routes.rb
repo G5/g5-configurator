@@ -4,6 +4,6 @@ Configurator::Application.routes.draw do
     post :migrate, on: :member
   end
   
-  post 'webhook' => 'webhook#index'
-  root :to => 'instructions#index'
+  post "consume_feed" => "webhooks#consume_feed"
+  root :to => "instructions#index"
 end
