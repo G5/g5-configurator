@@ -14,6 +14,10 @@ class Entry < ActiveRecord::Base
       G5HentryConsumer.parse(file_or_url)
     end
 
+    def async_consume_feed
+      Resque.enqueue(EntryConsumer)
+    end
+
     def consume_feed(file_or_url=FEED_URL)
       feed(file_or_url).entries.each do |hentry|
         find_or_create_from_hentry(hentry)
