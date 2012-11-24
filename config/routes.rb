@@ -1,4 +1,8 @@
+require 'resque/server'
+
 Configurator::Application.routes.draw do
+  mount Resque::Server, :at => "/resque"
+
   resources :instructions
   resources :remote_apps do
     post :migrate, on: :member
