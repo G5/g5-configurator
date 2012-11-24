@@ -1,5 +1,5 @@
 # Setup for Heroku
-Resque.redis = ENV["REDISTOGO_URL"] #if ENV["REDISTOGO_URL"]
+Resque.redis = ENV["REDISTOGO_URL"] if ENV["REDISTOGO_URL"]
 
 # Establish connection to the database before each job
 Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection }
