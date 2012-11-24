@@ -8,6 +8,10 @@ gem "jquery-rails"
 gem "quiet_assets", "~> 1.0.1"
 gem "bootstrap-sass", "~> 2.1.0.1"
 
+gem "foreman", "~> 0.60.2"
+
+gem "heroku_resque_autoscaler", "~> 0.0.1" 
+
 gem "hentry_consumer", "~> 0.5.3"
 gem "g5_hentry_consumer", "~> 0.2.0"
 
@@ -23,6 +27,7 @@ group :development, :test do
   gem "guard-spork"
   gem "spork"
   gem "rb-fsevent", "~> 0.9.1"
+  gem "debugger", "~> 1.2.2"
 end
 
 group :production do
