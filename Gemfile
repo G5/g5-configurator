@@ -12,7 +12,7 @@ gem "foreman", "~> 0.60.2"
 
 gem "heroku-api"
 gem "resque"
-gem "heroku_resque_autoscaler", "~> 0.0.1" 
+gem "heroku_resque_autoscaler", "~> 0.0.2"
 
 gem "hentry_consumer", "~> 0.5.3"
 gem "g5_hentry_consumer", "~> 0.2.0"
