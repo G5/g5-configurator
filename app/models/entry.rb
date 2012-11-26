@@ -34,11 +34,11 @@ class Entry < ActiveRecord::Base
           { name: app_name(hentry, PREFIXES[0]),
             uid: app_uid(hentry, PREFIXES[0]),
             git_repo: REPOS[0],
-            client_uid: hentry.content.first.uid },
+            client_uid: hentry.content.first.try(:uid) },
           { name: app_name(hentry, PREFIXES[1]),
             uid: app_uid(hentry, PREFIXES[1]),
             git_repo: REPOS[1],
-            client_uid: hentry.content.first.uid }
+            client_uid: hentry.content.first.try(:uid) }
         ]
       end
     end
