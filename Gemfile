@@ -10,8 +10,6 @@ gem "bootstrap-sass", "~> 2.1.0.1"
 
 gem "foreman", "~> 0.60.2"
 
-gem "heroku-api"
-gem "resque"
 gem "heroku_resque_autoscaler", "~> 0.0.2"
 
 gem "hentry_consumer", "~> 0.5.3"

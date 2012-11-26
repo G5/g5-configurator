@@ -191,14 +191,12 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   hentry_consumer (~> 0.5.3)
-  heroku-api
   heroku_resque_autoscaler (~> 0.0.2)
   jquery-rails
   pg
   quiet_assets (~> 1.0.1)
   rails (= 3.2.7)
   rb-fsevent (~> 0.9.1)
-  resque
   rspec-rails
   sass-rails (~> 3.2.3)
   spork
