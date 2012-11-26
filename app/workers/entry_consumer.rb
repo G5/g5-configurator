@@ -1,10 +1,10 @@
 class EntryConsumer
-  extend HerokuResqueAutoscaler
+  extend HerokuResqueAutoscaler if Rails.env.production?
   @queue = :consumer
 
   def self.perform
-    puts "start consuming feed"
+    puts "Start consuming feed"
     Entry.consume_feed
-    puts "done consuming feed"
+    puts "Done consuming feed"
   end
 end

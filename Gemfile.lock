@@ -59,7 +59,7 @@ GEM
     ffi (1.1.5)
     foreman (0.60.2)
       thor (>= 0.13.6)
-    g5_hentry_consumer (0.2.0)
+    g5_hentry_consumer (0.2.3)
       hentry_consumer (~> 0.5.2)
     guard (1.4.0)
       listen (>= 0.4.2)
@@ -187,10 +187,9 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger (~> 1.2.2)
   foreman (~> 0.60.2)
-  g5_hentry_consumer (~> 0.2.0)
+  g5_hentry_consumer (~> 0.2.3)
   guard-rspec
   guard-spork
-  hentry_consumer (~> 0.5.3)
   heroku_resque_autoscaler (~> 0.0.2)
   jquery-rails
   pg
