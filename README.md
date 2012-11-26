@@ -2,6 +2,7 @@
 
 * Consumes g5-hub's feed
 * Publishes feed of instructions to targets (g5-client-app-creator, g5-ch-*, g5-chd-*)
+* Pings g5-client-app-creator when feed is updated via webhook
 
 
 ## Setup
@@ -16,6 +17,13 @@ bundle
 cp config/database.example.yml config/database.yml
 vi config/database.yml # edit username
 rake db:create db:schema:load db:seed
+```
+
+1. Export environment variables
+```bash
+export CLIENT_APP_CREATOR_WEBHOOK_URL=http://g5-client-app-ceator.dev/consume_feed
+export HEROKU_APP_NAME=g5-configurator # only needed on production
+export HEROKU_API_KEY=heroku_api_key # only needed on production
 ```
 
 
