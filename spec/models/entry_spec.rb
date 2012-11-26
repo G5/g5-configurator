@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Entry do
   
   before do
-    Entry.stub(:feed) { HentryConsumer.parse(File.open('spec/support/nested_feed.html')) }
+    Entry.stub(:feed) { G5HentryConsumer.parse(File.open('spec/support/nested_feed.html')) }
     Entry.find_or_create_by_name("g5-client-app-creator")
   end
   
