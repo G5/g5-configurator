@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/G5/webhook.git
+  revision: f62b464df352e55be6a14eb9675ae2eabdacd11d
+  branch: configuration
+  specs:
+    webhook (0.0.2)
+
 GEM
   remote: http://rubygems.org/
   remote: https://gems.gemfury.com/***REMOVED***/
@@ -201,3 +208,4 @@ DEPENDENCIES
   spork
   thin (~> 1.5.0)
   uglifier (>= 1.0.3)
+  webhook!
