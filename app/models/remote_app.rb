@@ -42,7 +42,11 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def create_instruction
-    self.instructions.create(target_app_kind: kind, target_app_ids: [client_app_creator.id])
+    Instruction.create(
+      target_app_kind: CLIENT_APP_CREATOR, 
+      target_app_ids: [client_app_creator.id],
+      remote_app_id: self.id
+    )
   end
 
   def client_app_creator
