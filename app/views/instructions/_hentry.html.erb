@@ -1,7 +1,7 @@
 <dl class="h-entry">
   <dt>Name</dt>
   <dd>
-    <span class="p-name">Create new app <%= instruction.remote_app.try :name %></span>
+    <span class="p-name"><%= instruction.name %></span>
   </dd>
   <dt>UID</dt>
   <dd>
@@ -9,41 +9,11 @@
       <%= instruction_url(instruction) %>
     </a>
   </dd>
-  <dt>Summary</dt>
-  <dd>
-    <span class="p-summary">Instruction for <%= instruction.target_app.try :name %></span>
-  </dd>
   <dt>Published</dt>
   <dd>
     <time datetime="<%= instruction.created_at_computer_readable %>" class="dt-published">
       <%= instruction.created_at_human_readable %>
     </time>
-  </dd>
-  <dt>Category</dt>
-  <dd>
-    <a class="p-category" href="#" rel="tag">
-      Provision
-    </a>
-  </dd>
-  <dd>
-    <a class="p-category" href="#" rel="tag">
-      Deploy
-    </a>
-  </dd>
-  <dt>Author</dt>
-  <dd>
-    <dl class="p-author h-card">
-      <dt>UID</dt>
-      <dd>
-        <a class="u-url u-uid" href="<%= root_url %>">
-          <%= root_url %>
-        </a>
-      </dd>
-      <dt>Name</dt>
-      <dd>
-        <span class="p-name">g5-configurator</span>
-      </dd>
-    </dl>
   </dd>
   <dt>Content</dt>
   <dd>

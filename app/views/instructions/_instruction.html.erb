@@ -5,73 +5,39 @@
       <%= instruction_url(instruction) %>
     </a>
   </dd>
-  <dt>Targets (Performs Instruction)</dt> 
-  <dd>
-    <a class="u-g5-target-uid" href="<%= instruction.target_app.try :uid %>">
-      <%= instruction.target_app.try :uid %>
-    </a>
-  </dd>
-  <dt>Apps (Instruction Effects)</dt>
-  <dd>
-    <dl class="e-g5-app">
-      <dt>UID</dt>
-      <dd>
-        <a class="u-uid" href="<%= instruction.remote_app.try :uid %>">
-         <%= instruction.remote_app.try :uid %>
-        </a>
-      </dd>
-      <dt>Client UID</dt>
-      <dd>
-        <a class="u-g5-client-uid" href="<%= instruction.remote_app.try :client_uid %>">
-         <%= instruction.remote_app.try :client_uid %>
-        </a>
-      </dd>
-      <dt>Name</dt>
-      <dd>
-        <span class="p-name"><%= instruction.remote_app.try :name %></span>
-      </dd>
-      <dt>Repo</dt>
-      <dd>
-        <span class="p-g5-git-repo"><%= instruction.remote_app.try :git_repo %></span>
-      <dd>
-    </dl>
-  </dd>
-  <dt>Tasks</dt>
-  <dd>
-    <dl class="e-g5-instruction-task">
-      <dt>UID</dt>
-      <dd>
-        <a class="u-uid" href="http://foo.bar/provision-heroku-app">
-          http://foo.bar/provision-heroku-app
-        </a>
-      </dd>
-      <dt>Name</dt>
-      <dd>
-        <span class="p-name">Provision Heroku App</span>
-      </dd>
-    </dl>
-  </dd>
-  <dd>
-    <dl class="e-g5-instruction-task">
-      <dt>UID</dt>
-      <dd>
-        <a class="u-uid" href="http://foo.bar/initial-github-to-heroku-deploy">
-          http://foo.bar/initial-github-to-heroku-deploy
-        </a>
-      </dd>
-      <dt>Name</dt>
-      <dd>
-        <span class="p-name">Initial GitHub to Heroku Deploy</span>
-      </dd>
-    </dl>
-  </dd>
-  <dt>Actions</dt>
-  <dd>
-    <dl>
-      <dt>All</dt>
-      <dd>
-        <%= link_to instructions_url, instructions_url %>
-      </dd>
-    </dl>
-  </dd>
+  <dt>Target Apps (Performs Instruction)</dt> 
+  <% instruction.target_apps.each do |target_app| %>
+    <dd>
+      <a class="u-g5-target-uid" href="<%= target_app.try :uid %>">
+        <%= target_app.try :uid %>
+      </a>
+    </dd>
+  <% end %>
+  <% if instruction.remote_app.present? %>
+    <dt>Remote App (Instruction Effects)</dt>
+    <dd>
+      <dl class="e-g5-app">
+        <dt>UID</dt>
+        <dd>
+          <a class="u-uid" href="<%= instruction.remote_app.try :uid %>">
+           <%= instruction.remote_app.try :uid %>
+          </a>
+        </dd>
+        <dt>Client UID</dt>
+        <dd>
+          <a class="u-g5-client-uid" href="<%= instruction.remote_app.try :client_uid %>">
+           <%= instruction.remote_app.try :client_uid %>
+          </a>
+        </dd>
+        <dt>Name</dt>
+        <dd>
+          <span class="p-name"><%= instruction.remote_app.try :name %></span>
+        </dd>
+        <dt>Repo</dt>
+        <dd>
+          <span class="p-g5-git-repo"><%= instruction.remote_app.try :git_repo %></span>
+        <dd>
+      </dl>
+    </dd>
+  <% end %>
 </dl>
