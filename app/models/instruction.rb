@@ -1,17 +1,24 @@
 class Instruction < ActiveRecord::Base
-  attr_accessible :target_app_id, :remote_app_id, :body
+  NAMES = {
+    RemoteApp::CLIENT_APP_CREATOR => "Create New App",
+    RemoteApp::CLIENT_HUB_DEPLOYER => "Update Client Hub",
+    RemoteApp::CLIENT_HUB => "Update Client Hub Deployer"
+  }
 
-  # the app that should perform the instruction
-  belongs_to :target_app, class_name: "RemoteApp"
+  attr_accessible :target_app_kind, :target_app_ids, :remote_app_id, :body
+
+  # the apps that should perform the instruction
+  # explicit habtm
+  has_many :instructions_target_apps
+  has_many :target_apps, through: :instructions_target_apps, source: :target_app
+
   # the app that will be effected by the instruction
+  # only needed for g5-client-app-creator instructions
   belongs_to :remote_app
 
-  # validates :target_app_id, presence: true
-  # validates :remote_app_id, presence: true
-  # validates :body, presence: true
+  # webhooks make things speedy
+  after_save :ping_target_apps
 
-  after_save :post_webhook
-  
   def created_at_computer_readable
     created_at.utc.to_s(:computer)
   end
@@ -19,14 +26,21 @@ class Instruction < ActiveRecord::Base
   def created_at_human_readable
     created_at.to_s(:human)
   end
+
+  def name
+    NAMES[target_app_kind]
+  end
+
   private
 
-  # TODO: this should post to all subscribers (client hub, client hub deployer)
-  def post_webhook
-    url = ENV["CLIENT_APP_CREATOR_WEBHOOK_URL"]
-    if url
+  def async_ping_target_apps
+    Resque.enqueue(TargetAppPinger, self.id)
+  end
+
+  def ping_target_apps
+    target_apps.pluck(:uid).each do |target_app_uid|
       begin
-        Webhook.post(url) 
+        Webhook.post("#{target_app_uid}/webhook")
       rescue ArgumentError => e
         logger.error e
       end

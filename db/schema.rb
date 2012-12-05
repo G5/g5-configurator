@@ -11,38 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121041216) do
+ActiveRecord::Schema.define(:version => 20121204221351) do
 
   create_table "entries", :force => true do |t|
-    t.string   "bookmark"
-    t.string   "name"
-    t.string   "summary"
-    t.text     "content"
-    t.datetime "published_at"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "instructions", :force => true do |t|
-    t.text     "body"
     t.integer  "remote_app_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "target_app_kind"
+  end
+
+  create_table "instructions_target_apps", :force => true do |t|
+    t.integer  "instruction_id"
     t.integer  "target_app_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "remote_apps", :force => true do |t|
-    t.integer  "app_id"
     t.integer  "entry_id"
     t.string   "name"
     t.string   "uid"
-    t.string   "create_status", :default => "pending"
-    t.text     "configuration"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
-    t.string   "app_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "kind"
     t.string   "git_repo"
     t.string   "client_uid"
+    t.string   "client_name"
   end
 
 end

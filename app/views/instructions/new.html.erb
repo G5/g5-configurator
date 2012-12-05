@@ -4,17 +4,22 @@
 <%= form_for @instruction, html: { class: "form-horizontal" } do |f| %>
   <%= f.error_messages %>
   <fieldset class="well">
-    <legend>Instruction</legend>
-    <div class="control-group">
-      <%= f.label :target_app_id, "Target", class: "control-label" %>
+    <div class="control-group js-target_app_kind">
+      <%= f.label :target_app_kind, "Target App Kind", class: "control-label" %>
       <div class="controls">
-        <%= f.collection_select :target_app_id, RemoteApp.all, :id, :name %>
+        <%= f.select :target_app_kind, RemoteApp::KINDS, include_blank: "Please select" %>
       </div>
     </div>
-    <div class="control-group">
-      <%= f.label :remote_app_id, "App", class: "control-label" %>
+    <div class="control-group js-target_apps">
+      <%= f.label :target_app_ids, "Target Apps", class: "control-label" %>
       <div class="controls">
-        <%= f.collection_select :remote_app_id, RemoteApp.all, :id, :name %>
+        <%= f.select :target_app_ids, RemoteApp.grouped_by_kind_options, {}, multiple: true %>
+      </div>
+    </div>
+    <div class="control-group js-remote_app">
+      <%= f.label :remote_app_id, "Remote App", class: "control-label" %>
+      <div class="controls">
+        <%= f.collection_select :remote_app_id, RemoteApp.all, :id, :name, include_blank: "Please select" %>
       </div>
     </div>
     <div class="control-group">
