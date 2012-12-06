@@ -28,7 +28,7 @@ class Instruction < ActiveRecord::Base
   validate :has_at_least_one_target_app
 
   # webhooks make things speedy
-  after_save :async_ping_target_apps
+  after_save :async_webhook_target_apps
 
   def created_at_computer_readable
     created_at.utc.to_s(:computer)
@@ -42,29 +42,29 @@ class Instruction < ActiveRecord::Base
     NAMES[target_app_kind]
   end
 
-  private
-
-  def client_app_creator_kind?
-    target_app_kind == RemoteApp::CLIENT_APP_CREATOR
+  def async_webhook_target_apps
+    Resque.enqueue(InstructionWebhooker, self.id)
   end
 
-  def has_at_least_one_target_app
-    unless target_app_ids.length >= 1
-      errors[:target_app_ids] = "can't be blank"
-    end
-  end
-
-  def async_ping_target_apps
-    Resque.enqueue(TargetAppPinger, self.id)
-  end
-
-  def ping_target_apps
+  def webhook_target_apps
     target_apps.pluck(:uid).each do |target_app_uid|
       begin
         Webhook.post("#{target_app_uid}/webhook")
       rescue ArgumentError => e
         logger.error e
       end
+    end
+  end
+
+  def client_app_creator_kind?
+    target_app_kind == RemoteApp::CLIENT_APP_CREATOR
+  end
+
+  private
+
+  def has_at_least_one_target_app
+    unless target_app_ids.length >= 1
+      errors[:target_app_ids] = "can't be blank"
     end
   end
 end
