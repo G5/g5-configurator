@@ -16,8 +16,19 @@ class Instruction < ActiveRecord::Base
   # only needed for g5-client-app-creator instructions
   belongs_to :remote_app
 
+  validates :target_app_kind,
+    presence: true,
+    inclusion: { in: RemoteApp::KINDS },
+    allow_blank: true
+
+  validates :remote_app_id,
+    presence: true,
+    if: :client_app_creator_kind?
+
+  validate :has_at_least_one_target_app
+
   # webhooks make things speedy
-  after_save :ping_target_apps
+  after_save :async_ping_target_apps
 
   def created_at_computer_readable
     created_at.utc.to_s(:computer)
@@ -32,6 +43,16 @@ class Instruction < ActiveRecord::Base
   end
 
   private
+
+  def client_app_creator_kind?
+    target_app_kind == RemoteApp::CLIENT_APP_CREATOR
+  end
+
+  def has_at_least_one_target_app
+    unless target_app_ids.length >= 1
+      errors[:target_app_ids] = "can't be blank"
+    end
+  end
 
   def async_ping_target_apps
     Resque.enqueue(TargetAppPinger, self.id)

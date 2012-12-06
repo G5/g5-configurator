@@ -1,11 +1,5 @@
 $ = jQuery
 $ ->
-  # initially, hide and disable target apps and remote app
-  $(".js-target_apps").hide()
-  $(".js-target_apps").attr("disabled", "disabled")
-  $(".js-remote_app").hide()
-  $(".js-remote_app").attr("disabled", "disabled")
-  # can i define these out here?
   $targetAppsSelect = $(".js-target_apps select")
   $targetAppsOptgroups = $targetAppsSelect.children()
   # when target app type changes
@@ -34,3 +28,5 @@ $ ->
       else
         $(".js-remote_app").hide()
         $(".js-remote_app select").attr("disabled", "disabled")
+  # trigger appropriated hide/shows on page load
+  $(".js-target_app_kind").change()
