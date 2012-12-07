@@ -49,7 +49,7 @@ class Instruction < ActiveRecord::Base
   def webhook_target_apps
     target_apps.pluck(:uid).each do |target_app_uid|
       begin
-        Webhook.post("#{target_app_uid}/webhook")
+        Webhook.post("#{target_app_uid}/webhooks/g5-configurator")
       rescue ArgumentError => e
         logger.error e
       end
