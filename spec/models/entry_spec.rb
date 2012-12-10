@@ -4,7 +4,6 @@ describe Entry do
   
   before do
     Entry.stub(:feed) { G5HentryConsumer.parse(File.open('spec/support/nested_feed.html')) }
-    Entry.find_or_create_by_name("g5-client-app-creator")
   end
   
   describe "consuming feed" do
@@ -16,9 +15,6 @@ describe Entry do
     
     describe "remote apps" do
       let(:entry) { Entry.find_or_create_from_hentry(feed.entries.first) }
-      before do
-        entry
-      end
       it { entry.remote_apps.should_not be_blank }
     end
   end

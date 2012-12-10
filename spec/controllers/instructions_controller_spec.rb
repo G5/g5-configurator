@@ -28,7 +28,7 @@ describe InstructionsController do
 
   it "create action should redirect when model is valid" do
     Instruction.any_instance.stub(:valid?).and_return(true)
-    post :create, instruction: {remote_app_id: 1, body: "blah"}
+    post :create
     response.should redirect_to(instructions_path)
   end
 end
