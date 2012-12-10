@@ -8,36 +8,15 @@
   <dt>Target Apps (Performs Instruction)</dt> 
   <% instruction.target_apps.each do |target_app| %>
     <dd>
-      <a class="u-g5-target-uid" href="<%= target_app.try :uid %>">
-        <%= target_app.try :uid %>
+      <a class="u-g5-target-uid" href="<%= app_url target_app %>">
+        <%= app_url target_app %>
       </a>
     </dd>
   <% end %>
   <% if instruction.remote_app.present? %>
     <dt>Remote App (Instruction Effects)</dt>
     <dd>
-      <dl class="e-g5-app">
-        <dt>UID</dt>
-        <dd>
-          <a class="u-uid" href="<%= instruction.remote_app.try :uid %>">
-           <%= instruction.remote_app.try :uid %>
-          </a>
-        </dd>
-        <dt>Client UID</dt>
-        <dd>
-          <a class="u-g5-client-uid" href="<%= instruction.remote_app.try :client_uid %>">
-           <%= instruction.remote_app.try :client_uid %>
-          </a>
-        </dd>
-        <dt>Name</dt>
-        <dd>
-          <span class="p-name"><%= instruction.remote_app.try :name %></span>
-        </dd>
-        <dt>Repo</dt>
-        <dd>
-          <span class="p-g5-git-repo"><%= instruction.remote_app.try :git_repo %></span>
-        <dd>
-      </dl>
+      <%= render partial: "apps/app", object: instruction.remote_app %>
     </dd>
   <% end %>
 </dl>

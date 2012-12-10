@@ -1,23 +1,35 @@
 require 'spec_helper'
 
 describe RemoteApp do
-
-  before do
+  before :each do
     RemoteApp.skip_callback(:create, :after, :create_instruction)
-    RemoteApp.create(name: "g5-client-app-creator", git_repo: "git@git")
+    @client_app_creator = RemoteApp.create!(
+      kind: RemoteApp::CLIENT_APP_CREATOR
+    )
     RemoteApp.set_callback(:create, :after, :create_instruction)
+    Instruction.any_instance.stub(:create)
   end
 
-  let(:app) { RemoteApp.create(name: "mock-app", git_repo: "git@git") }
-  describe "creates an app" do
-    subject { app }
-    its(:name)             { should eq "mock-app" }
-
-    it "has a unique name" do
-      app
-      app = RemoteApp.create(name: "mock-app", git_repo: "git@git")
-      app.errors.full_messages.should include "Name has already been taken"
-      app.new_record?.should be_true
+  describe ".client_app_creator" do
+    it "exists" do
+      RemoteApp.client_app_creator.should be_present
     end
   end
+
+  before :each do
+    @app = RemoteApp.create!(
+      kind: RemoteApp::CLIENT_HUB,
+      client_name: "mock client",
+      client_uid: "mock uid"
+    )
+  end
+  subject { @app }
+
+  it { should be_valid }
+  its(:kind) { should be_present }
+  its(:client_uid) { should be_present }
+  its(:client_name) { should be_present }
+  its(:name) { should be_present }
+  its(:heroku_app_name) { should be_present }
+  its(:git_repo) { should be_present }
 end
