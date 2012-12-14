@@ -10,11 +10,11 @@ class Entry < ActiveRecord::Base
   
   class << self
     def feed(file_or_url=FEED_URL)
-      G5HentryConsumer.parse(file_or_url, "If-Modified-Since" => last_modified_at)
+      G5HentryConsumer.parse(file_or_url, last_modified_at:  last_modified_at)
     end
     
     def last_modified_at
-      CGI.rfc1123_date(recently_modified.first.try(:created_at) || 30.years.ago )
+      scoped.maximum(:created_at)
     end
 
     def async_consume_feed
