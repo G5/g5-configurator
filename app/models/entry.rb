@@ -6,10 +6,15 @@ class Entry < ActiveRecord::Base
   accepts_nested_attributes_for :remote_apps
 
   validates :uid, uniqueness: true
-
+  scope :recently_modified, order('updated_at DESC')
+  
   class << self
     def feed(file_or_url=FEED_URL)
-      G5HentryConsumer.parse(file_or_url)
+      G5HentryConsumer.parse(file_or_url, "If-Modified-Since" => last_modified_at)
+    end
+    
+    def last_modified_at
+      CGI.rfc1123_date(recently_modified.first.try(:created_at) || 30.years.ago )
     end
 
     def async_consume_feed
@@ -20,6 +25,8 @@ class Entry < ActiveRecord::Base
       feed(file_or_url).entries.each do |hentry|
         find_or_create_from_hentry(hentry)
       end
+    rescue OpenURI::HTTPError, "304 Not Modified"
+      true
     end
 
     def find_or_create_from_hentry(hentry)
