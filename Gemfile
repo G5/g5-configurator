@@ -22,6 +22,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem "simplecov", "~> 0.7.1", require: false
   gem "rspec-rails"
   gem "guard-rspec"
   gem "guard-spork"
