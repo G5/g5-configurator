@@ -14,6 +14,14 @@ describe InstructionsController do
     response.should render_template(:new)
   end
 
+  it "show action should render show template" do
+    instruction = Instruction.create
+    Instruction.stub(:find).and_return(instruction)
+    instruction.stub(:id).and_return(1)
+    get :show, id: 1
+    response.should render_template(:show)
+  end
+
   it "create action should render new template when model is invalid" do
     Instruction.any_instance.stub(:valid?).and_return(false)
     post :create
