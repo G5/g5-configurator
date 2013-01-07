@@ -14,7 +14,9 @@ class Entry < ActiveRecord::Base
     end
     
     def last_modified_at
+      #TODO: figure out why bookis did it this way
       scoped.maximum(:created_at)
+      # order('created_at DESC').first
     end
 
     def async_consume_feed
