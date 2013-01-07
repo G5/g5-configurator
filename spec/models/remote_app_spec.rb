@@ -32,4 +32,6 @@ describe RemoteApp do
   its(:name) { should be_present }
   its(:heroku_app_name) { should be_present }
   its(:git_repo) { should be_present }
+  its(:heroku_repo) { should be_present }
+  its(:heroku_url) { should be_present }
 end
