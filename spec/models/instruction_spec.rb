@@ -1,13 +1,8 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe Instruction do
   before :each do
-    RemoteApp.skip_callback(:create, :after, :create_instruction)
-    @client_app_creator = RemoteApp.create!(
-      kind: RemoteApp::CLIENT_APP_CREATOR
-    )
-    RemoteApp.set_callback(:create, :after, :create_instruction)
-
+    @client_app_creator = RemoteApp.client_app_creator
     @client_hub = RemoteApp.create!(
       kind: RemoteApp::CLIENT_HUB,
       client_name: "mock client",

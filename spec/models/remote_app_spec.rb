@@ -2,11 +2,6 @@ require 'spec_helper'
 
 describe RemoteApp do
   before :each do
-    RemoteApp.skip_callback(:create, :after, :create_instruction)
-    @client_app_creator = RemoteApp.create!(
-      kind: RemoteApp::CLIENT_APP_CREATOR
-    )
-    RemoteApp.set_callback(:create, :after, :create_instruction)
     Instruction.any_instance.stub(:create)
   end
 
