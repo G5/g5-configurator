@@ -2,12 +2,8 @@ require 'spec_helper'
 
 describe Entry do
   before do
+    stub_const("Entry::FEED_URL", "spec/support/nested_feed.html")
     Instruction.any_instance.stub(:create)
-
-    #TODO: stub FEED_URL constant instead
-    Entry.stub(:feed) { 
-      G5HentryConsumer.parse('spec/support/nested_feed.html')
-    }
   end
   
   describe ".feed" do
@@ -37,9 +33,10 @@ describe Entry do
     it "creates RemoteApps" do
       expect { Entry.consume_feed}.to change(RemoteApp, :count).by(4)
     end
-    # it "swallows 304 errors" do
-    #   Entry.stub(:find_or_create_from_hentry).and_raise(OpenURI::HTTPError, "304 Not Modified")
-    #   Entry.consume_feed.should == true
-    # end
+    it "swallows 304 errors" do
+      error = OpenURI::HTTPError.new("304 Not Modified", nil)
+      Entry.stub(:find_or_create_from_hentry).and_raise(error)
+      Entry.consume_feed.should == true
+    end
   end
 end

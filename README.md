@@ -52,3 +52,10 @@ If you find bugs, have feature requests or questions, please
 ```bash
 guard
 ```
+
+## Coverage
+
+```bash
+rspec spec
+open coverage/index.html
+```
