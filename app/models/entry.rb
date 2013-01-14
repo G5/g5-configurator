@@ -6,17 +6,15 @@ class Entry < ActiveRecord::Base
   accepts_nested_attributes_for :remote_apps
 
   validates :uid, uniqueness: true
-  scope :recently_modified, order('updated_at DESC')
-  
+  scope :recently_modified, order("updated_at DESC")
+
   class << self
     def feed(file_or_url=FEED_URL)
       G5HentryConsumer.parse(file_or_url, last_modified_at:  last_modified_at)
     end
-    
+
     def last_modified_at
-      #TODO: figure out why bookis did it this way
-      scoped.maximum(:created_at)
-      # order('created_at DESC').first
+      maximum(:created_at)
     end
 
     def async_consume_feed
