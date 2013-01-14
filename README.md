@@ -1,9 +1,12 @@
 # G5 Configurator
 
-* Consumes g5-hub's feed
-* Publishes feed of instructions to targets (g5-client-app-creator, g5-ch-*, g5-chd-*)
-* Pings g5-client-app-creator when feed is updated via webhook
+Deployment instructions are created manually by G5 and automagically from Client Feed.
 
+* Receives Webhook from Client Feed Publisher
+* Consumes Client Feed
+* Creates Apps
+* Creates Instructions
+* Publishes Instruction Feed
 
 ## Setup
 
@@ -12,8 +15,8 @@
 bundle
 ```
 
-1. Set up your database. 
-[rails-default-database](https://github.com/tpope/rails-default-database) 
+1. Set up your database.
+[rails-default-database](https://github.com/tpope/rails-default-database)
 automatically uses sensible defaults for the primary ActiveRecord database.
 ```bash
 rake db:setup

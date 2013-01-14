@@ -8,11 +8,11 @@ describe Instruction do
       client_name: "mock client",
       client_uid: "mock uid"
     )
-  
+
     @instruction = Instruction.create!(
       target_app_kind: @client_app_creator.kind,
       target_app_ids: [@client_app_creator.id],
-      remote_app_id: @client_hub
+      remote_app_id: @client_hub.id
     )
   end
   subject { @instruction }
