@@ -2,7 +2,8 @@ class RemoteApp < ActiveRecord::Base
   CLIENT_APP_CREATOR  = "g5-client-app-creator"
   CLIENT_HUB_DEPLOYER = "g5-client-hub-deployer"
   CLIENT_HUB          = "g5-client-hub"
-  KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB]
+  CLIENT_APP_CREATOR_DEPLOYER = "g5-client-app-creator-deployer"
+  KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB, CLIENT_APP_CREATOR_DEPLOYER]
   PREFIXES = {
     CLIENT_HUB_DEPLOYER => "g5-chd-",
     CLIENT_HUB          => "g5-ch-"
@@ -33,7 +34,7 @@ class RemoteApp < ActiveRecord::Base
   after_create :create_instruction
 
   def self.grouped_by_kind_options
-    KINDS.map do|kind| 
+    KINDS.map do|kind|
       [kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
     end
   end
@@ -64,7 +65,7 @@ class RemoteApp < ActiveRecord::Base
 
   def create_instruction
     Instruction.create(
-      target_app_kind: client_app_creator.kind, 
+      target_app_kind: client_app_creator.kind,
       target_app_ids: [client_app_creator.id],
       remote_app_id: self.id
     )
