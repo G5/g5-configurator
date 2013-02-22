@@ -11,6 +11,20 @@ describe RemoteApp do
     end
   end
 
+  describe ".client_app_creator_deployer" do
+
+    before do
+      @app = RemoteApp.client_app_creator_deployer
+    end
+
+    subject {@app}
+    it {should be_present}
+    its(:name) {should be_present}
+    its(:git_repo) {should be_present}
+    its(:heroku_app_name) {should be_present}
+  end
+
+
   before :each do
     @app = RemoteApp.create!(
       kind: RemoteApp::CLIENT_HUB,
