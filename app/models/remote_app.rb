@@ -16,8 +16,8 @@ class RemoteApp < ActiveRecord::Base
   REPOS = {
     CLIENT_APP_CREATOR          => "git@github.com:g5search/g5-client-app-creator.git",
     CLIENT_APP_CREATOR_DEPLOYER => "git@github.com:g5search/g5-client-app-creator-deployer.git",
-    CLIENT_HUB_DEPLOYER         => "git@github.com:g5search/g5-client-hub-deployer.git",
-    CLIENT_HUB                  => "git@github.com:g5search/g5-client-hub.git"
+    CLIENT_HUB                  => "git@github.com:g5search/g5-client-hub.git",
+    CLIENT_HUB_DEPLOYER         => "git@github.com:g5search/g5-client-hub-deployer.git"
   }
 
   attr_accessible :entry_id, :client_uid, :client_name
