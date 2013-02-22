@@ -100,4 +100,9 @@ class RemoteApp < ActiveRecord::Base
   def self.client_app_creator
     find_by_kind(CLIENT_APP_CREATOR)
   end
+
+  def self.client_app_creator_deployer
+    find_by_kind(CLIENT_APP_CREATOR_DEPLOYER)
+  end
+
 end
