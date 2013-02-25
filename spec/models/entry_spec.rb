@@ -2,22 +2,13 @@ require 'spec_helper'
 
 describe Entry do
   before do
-    stub_const("Entry::FEED_URL", "spec/support/nested_feed.html")
+    stub_const("Entry::FEED_URL", "spec/support/g5-hub-entries.html")
     Instruction.any_instance.stub(:async_webhook_target_apps)
   end
-  
+
   describe ".feed" do
-    it "returns a feed" do
-      Entry.feed.should be_kind_of G5HentryConsumer::HFeed
-    end
-  end
-  describe ".last_modified_at" do
-    it "returns nil when no entries" do
-      Entry.last_modified_at.should be_nil
-    end
-    it "returns a time" do
-      Entry.consume_feed
-      Entry.last_modified_at.should be_kind_of Time
+    it "returns a collection" do
+      Entry.feed.should be_kind_of Microformats2::Collection
     end
   end
   describe ".async_consume_feed" do
