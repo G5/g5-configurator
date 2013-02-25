@@ -88,8 +88,9 @@ GEM
     hentry_consumer (0.8.1)
       json
       nokogiri
-    heroku-api (0.3.8)
+    heroku-api (0.3.7)
       excon (~> 0.16.10)
+    heroku-api (0.3.8)
     heroku_resque_autoscaler (0.1.1)
       heroku-api (~> 0.3.5)
       resque (~> 1.23.0)
@@ -108,6 +109,10 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     method_source (0.8.1)
+    microformats2 (2.0.0.pre1)
+      activesupport (~> 3.2.12)
+      json (~> 1.7.6)
+      nokogiri (~> 1.5.6)
     mime-types (1.21)
     multi_json (1.6.1)
     nokogiri (1.5.6)
@@ -222,11 +227,11 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger (~> 1.2.2)
   foreman (~> 0.60.2)
-  g5_hentry_consumer (~> 0.5.0)
   guard-rspec
   guard-spork
   heroku_resque_autoscaler (~> 0.1.0)
   jquery-rails
+  microformats2 (= 2.0.0.pre1)
   pg
   quiet_assets (~> 1.0.1)
   rails (= 3.2.12)
