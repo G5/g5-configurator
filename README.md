@@ -24,7 +24,7 @@ rake db:setup
 
 1. Export environment variables.
 ```bash
-export CLIENT_APP_CREATOR_WEBHOOK_URL=http://g5-client-app-ceator.dev/consume_feed
+export G5_HUB_FEED_URL=http://g5-hub.herokuapp.com/
 export HEROKU_APP_NAME=g5-configurator # only needed on production
 export HEROKU_API_KEY=heroku_api_key # only needed on production
 ```
