@@ -1,45 +1,25 @@
-<dl class="e-g5-app">
-  <dt>UID</dt>
-  <dd>
-    <a class="u-uid" href="<%= app_url(app) %>">
-     <%= app_url(app) %>
-    </a>
-  </dd>
-  <dt>Client UID</dt>
-  <dd>
-    <a class="u-g5-client-uid" href="<%= app.client_uid %>">
-     <%= app.client_uid %>
-    </a>
-  </dd>
-  <dt>Name</dt>
-  <dd>
-    <span class="p-name"><%= app.name %></span>
-  </dd>
-  <dt>Git Repo</dt>
-  <dd>
-    <span class="p-g5-git-repo"><%= app.git_repo %></span>
-  <dd>
-  <dt>Heroku Repo</dt>
-  <dd>
-    <span class="p-g5-heroku-repo"><%= app.heroku_repo %></span>
-  <dd>
-  <dt>Heroku App Name</dt>
-  <dd>
-    <span class="p-g5-heroku-app-name"><%= app.heroku_app_name %></span>
-  <dd>
-  <dt>Heroku URL</dt>
-  <dd>
-    <a class="u-g5-heroku-url" href="<%= app.heroku_url %>">
-     <%= app.heroku_url %>
-    </a>
-  </dd>
-  <% display_siblings &&= true %>
-  <% if display_siblings %>
-    <dt>Siblings</dt>
-    <dd class="e-g5-siblings">
-      <% app.siblings.each do |sibling| %>
-        <%= render partial: "apps/app", locals: { app: sibling } %>
-      <% end %>
-    </dd>
+<div class="h-card">
+  <h2 class="p-name">
+    <%= link_to app.name, app_url(app), class: "u-uid u-url" %>
+  </h2>
+  <% if app.client_name %>
+    <h3>Client</h3>
+    <p class="p-org h-card">
+      <%= link_to app.client_name, app.client_uid, class: "p-name u-uid u-url" %>
+    </p>
   <% end %>
-</dl>
+  <h3>Git Repo</h3>
+  <p class="u-git-repo">
+    <%= link_to app.git_repo, app.git_repo %>
+  </p>
+  <h3>Sibling</h3>
+  <% app.siblings.each do |sibling| %>
+    <h4 class="p-sibling h-card">
+      <%= link_to sibling.name, app_url(app), class: "p-name u-uid u-url" %>
+    </h4>
+    <h5>Git Repo</h5>
+    <p class="u-git-repo">
+      <%= link_to sibling.git_repo, sibling.git_repo %>
+    </p>
+  <% end %>
+</div>
