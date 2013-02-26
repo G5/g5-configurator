@@ -61,6 +61,10 @@ class RemoteApp < ActiveRecord::Base
     RemoteApp.where("id != ?", id).where(client_uid: client_uid)
   end
 
+  def to_param
+    name
+  end
+
   private
 
   def non_client_app?

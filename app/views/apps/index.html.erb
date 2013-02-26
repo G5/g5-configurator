@@ -1,0 +1,8 @@
+<% title "Apps" %>
+<% header_right link_to("Entries", entries_path, class: "btn") %>
+
+<% @apps.each do |app| %>
+  <article class="well">
+    <%= render "app", app: app %>
+  </article>
+<% end %>
