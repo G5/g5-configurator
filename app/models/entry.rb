@@ -28,9 +28,9 @@ class Entry < ActiveRecord::Base
 
     def find_or_create_from_hentry(hentry)
       find_or_create_by_uid(hentry.uid.to_s) do |entry|
-        hcard = Microformats2.parse(hentry.content.to_s).card
-        client_uid = hcard.uid.to_s
-        client_name = hcard.name.to_s
+        client = client(hentry)
+        client_uid = client.uid.to_s
+        client_name = client.name.to_s
         entry.remote_apps_attributes = [
           { kind: RemoteApp::CLIENT_HUB,
             client_uid: client_uid,
