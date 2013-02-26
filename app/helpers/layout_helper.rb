@@ -25,4 +25,8 @@ module LayoutHelper
       end
     end
   end
+
+  def active_if(path)
+    current_page?(path) ? "active" : ""
+  end
 end
