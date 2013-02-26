@@ -40,6 +40,14 @@ class Instruction < ActiveRecord::Base
     created_at.to_s(:human)
   end
 
+  def updated_at_computer_readable
+    updated_at.utc.to_s(:computer)
+  end
+
+  def updated_at_human_readable
+    updated_at.to_s(:human)
+  end
+
   def name
     NAMES[target_app_kind]
   end
