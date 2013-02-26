@@ -1,0 +1,8 @@
+<% title "Entries" %>
+<% header_right link_to("Instructions", instructions_path, class: "btn") %>
+
+<% @instructions.each do |instruction| %>
+  <article class="well">
+    <%= render "entry", instruction: instruction %>
+  </article>
+<% end %>
