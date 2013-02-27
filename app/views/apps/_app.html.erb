@@ -8,8 +8,9 @@
     </p>
   <% end %>
   <p>
-    <%= link_to app.git_repo, app.git_repo, class: "u-g5-git-repo u-url" %>
-  </p>
+  <p><%= link_to app.git_repo, app.git_repo, class: "u-g5-git-repo u-url" %></p>
+  <p><%= link_to app.heroku_repo, app.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+  <p><%= link_to app.heroku_app_name, app.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
   <% app.siblings.each do |sibling| %>
     <h3 class="p-g5-sibling h-card">
       sibling of <%= link_to sibling.name, app_url(app), class: "p-name u-uid u-url" %>
@@ -19,8 +20,8 @@
         <%= link_to sibling.client_name, sibling.client_uid, class: "p-name u-uid u-url" %>
       </p>
     <% end %>
-    <p>
-      <%= link_to sibling.git_repo, sibling.git_repo, class: "u-g5-git-repo u-url" %>
-    </p>
+    <p><%= link_to sibling.git_repo, sibling.git_repo, class: "u-g5-git-repo u-url" %></p>
+    <p><%= link_to sibling.heroku_repo, sibling.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+    <p><%= link_to sibling.heroku_app_name, sibling.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
   <% end %>
 </div>

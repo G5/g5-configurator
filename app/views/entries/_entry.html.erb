@@ -59,6 +59,8 @@
             </p>
           <% end %>
           <p><%= link_to instruction.remote_app.git_repo, instruction.remote_app.git_repo, class: "u-g5-git-repo u-url" %></p>
+          <p><%= link_to instruction.remote_app.heroku_repo, instruction.remote_app.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+          <p><%= link_to instruction.remote_app.heroku_app_name, instruction.remote_app.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
         </div>
       <% end %>
     </div>
