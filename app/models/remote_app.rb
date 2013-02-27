@@ -35,20 +35,14 @@ class RemoteApp < ActiveRecord::Base
 
   validates :kind, presence: true, inclusion: { in: KINDS }
   validates :client_uid, presence: true, unless: :non_client_app?
+  validates :name, presence: true, uniqueness: true
 
+  before_validation :assign_name
   after_create :create_instruction
 
   def self.grouped_by_kind_options
     KINDS.map do|kind|
       [kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
-    end
-  end
-
-  def name
-    @name ||= if non_client_app?
-      kind
-    elsif client_name
-      "#{PREFIXES[kind]}-#{client_id}-#{client_name.parameterize}"
     end
   end
 
@@ -81,6 +75,14 @@ class RemoteApp < ActiveRecord::Base
   end
 
   private
+
+  def assign_name
+    self.name ||= if non_client_app?
+      kind
+    elsif client_name
+      "#{PREFIXES[kind]}-#{client_id}-#{client_name.parameterize}"
+    end
+  end
 
   def non_client_app?
     self.kind.in? [CLIENT_APP_CREATOR, CLIENT_APP_CREATOR_DEPLOYER]
