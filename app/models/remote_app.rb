@@ -35,18 +35,33 @@ class RemoteApp < ActiveRecord::Base
 
   validates :kind, presence: true, inclusion: { in: KINDS }
   validates :client_uid, presence: true, unless: :non_client_app?
-  validates :client_name, presence: true, unless: :non_client_app?
-  validates :name, presence: true, uniqueness: true
-  validates :heroku_app_name, presence: true, uniqueness: true
-  validates :git_repo, presence: true
 
-  before_validation :assign_missing_attributes
   after_create :create_instruction
 
   def self.grouped_by_kind_options
     KINDS.map do|kind|
       [kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
     end
+  end
+
+  def name
+    @name ||= if non_client_app?
+      kind
+    elsif client_name
+      "#{PREFIXES[kind]}-#{client_id}-#{client_name.parameterize}"
+    end
+  end
+
+  def client_id
+    @client_id ||= client_uid.split("/").last.split("-").third
+  end
+
+  def git_repo
+    @git_repo ||= REPOS[kind]
+  end
+
+  def heroku_app_name
+    @heroku_app_name ||= name[0..29]
   end
 
   def heroku_repo
@@ -71,28 +86,6 @@ class RemoteApp < ActiveRecord::Base
     self.kind.in? [CLIENT_APP_CREATOR, CLIENT_APP_CREATOR_DEPLOYER]
   end
 
-  def assign_missing_attributes
-    assign_git_repo
-    assign_heroku_app_name
-    assign_name
-  end
-
-  def assign_git_repo
-    self.git_repo ||= REPOS[kind]
-  end
-
-  def assign_heroku_app_name
-    if non_client_app?
-      self.heroku_app_name ||= kind
-    else
-      self.heroku_app_name ||= "#{PREFIXES[kind]}#{client_name.parameterize}" if client_name
-    end
-  end
-
-  def assign_name
-    self.name ||= heroku_app_name
-  end
-
   def create_instruction
     Instruction.create(
       target_app_kind: client_app_creator.kind,
@@ -112,5 +105,4 @@ class RemoteApp < ActiveRecord::Base
   def self.client_app_creator_deployer
     find_by_kind(CLIENT_APP_CREATOR_DEPLOYER)
   end
-
 end
