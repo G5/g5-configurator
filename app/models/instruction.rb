@@ -57,7 +57,7 @@ class Instruction < ActiveRecord::Base
   end
 
   def webhook_target_apps
-    target_apps.pluck(:heroku_app_name).each do |heroku_app_name|
+    target_apps.map(&:heroku_app_name).each do |heroku_app_name|
       begin
         Webhook.post("http://#{heroku_app_name}.herokuapp.com/webhooks/g5-configurator")
       rescue ArgumentError => e
