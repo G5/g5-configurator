@@ -3,23 +3,24 @@
     <%= link_to app.name, app_url(app), class: "u-uid u-url" %>
   </h2>
   <% if app.client_name %>
-    <h3>Client</h3>
     <p class="p-org h-card">
       <%= link_to app.client_name, app.client_uid, class: "p-name u-uid u-url" %>
     </p>
   <% end %>
-  <h3>Git Repo</h3>
-  <p class="u-git-repo">
-    <%= link_to app.git_repo, app.git_repo %>
+  <p>
+    <%= link_to app.git_repo, app.git_repo, class: "u-g5-git-repo u-url" %>
   </p>
-  <h3>Sibling</h3>
   <% app.siblings.each do |sibling| %>
-    <h4 class="p-sibling h-card">
-      <%= link_to sibling.name, app_url(app), class: "p-name u-uid u-url" %>
-    </h4>
-    <h5>Git Repo</h5>
-    <p class="u-git-repo">
-      <%= link_to sibling.git_repo, sibling.git_repo %>
+    <h3 class="p-g5-sibling h-card">
+      sibling of <%= link_to sibling.name, app_url(app), class: "p-name u-uid u-url" %>
+    </h3>
+    <% if sibling.client_name %>
+      <p class="p-org h-card">
+        <%= link_to sibling.client_name, sibling.client_uid, class: "p-name u-uid u-url" %>
+      </p>
+    <% end %>
+    <p>
+      <%= link_to sibling.git_repo, sibling.git_repo, class: "u-g5-git-repo u-url" %>
     </p>
   <% end %>
 </div>
