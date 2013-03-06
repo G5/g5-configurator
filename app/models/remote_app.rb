@@ -11,8 +11,9 @@ class RemoteApp < ActiveRecord::Base
   KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB, CLIENT_APP_CREATOR_DEPLOYER, CLIENT_LEADS_SERVICE]
 
   PREFIXES = {
-    CLIENT_HUB_DEPLOYER => "g5-chd-",
-    CLIENT_HUB          => "g5-ch-"
+    CLIENT_HUB_DEPLOYER  => "g5-chd-",
+    CLIENT_HUB           => "g5-ch-",
+    CLIENT_LEADS_SERVICE => "g5-cls-"
   }
 
   REPOS = {
