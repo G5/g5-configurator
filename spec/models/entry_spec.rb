@@ -31,7 +31,7 @@ describe Entry do
       expect { Entry.consume_feed }.to change(Entry, :count).by(2)
     end
     it "creates RemoteApps" do
-      expect { Entry.consume_feed}.to change(RemoteApp, :count).by(4)
+      expect { Entry.consume_feed}.to change(RemoteApp, :count).by(6)
     end
     it "swallows 304 errors" do
       error = OpenURI::HTTPError.new("304 Not Modified", nil)
