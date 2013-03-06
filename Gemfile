@@ -1,8 +1,8 @@
-source :rubygems
+source "https://rubygems.org"
 source "https://gems.gemfury.com/***REMOVED***/"
+ruby   "1.9.3"
 
-gem "rails", "3.2.11"
-gem "pg"
+gem "rails", "3.2.12"
 gem "jquery-rails"
 
 gem "quiet_assets", "~> 1.0.1"
@@ -22,6 +22,7 @@ end
 
 group :development, :test do
   gem "rails-default-database", "~> 1.0.6"
+  gem "sqlite3"
   gem "simplecov", "~> 0.7.1", require: false
   gem "rspec-rails"
   gem "guard-rspec"
