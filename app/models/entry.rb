@@ -39,6 +39,9 @@ class Entry < ActiveRecord::Base
             client_name: client_name },
           { kind: RemoteApp::CLIENT_HUB_DEPLOYER,
             client_uid: client_uid,
+            client_name: client_name },
+          { kind: RemoteApp::CLIENT_LEADS_SERVICE,
+            client_uid: client_uid,
             client_name: client_name }
         ]
       end

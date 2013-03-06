@@ -6,7 +6,9 @@ class RemoteApp < ActiveRecord::Base
   CLIENT_HUB                  = "g5-client-hub"
   CLIENT_HUB_DEPLOYER         = "g5-client-hub-deployer"
 
-  KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB, CLIENT_APP_CREATOR_DEPLOYER]
+  CLIENT_LEADS_SERVICE         = "g5-client-lead-service"
+
+  KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB, CLIENT_APP_CREATOR_DEPLOYER, CLIENT_LEADS_SERVICE]
 
   PREFIXES = {
     CLIENT_HUB_DEPLOYER => "g5-chd-",
@@ -17,7 +19,8 @@ class RemoteApp < ActiveRecord::Base
     CLIENT_APP_CREATOR          => "git@github.com:g5search/g5-client-app-creator.git",
     CLIENT_APP_CREATOR_DEPLOYER => "git@github.com:g5search/g5-sibling-deployer.git",
     CLIENT_HUB                  => "git@github.com:g5search/g5-client-hub.git",
-    CLIENT_HUB_DEPLOYER         => "git@github.com:g5search/g5-client-hub-deployer.git"
+    CLIENT_HUB_DEPLOYER         => "git@github.com:g5search/g5-client-hub-deployer.git",
+    CLIENT_LEADS_SERVICE        => "git@github.com:g5search/g5-client-leads-service.git"
   }
 
   attr_accessible :entry_id, :client_uid, :client_name
