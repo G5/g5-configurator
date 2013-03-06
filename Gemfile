@@ -34,4 +34,5 @@ end
 
 group :production do
   gem "thin", "~> 1.5.0"
+  gem "pg"
 end
