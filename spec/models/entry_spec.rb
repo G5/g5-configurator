@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Entry do
   before do
     stub_const("Entry::FEED_URL", "spec/support/nested_feed.html")
-    Instruction.any_instance.stub(:create)
+    Instruction.any_instance.stub(:async_webhook_target_apps)
   end
   
   describe ".feed" do
@@ -31,7 +31,10 @@ describe Entry do
       expect { Entry.consume_feed }.to change(Entry, :count).by(2)
     end
     it "creates RemoteApps" do
-      expect { Entry.consume_feed}.to change(RemoteApp, :count).by(4)
+      expect { Entry.consume_feed}.to change(RemoteApp, :count).by(6)
+    end
+    it "creates Instructions" do
+      expect { Entry.consume_feed}.to change(Instruction, :count).by(6)
     end
     it "swallows 304 errors" do
       error = OpenURI::HTTPError.new("304 Not Modified", nil)

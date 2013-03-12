@@ -1,9 +1,10 @@
 class Instruction < ActiveRecord::Base
   NAMES = {
-    RemoteApp::CLIENT_APP_CREATOR => "Create New App",
-    RemoteApp::CLIENT_HUB_DEPLOYER => "Update Client Hub",
-    RemoteApp::CLIENT_HUB => "Update Client Hub Deployer",
-    RemoteApp::CLIENT_APP_CREATOR_DEPLOYER => "Update Client App Creator"
+    RemoteApp::CLIENT_APP_CREATOR          => "Create New App",
+    RemoteApp::CLIENT_HUB_DEPLOYER         => "Update Client Hub",
+    RemoteApp::CLIENT_HUB                  => "Update Client Hub Deployer",
+    RemoteApp::CLIENT_APP_CREATOR_DEPLOYER => "Update Client App Creator",
+    RemoteApp::CLIENT_LEADS_SERVICE        => "Placeholder" #FIXME
   }
 
   attr_accessible :target_app_kind, :target_app_ids, :remote_app_id, :body
@@ -68,4 +69,5 @@ class Instruction < ActiveRecord::Base
       errors[:target_app_ids] = "can't be blank"
     end
   end
+
 end
