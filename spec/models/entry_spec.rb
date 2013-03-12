@@ -32,21 +32,13 @@ describe Entry do
     before do
       @entry = Entry.feed.entry
     end
-<<<<<<< HEAD
-    it "creates RemoteApps" do
-      expect { Entry.consume_feed}.to change(RemoteApp, :count).by(6)
-    end
-    it "creates Instructions" do
-      expect { Entry.consume_feed}.to change(Instruction, :count).by(6)
-=======
     it "creates an Entry" do
       expect { Entry.find_or_create_from_hentry(@entry) }.to(
         change(Entry, :count).by(1))
->>>>>>> cleans up entry model specs
     end
     it "creates two RemoteApps" do
       expect { Entry.find_or_create_from_hentry(@entry) }.to(
-        change(RemoteApp, :count).by(2))
+        change(RemoteApp, :count).by(3))
     end
   end
   describe ".client" do
