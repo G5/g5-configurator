@@ -85,7 +85,6 @@ class RemoteApp < ActiveRecord::Base
   def webhook
     Webhook.post(webhook_url)
   rescue ArgumentError => e
-    puts error.e
     Rails.logger.error e
   end
 
