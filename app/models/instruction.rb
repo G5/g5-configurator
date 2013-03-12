@@ -56,14 +56,11 @@ class Instruction < ActiveRecord::Base
     Resque.enqueue(InstructionWebhooker, self.id)
   end
 
+  def webhook_url
+  end
+
   def webhook_target_apps
-    target_apps.map(&:heroku_app_name).each do |heroku_app_name|
-      begin
-        Webhook.post("http://#{heroku_app_name}.herokuapp.com/webhooks/g5-configurator")
-      rescue ArgumentError => e
-        logger.error e
-      end
-    end
+    target_apps.map(&:webhook)
   end
 
   def client_app_creator_kind?
