@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RemoteApp do
   before :each do
-    Instruction.any_instance.stub(:create)
+    Resque.stub(:enqueue)
   end
 
   describe ".client_app_creator" do

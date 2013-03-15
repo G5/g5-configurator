@@ -3,7 +3,10 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe InstructionsController do
   render_views
   let(:app) { RemoteApp.create(name: "mock-app") }
-  before { RemoteApp.stub(:find) { app } }
+  before do
+    Resque.stub(:enqueue)
+    RemoteApp.stub(:find) { app }
+  end
 
   it "index action should render index template" do
     get :index
