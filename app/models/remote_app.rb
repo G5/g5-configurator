@@ -11,9 +11,9 @@ class RemoteApp < ActiveRecord::Base
   KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB, CLIENT_APP_CREATOR_DEPLOYER, CLIENT_LEADS_SERVICE]
 
   PREFIXES = {
-    CLIENT_HUB_DEPLOYER  => "g5-chd-",
-    CLIENT_HUB           => "g5-ch-",
-    CLIENT_LEADS_SERVICE => "g5-cls-"
+    CLIENT_HUB_DEPLOYER  => "g5-chd",
+    CLIENT_HUB           => "g5-ch",
+    CLIENT_LEADS_SERVICE => "g5-cls"
   }
 
   REPOS = {
@@ -35,18 +35,27 @@ class RemoteApp < ActiveRecord::Base
 
   validates :kind, presence: true, inclusion: { in: KINDS }
   validates :client_uid, presence: true, unless: :non_client_app?
-  validates :client_name, presence: true, unless: :non_client_app?
   validates :name, presence: true, uniqueness: true
-  validates :heroku_app_name, presence: true, uniqueness: true
-  validates :git_repo, presence: true
 
-  before_validation :assign_missing_attributes
+  before_validation :assign_name
   after_create :create_instruction
 
   def self.grouped_by_kind_options
     KINDS.map do|kind|
       [kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
     end
+  end
+
+  def client_id
+    @client_id ||= client_uid.split("/").last.split("-").third
+  end
+
+  def git_repo
+    @git_repo ||= REPOS[kind]
+  end
+
+  def heroku_app_name
+    @heroku_app_name ||= name[0..29]
   end
 
   def heroku_repo
@@ -61,32 +70,36 @@ class RemoteApp < ActiveRecord::Base
     RemoteApp.where("id != ?", id).where(client_uid: client_uid)
   end
 
+  def to_param
+    name
+  end
+
+  def webhook_host
+    ENV["G5_REMOTE_APP_WEBHOOK_HOST"]
+  end
+
+  def webhook_url
+    "http://#{heroku_app_name}.#{webhook_host}/webhooks/g5-configurator"
+  end
+
+  def webhook
+    Webhook.post(webhook_url)
+  rescue ArgumentError => e
+    Rails.logger.error e
+  end
+
   private
 
-  def non_client_app?
-    self.kind.in? [CLIENT_APP_CREATOR, CLIENT_APP_CREATOR_DEPLOYER]
-  end
-
-  def assign_missing_attributes
-    assign_git_repo
-    assign_heroku_app_name
-    assign_name
-  end
-
-  def assign_git_repo
-    self.git_repo ||= REPOS[kind]
-  end
-
-  def assign_heroku_app_name
-    if non_client_app?
-      self.heroku_app_name ||= kind
-    else
-      self.heroku_app_name ||= "#{PREFIXES[kind]}#{client_name.parameterize}" if client_name
+  def assign_name
+    self.name ||= if non_client_app?
+      kind
+    elsif client_name
+      "#{PREFIXES[kind]}-#{client_id}-#{client_name.parameterize}"
     end
   end
 
-  def assign_name
-    self.name ||= heroku_app_name
+  def non_client_app?
+    self.kind.in? [CLIENT_APP_CREATOR, CLIENT_APP_CREATOR_DEPLOYER]
   end
 
   def create_instruction
@@ -108,5 +121,4 @@ class RemoteApp < ActiveRecord::Base
   def self.client_app_creator_deployer
     find_by_kind(CLIENT_APP_CREATOR_DEPLOYER)
   end
-
 end

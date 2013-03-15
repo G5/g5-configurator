@@ -3,9 +3,12 @@ require 'resque/server'
 Configurator::Application.routes.draw do
   mount Resque::Server, :at => "/resque"
 
-  resources :instructions
-  resources :apps, only: [:show]
-  
+  resources :entries, only: [:index, :show]
+  resources :tags, only: [:show]
+  resources :instructions, only: [:index, :show, :new, :create]
+  resources :apps, only: [:index, :show]
+
   post "consume_feed" => "webhooks#consume_feed"
-  root :to => "instructions#index"
+
+  root :to => "entries#index"
 end
