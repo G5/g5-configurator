@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Instruction do
   before :each do
+    Resque.stub(:enqueue)
+
     @client_app_creator = RemoteApp.client_app_creator
     @client_hub = RemoteApp.create!(
       kind: RemoteApp::CLIENT_HUB,
