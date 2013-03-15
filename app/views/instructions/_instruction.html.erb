@@ -1,22 +1,27 @@
-<dl class="e-g5-instruction">
-  <dt>UID</dt>
-  <dd>
-    <a class="u-uid" href="<%= instruction_url(instruction) %>">
-      <%= instruction_url(instruction) %>
-    </a>
-  </dd>
-  <dt>Target Apps (Performs Instruction)</dt> 
-  <% instruction.target_apps.each do |target_app| %>
-    <dd>
-      <a class="u-g5-target-uid" href="<%= app_url target_app %>">
-        <%= app_url target_app %>
-      </a>
-    </dd>
-  <% end %>
+<div class="h-card">
+  <h2 class="p-name">
+    <%= link_to instruction.name, instruction_url(instruction), class: "u-uid u-url" %>
+  </h2>
+  <h3>Targets</h3>
+  <ul>
+    <% instruction.target_apps.each do |target_app| %>
+      <li class="p-g5-target h-card">
+        <%= link_to target_app.name, app_url(target_app), class: "p-name u-uid u-url" %>
+      </li>
+    <% end %>
+  </ul>
   <% if instruction.remote_app.present? %>
-    <dt>Remote App (Instruction Effects)</dt>
-    <dd>
-      <%= render partial: "apps/app", object: instruction.remote_app %>
-    </dd>
+    <h3>App</h3>
+    <div class="p-g5-app h-card">
+      <p><%= link_to instruction.remote_app.name, app_url(instruction.remote_app), class: "p-name u-uid u-url" %></p>
+      <% if instruction.remote_app.client_name.present? %>
+        <p class="p-org h-card">
+          <%= link_to instruction.remote_app.client_name, instruction.remote_app.client_uid, class: "p-name u-uid u-url" %>
+        </p>
+      <% end %>
+      <p><%= link_to instruction.remote_app.git_repo, instruction.remote_app.git_repo, class: "u-g5-git-repo u-url" %></p>
+      <p><%= link_to instruction.remote_app.heroku_repo, instruction.remote_app.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+      <p><%= link_to instruction.remote_app.heroku_app_name, instruction.remote_app.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
+    </div>
   <% end %>
-</dl>
+</div>

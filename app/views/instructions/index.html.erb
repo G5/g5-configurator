@@ -1,10 +1,8 @@
 <% title "Instructions" %>
 <% header_right link_to("New Instruction", new_instruction_path, class: "btn btn-success") %>
 
-<section class="h-feed">
-  <% @instructions.each do |instruction| %>
-    <article class="well">
-      <%= render partial: "hentry", locals: { instruction: instruction } %>
-    </article>
-  <% end %>
-</section>
+<% @instructions.each do |instruction| %>
+  <article class="well">
+    <%= render instruction %>
+  </article>
+<% end %>

@@ -4,6 +4,7 @@ describe InstructionsController do
   render_views
   let(:app) { RemoteApp.create(name: "mock-app") }
   before { RemoteApp.stub(:find) { app } }
+
   it "index action should render index template" do
     get :index
     response.should render_template(:index)
