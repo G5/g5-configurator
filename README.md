@@ -12,22 +12,23 @@ Deployment instructions are created manually by G5 and automagically from Client
 
 1. Install all gem dependencies.
 ```bash
-bundle
+$ bundle
 ```
 
 1. Set up your database.
 [rails-default-database](https://github.com/tpope/rails-default-database)
 automatically uses sensible defaults for the primary ActiveRecord database.
 ```bash
-rake db:setup
+$ rake db:setup
 ```
 
-1. Export environment variables.
-```bash
-export G5_HUB_FEED_URL=http://g5-hub.herokuapp.com/
-export HEROKU_APP_NAME=g5-configurator # only needed on production
-export HEROKU_API_KEY=heroku_api_key # only needed on production
-```
+### Optional: Set Custom G5 Hub Feed URL
+1. Set environment variable `G5_HUB_FEED_URL`.
+Defaults are set in `config/initializers/env.rb`.
+
+### Optional: Autoscale Resque Workers on Heroku
+1. Set environment variables `HEROKU_APP_NAME` and `HEROKU_API_KEY`.
+Defaults are set in `config/initializers/env.rb`.
 
 
 ## Authors
@@ -38,7 +39,6 @@ export HEROKU_API_KEY=heroku_api_key # only needed on production
 
 ## Contributing
 
-1. Fork it
 1. Get it running
 1. Create your feature branch (`git checkout -b my-new-feature`)
 1. Write your code and **specs**
@@ -52,13 +52,18 @@ If you find bugs, have feature requests or questions, please
 
 ## Specs
 
+Run once.
 ```bash
-guard
+$ rspec spec
 ```
 
-## Coverage
-
+Keep then running.
 ```bash
-rspec spec
-open coverage/index.html
+$ guard
+```
+
+Coverage.
+```bash
+$ rspec spec
+$ open coverage/index.html
 ```
