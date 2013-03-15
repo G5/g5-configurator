@@ -1,45 +1,29 @@
-<dl class="e-g5-app">
-  <dt>UID</dt>
-  <dd>
-    <a class="u-uid" href="<%= app_url(app) %>">
-     <%= app_url(app) %>
-    </a>
-  </dd>
-  <dt>Client UID</dt>
-  <dd>
-    <a class="u-g5-client-uid" href="<%= app.client_uid %>">
-     <%= app.client_uid %>
-    </a>
-  </dd>
-  <dt>Name</dt>
-  <dd>
-    <span class="p-name"><%= app.name %></span>
-  </dd>
-  <dt>Git Repo</dt>
-  <dd>
-    <span class="p-g5-git-repo"><%= app.git_repo %></span>
-  <dd>
-  <dt>Heroku Repo</dt>
-  <dd>
-    <span class="p-g5-heroku-repo"><%= app.heroku_repo %></span>
-  <dd>
-  <dt>Heroku App Name</dt>
-  <dd>
-    <span class="p-g5-heroku-app-name"><%= app.heroku_app_name %></span>
-  <dd>
-  <dt>Heroku URL</dt>
-  <dd>
-    <a class="u-g5-heroku-url" href="<%= app.heroku_url %>">
-     <%= app.heroku_url %>
-    </a>
-  </dd>
-  <% display_siblings &&= true %>
-  <% if display_siblings %>
-    <dt>Siblings</dt>
-    <dd class="e-g5-siblings">
-      <% app.siblings.each do |sibling| %>
-        <%= render partial: "apps/app", locals: { app: sibling } %>
-      <% end %>
-    </dd>
+<div class="h-card">
+  <h2 class="p-name">
+    <%= link_to app.name, app_url(app), class: "u-uid u-url" %>
+  </h2>
+  <% if app.client_name %>
+    <p class="p-org h-card">
+      <%= link_to app.client_name, app.client_uid, class: "p-name u-uid u-url" %>
+    </p>
   <% end %>
-</dl>
+  <p>
+  <p><%= link_to app.git_repo, app.git_repo, class: "u-g5-git-repo u-url" %></p>
+  <p><%= link_to app.heroku_repo, app.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+  <p><%= link_to app.heroku_app_name, app.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
+  <% app.siblings.each do |sibling| %>
+    <div class="p-g5-sibling h-card">
+      <h3>
+        sibling of <%= link_to sibling.name, app_url(app), class: "p-name u-uid u-url" %>
+      </h3>
+      <% if sibling.client_name %>
+        <p class="p-org h-card">
+          <%= link_to sibling.client_name, sibling.client_uid, class: "p-name u-uid u-url" %>
+        </p>
+      <% end %>
+      <p><%= link_to sibling.git_repo, sibling.git_repo, class: "u-g5-git-repo u-url" %></p>
+      <p><%= link_to sibling.heroku_repo, sibling.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+      <p><%= link_to sibling.heroku_app_name, sibling.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
+    </div>
+  <% end %>
+</div>

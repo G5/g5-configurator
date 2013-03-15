@@ -36,7 +36,7 @@ describe Instruction do
     end
     it "swallows argument errors" do
       Webhook.stub(:post).and_raise(ArgumentError)
-      @instruction.webhook_target_apps.should == ["g5-client-app-creator"]
+      @instruction.webhook_target_apps.should == [true]
     end
   end
   describe "#created_at_computer_readable" do

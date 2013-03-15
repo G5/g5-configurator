@@ -1,0 +1,69 @@
+<div class="h-entry">
+  <h2 class="p-name">
+    <%= link_to "New Instruction: #{instruction.name}", entry_url(instruction), class: "u-uid u-url", rel: "bookmark" %>
+  </h2>
+
+  <%# TODO: make summary dynamical, e.g. signed up, updated, left, (or something) %>
+  <p class="p-summary"></p>
+
+  <p>Updated at
+    <time datetime="<%= instruction.updated_at_computer_readable %>" class="dt-updated">
+      <%= instruction.updated_at_human_readable %>
+    </time>
+  </p>
+
+  <% unless instruction.updated_at_computer_readable == instruction.updated_at_computer_readable %>
+    <p>Published at
+      <time datetime="<%= instruction.created_at_computer_readable %>" class="dt-published">
+        <%= instruction.created_at_human_readable %>
+      </time>
+    </p>
+  <% end %>
+
+  <%# TODO: author should ideally be the person that performed the action %>
+  <p>by
+    <span class="p-author h-card">
+      <%= link_to "g5-configurator", root_url, class: "u-uid u-url" %>
+    </span>
+  </p>
+
+  <%# TODO: make category dynamical, e.g. create, deploy, rake (or something) %>
+  <p>
+    <%= link_to "create-app", tag_url("create-instructed"), class: "p-category", rel: "tag" %>
+  </p>
+
+  <hr/>
+
+  <div class="e-content">
+
+    <h3>Instruction</h3>
+    <div class="h-card">
+      <p class="p-name">
+        <%= link_to instruction.name, instruction_url(instruction), class: "u-uid u-url" %>
+      </p>
+      <h4>Targets</h4>
+      <ul>
+        <% instruction.target_apps.each do |target_app| %>
+          <li class="p-g5-target h-card">
+            <%= link_to target_app.name, app_url(target_app), class: "p-name u-uid u-url" %>
+          </li>
+        <% end %>
+      </ul>
+      <% if instruction.remote_app.present? %>
+        <h4>App</h4>
+        <div class="p-g5-app h-card">
+          <p><%= link_to instruction.remote_app.name, app_url(instruction.remote_app), class: "p-name u-uid u-url" %></p>
+          <% if instruction.remote_app.client_name.present? %>
+            <p class="p-org h-card">
+              <%= link_to instruction.remote_app.client_name, instruction.remote_app.client_uid, class: "p-name u-uid u-url" %>
+            </p>
+          <% end %>
+          <p><%= link_to instruction.remote_app.git_repo, instruction.remote_app.git_repo, class: "u-g5-git-repo u-url" %></p>
+          <p><%= link_to instruction.remote_app.heroku_repo, instruction.remote_app.heroku_repo, class: "u-g5-heroku-repo u-url" %></p>
+          <p><%= link_to instruction.remote_app.heroku_app_name, instruction.remote_app.heroku_url, class: "p-g5-heroku-app-name u-g5-heroku-repo u-url" %></p>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
