@@ -31,17 +31,13 @@ class Entry < ActiveRecord::Base
         client = client(hentry)
         client_uid = client.uid.to_s
         client_name = client.name.to_s
-        entry.remote_apps_attributes = [
-          { kind: RemoteApp::CLIENT_HUB,
-            client_uid: client_uid,
-            client_name: client_name },
-          { kind: RemoteApp::CLIENT_HUB_DEPLOYER,
-            client_uid: client_uid,
-            client_name: client_name },
-          { kind: RemoteApp::CLIENT_LEADS_SERVICE,
+
+        client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
+        entry.remote_apps_attributes = client_app_kinds.map do |kind|
+          { kind: kind,
             client_uid: client_uid,
             client_name: client_name }
-        ]
+        end
       end
     end
 
