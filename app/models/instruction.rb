@@ -7,7 +7,7 @@ class Instruction < ActiveRecord::Base
   has_many :target_apps, through: :instructions_target_apps, source: :target_app
 
   # the app that will be effected by the instruction
-  # only needed for g5-client-app-creator instructions
+  # only needed for client-app-creator instructions
   belongs_to :remote_app
 
   validates :target_app_kind,
