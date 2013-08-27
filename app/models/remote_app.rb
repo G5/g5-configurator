@@ -1,4 +1,6 @@
 class RemoteApp < ActiveRecord::Base
+  HEROKU_APP_NAME_MAX_LENGTH = 30
+
   attr_accessible :entry_id, :client_uid, :client_name
   attr_accessible :kind, :name, :git_repo, :heroku_app_name
 
@@ -30,7 +32,7 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def heroku_app_name
-    @heroku_app_name ||= name[0..29]
+    @heroku_app_name ||= name[0...HEROKU_APP_NAME_MAX_LENGTH]
   end
 
   def heroku_repo
@@ -71,10 +73,16 @@ class RemoteApp < ActiveRecord::Base
 
   def assign_name
     self.name ||= if non_client_app?
-      kind
+      with_orion_namespace(kind)
     elsif client_name
-      "#{app_definition.prefix}-#{client_id}-#{client_name.parameterize}"
+      with_orion_namespace(
+        "#{app_definition.prefix}-#{client_id}-#{client_name.parameterize}"
+      )
     end
+  end
+
+  def with_orion_namespace(s)
+    "#{ENV["ORION_NAMESPACE"]}-#{s}"
   end
 
   def non_client_app?

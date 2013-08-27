@@ -1,5 +1,5 @@
-CLIENT_APP_CREATOR_KIND = "g5-client-app-creator"
-CLIENT_APP_CREATOR_DEPLOYER_KIND = "g5-client-app-creator-deployer"
+CLIENT_APP_CREATOR_KIND = "client-app-creator"
+CLIENT_APP_CREATOR_DEPLOYER_KIND = "client-app-creator-deployer"
 
 AppDefinition.create_and_register(
   kind: CLIENT_APP_CREATOR_KIND,
@@ -18,21 +18,21 @@ AppDefinition.create_and_register(
 )
 
 AppDefinition.create_and_register(
-  kind: "g5-client-hub",
+  kind: "client-hub",
   human_name: "Client Hub",
   prefix: "ch",
   repo_url: "git@github.com:g5search/g5-client-hub.git"
 )
 
 AppDefinition.create_and_register(
-  kind: "g5-client-hub-deployer",
+  kind: "client-hub-deployer",
   human_name: "Client Hub Deployer",
   prefix: "chd",
   repo_url: "git@github.com:g5search/g5-sibling-deployer.git"
 )
 
 AppDefinition.create_and_register(
-  kind: "g5-client-lead-service",
+  kind: "client-lead-service",
   human_name: "Client Leads Service",
   prefix: "cls",
   repo_url: "git@github.com:g5search/g5-client-leads-service.git"

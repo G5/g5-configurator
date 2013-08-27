@@ -6,7 +6,7 @@ describe Instruction do
 
     @client_app_creator = RemoteApp.client_app_creator
     @client_hub = RemoteApp.create!(
-      kind: "g5-client-hub",
+      kind: "client-hub",
       client_name: "mock client",
       client_uid: "mock uid"
     )
@@ -38,7 +38,7 @@ describe Instruction do
     end
 
     context "with any other target_app_kind" do
-      let(:kind) { "g5-client-hub" }
+      let(:kind) { "client-hub" }
       it { should eq("Update Client Hub") }
     end
   end
