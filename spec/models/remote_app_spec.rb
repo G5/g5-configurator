@@ -27,7 +27,7 @@ describe RemoteApp do
 
   before :each do
     @app = RemoteApp.create!(
-      kind: RemoteApp::CLIENT_HUB,
+      kind: "g5-client-hub",
       client_name: "mock client",
       client_uid: "mock uid"
     )
@@ -59,7 +59,7 @@ describe RemoteApp do
   describe "#siblings" do
     before :each do
       @sibling = RemoteApp.create!(
-        kind: RemoteApp::CLIENT_HUB_DEPLOYER,
+        kind: "g5-client-hub-deployer",
         client_name: "mock client",
         client_uid: @app.client_uid
       )

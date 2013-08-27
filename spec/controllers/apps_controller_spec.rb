@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe AppsController do
   render_views
-  let(:app) { RemoteApp.create(name: "mock-app") }
+  let(:app) { RemoteApp.create(kind: "g5-client-hub", name: "mock-app") }
   before { RemoteApp.stub(:find_by_name) { app } }
 
   it "index action should render index template" do

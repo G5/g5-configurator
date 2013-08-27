@@ -1,12 +1,4 @@
 class Instruction < ActiveRecord::Base
-  NAMES = {
-    RemoteApp::CLIENT_APP_CREATOR          => "Create New App",
-    RemoteApp::CLIENT_HUB_DEPLOYER         => "Update Client Hub",
-    RemoteApp::CLIENT_HUB                  => "Update Client Hub Deployer",
-    RemoteApp::CLIENT_APP_CREATOR_DEPLOYER => "Update Client App Creator",
-    RemoteApp::CLIENT_LEADS_SERVICE        => "Placeholder" #FIXME
-  }
-
   attr_accessible :target_app_kind, :target_app_ids, :remote_app_id, :body
 
   # the apps that should perform the instruction
@@ -20,7 +12,7 @@ class Instruction < ActiveRecord::Base
 
   validates :target_app_kind,
     presence: true,
-    inclusion: { in: RemoteApp::KINDS },
+    inclusion: { in: AppDefinition.all_kinds },
     allow_blank: true
 
   validates :remote_app_id,
@@ -49,7 +41,11 @@ class Instruction < ActiveRecord::Base
   end
 
   def name
-    NAMES[target_app_kind]
+    return nil if target_app_kind.nil?
+    return "Create New App" if client_app_creator_kind?
+
+    app_definition = AppDefinition.for_kind(target_app_kind)
+    "Update #{app_definition.human_name}"
   end
 
   def async_webhook_target_apps
@@ -64,7 +60,7 @@ class Instruction < ActiveRecord::Base
   end
 
   def client_app_creator_kind?
-    target_app_kind == RemoteApp::CLIENT_APP_CREATOR
+    target_app_kind == CLIENT_APP_CREATOR_KIND
   end
 
   private
