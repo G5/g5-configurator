@@ -114,8 +114,8 @@ describe RemoteApp do
       end
     end
 
-    context "with overridden ORION_NAMESPACE" do
-      before { ENV.stub(:[]).with("ORION_NAMESPACE").and_return("test") }
+    context "with overridden APP_NAMESPACE" do
+      before { ENV.stub(:[]).with("APP_NAMESPACE").and_return("test") }
 
       context "with a non_client AppDefinition" do
         let(:kind) { CLIENT_APP_CREATOR_KIND }
