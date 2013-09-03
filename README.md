@@ -22,8 +22,8 @@ automatically uses sensible defaults for the primary ActiveRecord database.
 $ rake db:setup
 ```
 
-### Optional: Set Custom G5 Hub Feed URL
-1. Set environment variable `G5_HUB_FEED_URL`.
+### Optional: Set Custom G5 Hub Entries URL
+1. Set environment variable `G5_HUB_ENTRIES_URL`.
 Defaults are set in `config/initializers/env.rb`.
 
 ### Optional: Autoscale Resque Workers on Heroku
