@@ -82,7 +82,7 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def with_orion_namespace(s)
-    "#{ENV["ORION_NAMESPACE"]}-#{s}"
+    "#{ENV["APP_NAMESPACE"]}-#{s}"
   end
 
   def non_client_app?

@@ -30,13 +30,11 @@ Defaults are set in `config/initializers/env.rb`.
 1. Set environment variables `HEROKU_APP_NAME` and `HEROKU_API_KEY`.
 Defaults are set in `config/initializers/env.rb`.
 
-### Optional: Set the Orion Namespace
-Used to determine the top-level namespace for your Orion infrastructure (e.g. the `g5` in `g5-ch-ab123-my-apartments`).  If you plan on building a parallel infrastructure with a separate prefix for its deployed applications, you should set this.
+### Optional: Set the App Namespace
+Used to determine the top-level namespace for your infrastructure (e.g. the `g5` in `g5-ch-ab123-my-apartments`).  If you plan on building a parallel infrastructure with a separate prefix for its deployed applications, you should set this.
 
-1. Set environment variable `ORION_NAMESPACE`.
+1. Set environment variable `APP_NAMESPACE`.
 Defaults are set in `config/initializers/env.rb`.
-
-
 
 ## Authors
 
