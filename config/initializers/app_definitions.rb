@@ -1,39 +1,9 @@
 CLIENT_APP_CREATOR_KIND = "client-app-creator"
 CLIENT_APP_CREATOR_DEPLOYER_KIND = "client-app-creator-deployer"
 
-AppDefinition.create_and_register(
-  kind: CLIENT_APP_CREATOR_KIND,
-  human_name: "Client App Creator",
-  prefix: nil,
-  repo_url: "git@github.com:g5search/g5-client-app-creator.git",
-  non_client: true
-)
+app_definitions_path = Rails.root.join("config", "app_definitions.yml.erb")
+parsed_app_definitions = ERB.new(File.read(app_definitions_path)).result
 
-AppDefinition.create_and_register(
-  kind: CLIENT_APP_CREATOR_DEPLOYER_KIND,
-  human_name: "Client App Creator Deployer",
-  prefix: nil,
-  repo_url: "git@github.com:g5search/g5-sibling-deployer.git",
-  non_client: true
-)
-
-AppDefinition.create_and_register(
-  kind: "client-hub",
-  human_name: "Client Hub",
-  prefix: "ch",
-  repo_url: "git@github.com:g5search/g5-client-hub.git"
-)
-
-AppDefinition.create_and_register(
-  kind: "client-hub-deployer",
-  human_name: "Client Hub Deployer",
-  prefix: "chd",
-  repo_url: "git@github.com:g5search/g5-sibling-deployer.git"
-)
-
-AppDefinition.create_and_register(
-  kind: "client-lead-service",
-  human_name: "Client Leads Service",
-  prefix: "cls",
-  repo_url: "git@github.com:g5search/g5-client-leads-service.git"
-)
+YAML.load(parsed_app_definitions).each do |attributes|
+  AppDefinition.create_and_register(attributes.with_indifferent_access)
+end
