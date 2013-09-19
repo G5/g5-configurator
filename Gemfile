@@ -29,7 +29,6 @@ group :development, :test do
   gem "guard-spork"
   gem "spork"
   gem "rb-fsevent", "~> 0.9.1"
-  gem "debugger", "~> 1.2.2"
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil
