@@ -41,6 +41,8 @@ GEM
     builder (3.0.4)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    codeclimate-test-reporter (0.0.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -210,6 +212,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 2.1.0.1)
+  codeclimate-test-reporter
   coffee-rails (~> 3.2.1)
   debugger (~> 1.2.2)
   foreman (~> 0.60.2)
