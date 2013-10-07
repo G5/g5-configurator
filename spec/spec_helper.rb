@@ -24,8 +24,8 @@ Spork.prefork do
     config.before :each do
       # create client app creator
       RemoteApp.skip_callback(:create, :after, :create_instruction)
-      RemoteApp.create!(kind: RemoteApp::CLIENT_APP_CREATOR)
-      RemoteApp.create!(kind: RemoteApp::CLIENT_APP_CREATOR_DEPLOYER)
+      RemoteApp.create!(kind: CLIENT_APP_CREATOR_KIND)
+      RemoteApp.create!(kind: CLIENT_APP_CREATOR_DEPLOYER_KIND)
       RemoteApp.set_callback(:create, :after, :create_instruction)
     end
   end

@@ -9,3 +9,5 @@ ENV["G5_REMOTE_APP_WEBHOOK_HOST"] ||= case Rails.env
   when "development" then "dev"
   when "test"        then "test"
 end
+
+ENV["APP_NAMESPACE"] ||= "g5"
