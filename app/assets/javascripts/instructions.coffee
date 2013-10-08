@@ -21,8 +21,8 @@ $ ->
       # display target apps
       $(".js-target_apps").show()
       $(".js-target_apps select").removeAttr("disabled")
-      # if g5-client-app-creator then show remote app else hide
-      if targetAppKind == "g5-client-app-creator"
+      # if client-app-creator then show remote app else hide
+      if targetAppKind == "client-app-creator"
         $(".js-remote_app").show()
         $(".js-remote_app select").removeAttr("disabled")
       else

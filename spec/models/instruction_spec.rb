@@ -6,7 +6,7 @@ describe Instruction do
 
     @client_app_creator = RemoteApp.client_app_creator
     @client_hub = RemoteApp.create!(
-      kind: RemoteApp::CLIENT_HUB,
+      kind: "client-hub",
       client_name: "mock client",
       client_uid: "mock uid"
     )
@@ -25,9 +25,21 @@ describe Instruction do
   its(:remote_app_id) { should be_present }
 
   describe "#name" do
-    it "uses target_app_kind" do
-      @instruction.should_receive(:target_app_kind)
-      @instruction.name
+    subject { Instruction.new(target_app_kind: kind).name }
+
+    context "with a nil target_app_kind" do
+      let(:kind) { nil }
+      it { should be_nil }
+    end
+
+    context "with a Client App Creator target_app_kind" do
+      let(:kind) { CLIENT_APP_CREATOR_KIND }
+      it { should eq("Create New App") }
+    end
+
+    context "with any other target_app_kind" do
+      let(:kind) { "client-hub" }
+      it { should eq("Update Client Hub") }
     end
   end
   describe "#webhook_target_apps" do

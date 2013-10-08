@@ -7,7 +7,7 @@
     <div class="control-group js-target_app_kind">
       <%= f.label :target_app_kind, "Target App Kind", class: "control-label" %>
       <div class="controls">
-        <%= f.select :target_app_kind, RemoteApp::KINDS, include_blank: "Please select" %>
+        <%= f.select :target_app_kind, AppDefinition.all_kinds, include_blank: "Please select" %>
       </div>
     </div>
     <div class="control-group js-target_apps">

@@ -1,28 +1,5 @@
 class RemoteApp < ActiveRecord::Base
-
-  CLIENT_APP_CREATOR          = "g5-client-app-creator"
-  CLIENT_APP_CREATOR_DEPLOYER = "g5-client-app-creator-deployer"
-
-  CLIENT_HUB                  = "g5-client-hub"
-  CLIENT_HUB_DEPLOYER         = "g5-client-hub-deployer"
-
-  CLIENT_LEADS_SERVICE         = "g5-client-lead-service"
-
-  KINDS           = [CLIENT_APP_CREATOR, CLIENT_HUB_DEPLOYER, CLIENT_HUB, CLIENT_APP_CREATOR_DEPLOYER, CLIENT_LEADS_SERVICE]
-
-  PREFIXES = {
-    CLIENT_HUB_DEPLOYER  => "g5-chd",
-    CLIENT_HUB           => "g5-ch",
-    CLIENT_LEADS_SERVICE => "g5-cls"
-  }
-
-  REPOS = {
-    CLIENT_APP_CREATOR          => "git@github.com:g5search/g5-client-app-creator.git",
-    CLIENT_APP_CREATOR_DEPLOYER => "git@github.com:g5search/g5-sibling-deployer.git",
-    CLIENT_HUB                  => "git@github.com:g5search/g5-client-hub.git",
-    CLIENT_HUB_DEPLOYER         => "git@github.com:g5search/g5-sibling-deployer.git",
-    CLIENT_LEADS_SERVICE        => "git@github.com:g5search/g5-client-leads-service.git"
-  }
+  HEROKU_APP_NAME_MAX_LENGTH = 30
 
   attr_accessible :entry_id, :client_uid, :client_name
   attr_accessible :kind, :name, :git_repo, :heroku_app_name
@@ -33,7 +10,7 @@ class RemoteApp < ActiveRecord::Base
   has_many :instructions_target_apps, foreign_key: :target_app_id
   has_many :instructions, through: :instructions_target_apps, source: :instruction
 
-  validates :kind, presence: true, inclusion: { in: KINDS }
+  validates :kind, presence: true, inclusion: { in: AppDefinition.all_kinds }
   validates :client_uid, presence: true, unless: :non_client_app?
   validates :name, presence: true, uniqueness: true
 
@@ -41,7 +18,7 @@ class RemoteApp < ActiveRecord::Base
   after_create :create_instruction
 
   def self.grouped_by_kind_options
-    KINDS.map do|kind|
+    AppDefinition.all_kinds.map do |kind|
       [kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
     end
   end
@@ -51,11 +28,11 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def git_repo
-    @git_repo ||= REPOS[kind]
+    @git_repo ||= app_definition.repo_url
   end
 
   def heroku_app_name
-    @heroku_app_name ||= name[0..29]
+    @heroku_app_name ||= name[0...HEROKU_APP_NAME_MAX_LENGTH]
   end
 
   def heroku_repo
@@ -90,16 +67,26 @@ class RemoteApp < ActiveRecord::Base
 
   private
 
+  def app_definition
+    @app_definition ||= AppDefinition.for_kind(kind)
+  end
+
   def assign_name
     self.name ||= if non_client_app?
-      kind
+      with_orion_namespace(kind)
     elsif client_name
-      "#{PREFIXES[kind]}-#{client_id}-#{client_name.parameterize}"
+      with_orion_namespace(
+        "#{app_definition.prefix}-#{client_id}-#{client_name.parameterize}"
+      )
     end
   end
 
+  def with_orion_namespace(s)
+    "#{ENV["APP_NAMESPACE"]}-#{s}"
+  end
+
   def non_client_app?
-    self.kind.in? [CLIENT_APP_CREATOR, CLIENT_APP_CREATOR_DEPLOYER]
+    app_definition.non_client?
   end
 
   def create_instruction
@@ -115,10 +102,10 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def self.client_app_creator
-    find_by_kind(CLIENT_APP_CREATOR)
+    find_by_kind(CLIENT_APP_CREATOR_KIND)
   end
 
   def self.client_app_creator_deployer
-    find_by_kind(CLIENT_APP_CREATOR_DEPLOYER)
+    find_by_kind(CLIENT_APP_CREATOR_DEPLOYER_KIND)
   end
 end
