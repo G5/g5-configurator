@@ -18,4 +18,4 @@
 
 3. Add application deployment config to `config/defaults.yml` in
    g5-client-app-creator. [See there for
-   instructions.](http://github.com/g5search/g5-client-app-creator/docs/ADD_APPLICATION_TO_CLIENT_DEPLOY.md)
+   instructions.](http://github.com/g5search/g5-client-app-creator/blob/master/doc/ADD_APPLICATION_TO_CLIENT_DEPLOY.md)
