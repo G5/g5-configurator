@@ -36,9 +36,9 @@ describe Entry do
       expect { Entry.find_or_create_from_hentry(@entry) }.to(
         change(Entry, :count).by(1))
     end
-    it "creates four RemoteApps" do
+    it "creates five RemoteApps" do
       expect { Entry.find_or_create_from_hentry(@entry) }.to(
-        change(RemoteApp, :count).by(4))
+        change(RemoteApp, :count).by(5))
     end
   end
   describe ".client" do
