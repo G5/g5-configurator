@@ -39,7 +39,7 @@ describe Instruction do
 
     context "with any other target_app_kind" do
       let(:kind) { "client-hub" }
-      it { should eq("Update Client Hub") }
+      it { should eq("Update Client Hub Siblings") }
     end
   end
   describe "#webhook_target_apps" do
