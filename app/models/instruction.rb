@@ -45,7 +45,7 @@ class Instruction < ActiveRecord::Base
     return "Create New App" if client_app_creator_kind?
 
     app_definition = AppDefinition.for_kind(target_app_kind)
-    "Update #{app_definition.human_name}"
+    "Update #{app_definition.human_name} Siblings"
   end
 
   def async_webhook_target_apps
