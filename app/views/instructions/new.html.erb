@@ -9,18 +9,21 @@
       <div class="controls">
         <%= f.select :target_app_kind, AppDefinition.all_kinds, include_blank: "Please select" %>
       </div>
+      <span class="help-block">This is the kind of app that will perform the instruction.</span>
     </div>
     <div class="control-group js-target_apps">
       <%= f.label :target_app_ids, "Target Apps", class: "control-label" %>
       <div class="controls">
         <%= f.select :target_app_ids, RemoteApp.grouped_by_kind_options, {}, multiple: true %>
       </div>
+      <span class="help-block">This is the app that will perform the instruction.</span>
     </div>
     <div class="control-group js-remote_app">
       <%= f.label :remote_app_id, "Remote App", class: "control-label" %>
       <div class="controls">
         <%= f.collection_select :remote_app_id, RemoteApp.all, :id, :name, include_blank: "Please select" %>
       </div>
+      <span class="help-block">This is the app that the instruction will be performed on.</span>
     </div>
     <div class="control-group">
       <div class="controls">
