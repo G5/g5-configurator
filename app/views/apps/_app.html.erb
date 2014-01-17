@@ -14,7 +14,7 @@
   <% app.siblings.each do |sibling| %>
     <div class="p-g5-sibling h-card">
       <h3>
-        sibling of <%= link_to sibling.name, app_url(app), class: "p-name u-uid u-url" %>
+        sibling of <%= link_to sibling.name, app_url(sibling), class: "p-name u-uid u-url" %>
       </h3>
       <% if sibling.client_name %>
         <p class="p-org h-card">
