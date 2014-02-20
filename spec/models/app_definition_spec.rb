@@ -5,7 +5,7 @@ describe AppDefinition do
     subject { AppDefinition::ALL.map(&:kind) }
 
     it { should_not be_empty }
-    it { should include("client-hub") }
+    it { should include("content-manangement-system") }
     it { should include(CLIENT_APP_CREATOR_KIND) }
   end
 
@@ -13,7 +13,7 @@ describe AppDefinition do
     subject { AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind) }
 
     it { should_not be_empty }
-    it { should include("client-hub") }
+    it { should include("content-manangement-system") }
     it { should_not include(CLIENT_APP_CREATOR_KIND) }
   end
 
@@ -21,15 +21,15 @@ describe AppDefinition do
     subject { AppDefinition.all_kinds }
 
     it { should_not be_empty }
-    it { should include("client-hub") }
+    it { should include("content-manangement-system") }
   end
 
   describe ".for_kind" do
     subject { AppDefinition.for_kind(kind) }
 
     context "passed a known kind" do
-      let(:kind) { "client-hub" }
-      its(:kind) { should eq("client-hub") }
+      let(:kind) { "content-manangement-system" }
+      its(:kind) { should eq("content-manangement-system") }
     end
 
     context "passed an unknown kind" do
