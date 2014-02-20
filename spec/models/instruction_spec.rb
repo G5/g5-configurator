@@ -38,8 +38,8 @@ describe Instruction do
     end
 
     context "with any other target_app_kind" do
-      let(:kind) { "client-hub" }
-      it { should eq("Update Client Hub Siblings") }
+      let(:kind) { "content-management-system" }
+      it { should eq("Update CMS Siblings") }
     end
   end
   describe "#webhook_target_apps" do
