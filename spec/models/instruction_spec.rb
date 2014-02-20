@@ -6,7 +6,7 @@ describe Instruction do
 
     @client_app_creator = RemoteApp.client_app_creator
     @client_hub = RemoteApp.create!(
-      kind: "client-hub",
+      kind: "content-manangement-system",
       client_name: "mock client",
       client_uid: "mock uid"
     )
