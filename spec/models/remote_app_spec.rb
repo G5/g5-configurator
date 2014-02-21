@@ -110,7 +110,7 @@ describe RemoteApp do
 
       context "with a client AppDefinition" do
         let(:kind) { "content-management-system" }
-        it { should eq("g5-ch-abc123-test-client") }
+        it { should eq("g5-cms-abc123-test-client") }
       end
     end
 
@@ -124,7 +124,7 @@ describe RemoteApp do
 
       context "with a client AppDefinition" do
         let(:kind) { "content-management-system" }
-        it { should eq("test-ch-abc123-test-client") }
+        it { should eq("test-cms-abc123-test-client") }
       end
     end
   end
