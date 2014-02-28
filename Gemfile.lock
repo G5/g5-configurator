@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/G5/webhook.git
-  revision: 3b951161bad88d3054111e1486bbf32717209136
-  branch: configuration
-  specs:
-    webhook (0.0.2)
-
 GEM
   remote: https://rubygems.org/
   remote: https://gems.gemfury.com/88yeKzEGfizstwBaXVqj/
@@ -204,6 +197,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     vegas (0.1.11)
       rack (>= 1.0.0)
+    webhook (0.1.0)
 
 PLATFORMS
   ruby
@@ -233,4 +227,4 @@ DEPENDENCIES
   sqlite3
   thin (~> 1.5.0)
   uglifier (>= 1.0.3)
-  webhook!
+  webhook
