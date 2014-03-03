@@ -27,7 +27,7 @@ describe RemoteApp do
 
   before :each do
     @app = RemoteApp.create!(
-      kind: "client-hub",
+      kind: "content-management-system",
       client_name: "mock client",
       client_uid: "mock uid"
     )
@@ -109,8 +109,8 @@ describe RemoteApp do
       end
 
       context "with a client AppDefinition" do
-        let(:kind) { "client-hub" }
-        it { should eq("g5-ch-abc123-test-client") }
+        let(:kind) { "content-management-system" }
+        it { should eq("g5-cms-abc123-test-client") }
       end
     end
 
@@ -123,8 +123,8 @@ describe RemoteApp do
       end
 
       context "with a client AppDefinition" do
-        let(:kind) { "client-hub" }
-        it { should eq("test-ch-abc123-test-client") }
+        let(:kind) { "content-management-system" }
+        it { should eq("test-cms-abc123-test-client") }
       end
     end
   end
