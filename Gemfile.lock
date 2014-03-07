@@ -129,6 +129,11 @@ GEM
       railties (= 3.2.12)
     rails-default-database (1.0.6)
       railties
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (3.2.12)
       actionpack (= 3.2.12)
       activesupport (= 3.2.12)
@@ -223,6 +228,7 @@ DEPENDENCIES
   quiet_assets (~> 1.0.1)
   rails (= 3.2.12)
   rails-default-database (~> 1.0.6)
+  rails_12factor
   rb-fsevent (~> 0.9.1)
   rspec-rails
   sass-rails (~> 3.2.3)
