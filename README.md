@@ -34,7 +34,7 @@ Defaults are set in `config/initializers/env.rb`.
 Defaults are set in `config/initializers/env.rb`.
 
 ### Optional: Set the App Namespace
-Used to determine the top-level namespace for your infrastructure (e.g. the `g5` in `g5-ch-ab123-my-apartments`).  If you plan on building a parallel infrastructure with a separate prefix for its deployed applications, you should set this.
+Used to determine the top-level namespace for your infrastructure (e.g. the `g5` in `g5-cms-ab123-my-apartments`).  If you plan on building a parallel infrastructure with a separate prefix for its deployed applications, you should set this.
 
 1. Set environment variable `APP_NAMESPACE`.
 Defaults are set in `config/initializers/env.rb`.
