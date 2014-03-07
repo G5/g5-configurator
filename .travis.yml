@@ -6,5 +6,7 @@ notifications:
   campfire:
     rooms:
       secure: aI6dyzNBa2lolmisnfJzW3tQn+6p3Fa6OT1Tf2SCI7pF5cgFot8Q2fh6rKWOZBPbjIs1iaJsAc8qcnajJkntuqQAk0NdgStzNvECjEdCDmmrwfBsVLbh58GosuQxCsiTDQs56oWTClQbYP025V2wr5U9qXy9KU9gKK5lS4tGMXg=
+    template:
+          - "%{repository}#%{build_number} %{message} (%{branch} - %{commit} : %{author}) Change view : %{compare_url} Build details : %{build_url}"
     on_success: change
     on_failure: always
