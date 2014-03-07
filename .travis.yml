@@ -1,10 +1,10 @@
 language: ruby
 rvm:
-  - 1.9.3
+- 1.9.3
 script: bundle exec rspec
 notifications:
   campfire:
     rooms:
-      secure: UwsCEilVpBakyB+/A84lOS0Gp7KsNEZOGOXdWuS4M0L2BtmHYEYzO5DM3KrQuBmeCPoBQKfZRGGmAAXoHIinD+ziRczfknzL8lesAFcEVLs9ZMwtTdkk3FyCyOWcNu+Q6Iw5s9bz8Jpuz9u2iIC1knyAePhWSH76zg9R0DZrYmI=
+      secure: aI6dyzNBa2lolmisnfJzW3tQn+6p3Fa6OT1Tf2SCI7pF5cgFot8Q2fh6rKWOZBPbjIs1iaJsAc8qcnajJkntuqQAk0NdgStzNvECjEdCDmmrwfBsVLbh58GosuQxCsiTDQs56oWTClQbYP025V2wr5U9qXy9KU9gKK5lS4tGMXg=
     on_success: change
     on_failure: always
