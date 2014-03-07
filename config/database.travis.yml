@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: g5_configurator_test
+  username: postgres

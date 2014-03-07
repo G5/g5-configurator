@@ -1,7 +1,12 @@
 language: ruby
 rvm:
-- 1.9.3
-script: bundle exec rspec
+  - 1.9.3
+script:
+  - RAILS_ENV=test bundle exec rake db:schema:load --trace
+  - bundle exec rspec
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database g5_configurator_test;' -U postgres
 notifications:
   campfire:
     rooms:
