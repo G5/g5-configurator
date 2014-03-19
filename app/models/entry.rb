@@ -3,7 +3,7 @@ class Entry < ActiveRecord::Base
   accepts_nested_attributes_for :remote_apps
 
   validates :uid, uniqueness: true
-  scope :recently_modified, order("updated_at DESC")
+  scope :recently_modified, -> { order("updated_at DESC") }
 
   class << self
     def feed_url
