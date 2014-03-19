@@ -1,9 +1,6 @@
 class RemoteApp < ActiveRecord::Base
   HEROKU_APP_NAME_MAX_LENGTH = 30
 
-  attr_accessible :entry_id, :client_uid, :client_name
-  attr_accessible :kind, :name, :git_repo, :heroku_app_name
-
   belongs_to :entry
 
   # habtm

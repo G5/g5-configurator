@@ -2,8 +2,6 @@ class AppDefinition
   ALL = []
   CLIENT_APP_DEFINITIONS = []
 
-  attr_reader :kind, :human_name, :prefix, :repo_url
-
   def self.all_kinds
     @all_kinds ||= ALL.map(&:kind)
   end
