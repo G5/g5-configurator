@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 ruby   "2.1.1"
 
-gem "rails", "4.0.3"
+gem "rails", "4.0.4"
 gem "jquery-rails"
 
 gem "quiet_assets", "~> 1.0.1"
@@ -9,9 +9,9 @@ gem "bootstrap-sass", "~> 2.1.0.1"
 
 gem "webhook"
 
-gem "foreman", "~> 0.60.2"
+gem "foreman", "~> 0.63.0"
 gem "heroku_resque_autoscaler", "~> 0.1.0"
-gem "microformats2", "2.0.0"
+gem "microformats2", "2.0.1"
 
 gem "sass-rails",   "~> 4.0.0"
 gem "coffee-rails", "~> 4.0.0"
