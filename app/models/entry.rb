@@ -3,7 +3,7 @@ class Entry < ActiveRecord::Base
   accepts_nested_attributes_for :remote_apps
 
   validates :uid, uniqueness: true
-  scope :recently_modified, order("updated_at DESC")
+  scope :recently_modified, -> { order("updated_at DESC") }
 
   class << self
     def feed_url
@@ -27,7 +27,7 @@ class Entry < ActiveRecord::Base
     end
 
     def find_or_create_from_hentry(hentry)
-      find_or_create_by_uid(hentry.uid.to_s) do |entry|
+      find_or_create_by(uid: hentry.uid.to_s) do |entry|
         client = client(hentry)
         client_uid = client.uid.to_s
         client_name = client.name.to_s

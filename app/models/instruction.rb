@@ -1,6 +1,4 @@
 class Instruction < ActiveRecord::Base
-  attr_accessible :target_app_kind, :target_app_ids, :remote_app_id, :body
-
   # the apps that should perform the instruction
   # explicit habtm
   has_many :instructions_target_apps
