@@ -23,6 +23,6 @@ class InstructionsController < ApplicationController
 
   private
     def instruction_params
-      params.fetch(:instruction, {}).permit(:target_app_kind, :target_app_ids, :remote_app_id, :body)
+      params.fetch(:instruction, {}).permit(target_app_ids: []).permit(:target_app_kind, :remote_app_id, :body)
     end
 end
