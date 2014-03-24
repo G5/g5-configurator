@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 feature "Instructions" do
+  before do
+    Resque.stub(:enqueue)
+  end
 
   scenario "User creates new instruction" do
     visit instructions_path
