@@ -9,7 +9,6 @@ gem "bootstrap-sass", "~> 2.1.0.1"
 
 gem "webhook"
 
-gem "foreman", "~> 0.63.0"
 gem "heroku_resque_autoscaler", "~> 0.1.0"
 gem "microformats2", "2.0.1"
 
@@ -27,6 +26,7 @@ group :development, :test do
   gem "spork"
   gem "rb-fsevent", "~> 0.9.2"
   gem "capybara", "~> 2.2.1"
+  gem "foreman"
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil
