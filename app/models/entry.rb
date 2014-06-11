@@ -18,7 +18,8 @@ class Entry < ActiveRecord::Base
       feed.entries.map do |hentry|
         find_or_create_from_hentry(hentry)
       end
-    rescue OpenURI::HTTPError, "304 Not Modified"
+    rescue OpenURI::HTTPError => e
+      raise e unless /304 Not Modified/ =~ e.message
       []
     end
 
