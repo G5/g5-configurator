@@ -1,4 +1,5 @@
 class InstructionsController < ApplicationController
+  before_filter :authenticate_user!, only: [:new, :create]
 
   def index
     @instructions = Instruction.order('created_at desc')
