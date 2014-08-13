@@ -13,9 +13,21 @@ describe InstructionsController do
     response.should render_template(:index)
   end
 
-  it "new action should render new template" do
-    get :new
-    response.should render_template(:new)
+  context "authorized user" do
+    before do
+      spec_sign_in
+    end
+    it "new action should render new template" do
+      get :new
+     response.should render_template(:new)
+    end
+  end
+
+  context "unauthorized user" do
+    it "should not render" do
+      get :new
+      response.should redirect_to "/g5_auth/users/sign_in"
+    end
   end
 
   it "show action should render show template" do
@@ -26,15 +38,41 @@ describe InstructionsController do
     response.should render_template(:show)
   end
 
-  it "create action should render new template when model is invalid" do
-    Instruction.any_instance.stub(:valid?).and_return(false)
-    post :create
-    response.should render_template(:new)
+  context "authenticated" do
+    before do
+      spec_sign_in
+    end
+    it "create action should render new template when model is invalid" do
+      Instruction.any_instance.stub(:valid?).and_return(false)
+      post :create
+      response.should render_template(:new)
+    end
   end
 
-  it "create action should redirect when model is valid" do
-    Instruction.any_instance.stub(:valid?).and_return(true)
-    post :create
-    response.should redirect_to(instructions_path)
+  context "unauthenticated" do
+    it "create action should redirect to sign in" do
+      Instruction.any_instance.stub(:valid?).and_return(false)
+      post :create
+      response.should redirect_to "/g5_auth/users/sign_in"
+    end
+  end
+
+  context "authenticated" do
+    before do
+      spec_sign_in
+    end
+    it "create action should redirect when model is valid" do
+      Instruction.any_instance.stub(:valid?).and_return(true)
+      post :create
+      response.should redirect_to(instructions_path)
+    end
+  end
+
+  context "unauthenticated" do
+    it "create action should not work" do
+      Instruction.any_instance.stub(:valid?).and_return(true)
+      post :create
+      response.should redirect_to "/g5_auth/users/sign_in"
+    end
   end
 end

@@ -5,7 +5,7 @@ feature "Instructions" do
     Resque.stub(:enqueue)
   end
 
-  scenario "User creates new instruction" do
+  scenario "authorized User creates new instruction", auth_request: true do
     visit instructions_path
     click_link "New Instruction"
     select "client-app-creator-deployer", from: "instruction[target_app_kind]"
