@@ -7,7 +7,7 @@ class Entry < ActiveRecord::Base
 
   class << self
     def feed_url
-      ENV["G5_HUB_ENTRIES_URL"]
+      G5HubService.feed_url
     end
 
     def feed
