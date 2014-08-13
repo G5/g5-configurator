@@ -7,7 +7,7 @@ module G5HubService
 
   def self.url_with_access_token(url)
     access_token = G5AuthenticationClient::Client.new.get_access_token
-    URI.parse(URI.encode("#{url}?access_token=#{access_token}".strip))
+    "#{url}?access_token=#{access_token}".strip
   end
 end
 
