@@ -1,9 +1,8 @@
 require 'spec_helper'
 
-feature "Instructions" do
+feature "Instructions", auth_request: true do
   before do
     Resque.stub(:enqueue)
-    spec_sign_in
   end
 
   scenario "authorized User creates new instruction", auth_request: true do

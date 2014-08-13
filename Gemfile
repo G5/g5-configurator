@@ -31,6 +31,7 @@ group :development, :test do
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem "factory_girl_rails", group: :test
 
 group :production do
   gem "unicorn"
