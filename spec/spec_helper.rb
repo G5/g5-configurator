@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'spork'
+require 'helpers'
 
 Spork.prefork do
   unless ENV['DRB']
@@ -13,10 +14,13 @@ Spork.prefork do
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
+  require 'g5_authenticatable/rspec'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
   RSpec.configure do |config|
+    config.include Helpers
+    config.include Devise::TestHelpers, type: :controller
     config.use_transactional_fixtures = true
     config.infer_base_class_for_anonymous_controllers = false
     config.order = "random"

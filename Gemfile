@@ -8,6 +8,7 @@ gem "quiet_assets", "~> 1.0.1"
 gem "bootstrap-sass", "~> 2.1.0.1"
 
 gem "webhook"
+gem "g5_authenticatable"
 
 gem "heroku_resque_autoscaler", "~> 0.1.0"
 gem "microformats2", "2.0.1"
@@ -30,6 +31,7 @@ group :development, :test do
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem "factory_girl_rails", group: :test
 
 group :production do
   gem "unicorn"

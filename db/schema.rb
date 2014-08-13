@@ -11,33 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140304220845) do
+ActiveRecord::Schema.define(version: 20140812174627) do
 
   create_table "entries", force: true do |t|
     t.string   "uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  create_table "g5_authenticatable_users", force: true do |t|
+    t.string   "email",              default: "",   null: false
+    t.string   "provider",           default: "g5", null: false
+    t.string   "uid",                               null: false
+    t.string   "g5_access_token"
+    t.integer  "sign_in_count",      default: 0,    null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "g5_authenticatable_users", ["email"], name: "index_g5_authenticatable_users_on_email", unique: true
+  add_index "g5_authenticatable_users", ["provider", "uid"], name: "index_g5_authenticatable_users_on_provider_and_uid", unique: true
 
   create_table "instructions", force: true do |t|
     t.integer  "remote_app_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "target_app_kind"
   end
 
   create_table "instructions_target_apps", force: true do |t|
     t.integer  "instruction_id"
     t.integer  "target_app_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "remote_apps", force: true do |t|
     t.integer  "entry_id"
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "kind"
     t.string   "git_repo"
     t.string   "client_uid"
