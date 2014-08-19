@@ -32,12 +32,14 @@ class Entry < ActiveRecord::Base
         client = client(hentry)
         client_uid = client.uid.to_s
         client_name = client.name.to_s
+        organization = client.organization.to_s
 
         client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
         entry.remote_apps_attributes = client_app_kinds.map do |kind|
           { kind: kind,
             client_uid: client_uid,
-            client_name: client_name }
+            client_name: client_name,
+            organization: organization }
         end
       end
     end
