@@ -29,7 +29,8 @@ describe RemoteApp do
     @app = RemoteApp.create!(
       kind: "content-management-system",
       client_name: "mock client",
-      client_uid: "mock uid"
+      client_uid: "mock uid",
+      organization: "heroku organization"
     )
   end
   subject { @app }
@@ -43,6 +44,7 @@ describe RemoteApp do
   its(:git_repo) { should be_present }
   its(:heroku_repo) { should be_present }
   its(:heroku_url) { should be_present }
+  its(:organization) { should be_present }
 
   describe "#heroku_app_name" do
     subject { RemoteApp.new(name: name).heroku_app_name }
