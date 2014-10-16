@@ -11,16 +11,24 @@ class Entry < ActiveRecord::Base
     end
 
     def feed
+      Rails.logger.info("Grabbing and parsing the feed")
       Microformats2.parse(feed_url)
     end
 
     def consume_feed
-      feed.entries.map do |hentry|
-        find_or_create_from_hentry(hentry)
+      begin
+        Rails.logger.info("begin consume_feed from #{feed_url}")
+        feed.entries.map do |hentry|
+          Rails.logger.info("entries count: #{Entry.count}")
+          entry = find_or_create_from_hentry(hentry)
+          Rails.logger.info("entries count: #{Entry.count}")
+          entry
+        end
+      rescue OpenURI::HTTPError => e
+        Rails.logger.info("rescuing from: #{e}")
+        raise e unless /304 Not Modified/ =~ e.message
+        []
       end
-    rescue OpenURI::HTTPError => e
-      raise e unless /304 Not Modified/ =~ e.message
-      []
     end
 
     def async_consume_feed
@@ -28,7 +36,9 @@ class Entry < ActiveRecord::Base
     end
 
     def find_or_create_from_hentry(hentry)
+      Rails.logger.info("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
       find_or_create_by(uid: hentry.uid.to_s) do |entry|
+        Rails.logger.info("processing entry: #{entry}")
         client = client(hentry)
         client_uid = client.uid.to_s
         client_name = client.name.to_s
@@ -41,6 +51,7 @@ class Entry < ActiveRecord::Base
             client_name: client_name,
             organization: organization }
         end
+        Rails.logger.info("Entry setup complete. Valid?: #{entry.valid?}")
       end
     end
 
