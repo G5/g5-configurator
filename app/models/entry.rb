@@ -44,8 +44,6 @@ class Entry < ActiveRecord::Base
         organization = client.g5_organization.to_s
 
         client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
-        Rails.logger.info("#{client_uid}")
-        Rails.logger.info("#{organization}")
         entry.remote_apps_attributes = client_app_kinds.map do |kind|
           { kind: kind,
             client_uid: client_uid,
