@@ -22,6 +22,7 @@ class Entry < ActiveRecord::Base
           Rails.logger.info("finding or creating from hentry: #{hentry}, 
                             Entry count: #{Entry.count}")
           Rails.logger.info("the uid is: #{hentry.uid.to_s}")
+          Rails.logger.info random_method
           find_or_create_from_hentry(hentry)
           Rails.logger.info("done finding or creating from hentry. 
                             Entry count: #{Entry.count}")
@@ -31,6 +32,10 @@ class Entry < ActiveRecord::Base
         raise e unless /304 Not Modified/ =~ e.message
         []
       end
+    end
+
+    def random_method
+      "got here"
     end
 
     def async_consume_feed
