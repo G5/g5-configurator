@@ -19,7 +19,9 @@ class Entry < ActiveRecord::Base
       begin
         Rails.logger.info("begin consume_feed from #{feed_url}")
         feed.entries.map do |hentry|
+          Rails.logger.info("entries count: #{Entry.count}")
           find_or_create_from_hentry(hentry)
+          Rails.logger.info("entries count: #{Entry.count}")
         end
       rescue OpenURI::HTTPError => e
         Rails.logger.info("rescuing from: #{e}")
