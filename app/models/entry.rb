@@ -23,7 +23,7 @@ class Entry < ActiveRecord::Base
                             Entry count: #{Entry.count}")
           Rails.logger.info("the uid is: #{hentry.uid.to_s}")
           Rails.logger.info random_method
-          find_or_create_from_hentry(hentry)
+          foo_find_or_create_from_hentry(hentry)
           Rails.logger.info("done finding or creating from hentry. 
                             Entry count: #{Entry.count}")
         end
@@ -42,9 +42,9 @@ class Entry < ActiveRecord::Base
       Resque.enqueue(EntryConsumer)
     end
 
-    def find_or_create_from_hentry(hentry)
+    def foo_find_or_create_from_hentry(hentry)
       Rails.logger("test")
-      Rails.logger("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
+      #Rails.logger("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
       find_or_create_by(uid: hentry.uid.to_s) do |entry|
         client = client(hentry)
         client_uid = client.uid.to_s
