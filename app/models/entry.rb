@@ -38,6 +38,7 @@ class Entry < ActiveRecord::Base
     end
 
     def find_or_create_from_hentry(hentry)
+      Rails.logger("test")
       Rails.logger("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
       find_or_create_by(uid: hentry.uid.to_s) do |entry|
         client = client(hentry)
