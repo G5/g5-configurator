@@ -48,6 +48,7 @@ class Entry < ActiveRecord::Base
         organization = client.g5_organization.to_s
 
         client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
+        Rails.logger.info("client app kinds: #{client_app_kinds}")
         entry.remote_apps_attributes = client_app_kinds.map do |kind|
           { kind: kind,
             client_uid: client_uid,
@@ -56,7 +57,7 @@ class Entry < ActiveRecord::Base
         end
         Rails.logger.info("Entry setup complete. Valid?: #{entry.valid?}")
       end
-      Rails.logger("ending find_or_create_from_hentry")
+      Rails.logger.info("ending find_or_create_from_hentry")
     end
 
     def client(hentry)
