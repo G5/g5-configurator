@@ -19,12 +19,7 @@ class Entry < ActiveRecord::Base
       begin
         Rails.logger.info("begin consume_feed from #{feed_url}")
         feed.entries.map do |hentry|
-          Rails.logger.info("finding or creating from hentry: #{hentry}, 
-                            Entry count: #{Entry.count}")
-          Rails.logger.info("the uid is: #{hentry.uid.to_s}")
           find_or_create_from_hentry(hentry)
-          Rails.logger.info("done finding or creating from hentry. 
-                            Entry count: #{Entry.count}")
         end
       rescue OpenURI::HTTPError => e
         Rails.logger.info("rescuing from: #{e}")
@@ -41,14 +36,14 @@ class Entry < ActiveRecord::Base
       Rails.logger.info("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
       find_or_create_by(uid: hentry.uid.to_s) do |entry|
         Rails.logger.info("processing entry: #{entry}")
-        Rails.logger.info("client(hentry): #{client(hentry)}")
         client = client(hentry)
         client_uid = client.uid.to_s
         client_name = client.name.to_s
         organization = client.g5_organization.to_s
 
         client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
-        Rails.logger.info("client app kinds: #{client_app_kinds}")
+        Rails.logger.info(client_uid)
+        Rails.logger.info(organization)
         entry.remote_apps_attributes = client_app_kinds.map do |kind|
           { kind: kind,
             client_uid: client_uid,
