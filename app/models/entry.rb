@@ -44,22 +44,6 @@ class Entry < ActiveRecord::Base
 
     def foo_find_or_create_from_hentry(hentry)
       Rails.logger("test")
-      Rails.logger("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
-      #find_or_create_by(uid: hentry.uid.to_s) do |entry|
-      #  client = client(hentry)
-      #  client_uid = client.uid.to_s
-      #  client_name = client.name.to_s
-      #  organization = client.g5_organization.to_s
-
-      #  client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
-      #  entry.remote_apps_attributes = client_app_kinds.map do |kind|
-      #   { kind: kind,
-      #      client_uid: client_uid,
-      #      client_name: client_name,
-      #      organization: organization }
-      #  end
-      #end
-      Rails.logger("ending find_or_create_from_hentry")
     end
 
     def client(hentry)
@@ -67,3 +51,4 @@ class Entry < ActiveRecord::Base
     end
   end # class << self
 end
+
