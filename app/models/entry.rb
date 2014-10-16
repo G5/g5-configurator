@@ -42,7 +42,7 @@ class Entry < ActiveRecord::Base
       Resque.enqueue(EntryConsumer)
     end
 
-    def foo(the_hentry)
+    def foo
       Rails.logger("test")
     end
 
