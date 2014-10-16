@@ -15,6 +15,7 @@ class Entry < ActiveRecord::Base
     end
 
     def consume_feed
+      Rails.logger.info("begin consume_feed from #{feed_url}")
       feed.entries.map do |hentry|
         Rails.logger.info("finding or creating from hentry: #{hentry}")
         find_or_create_from_hentry(hentry)
