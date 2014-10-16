@@ -16,9 +16,11 @@ class Entry < ActiveRecord::Base
 
     def consume_feed
       feed.entries.map do |hentry|
+        Rails.logger.info("finding or creating from hentry: #{hentry}")
         find_or_create_from_hentry(hentry)
       end
     rescue OpenURI::HTTPError => e
+      Rails.logger.info("rescuing from: #{e}")
       raise e unless /304 Not Modified/ =~ e.message
       []
     end
