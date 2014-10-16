@@ -57,7 +57,6 @@ class Entry < ActiveRecord::Base
         end
         Rails.logger.info("Entry setup complete. Valid?: #{entry.valid?}")
       end
-      Rails.logger.info("ending find_or_create_from_hentry")
     end
 
     def client(hentry)
