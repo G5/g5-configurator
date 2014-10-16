@@ -11,6 +11,7 @@ class Entry < ActiveRecord::Base
     end
 
     def feed
+      Rails.logger.info("Grabbing and parsing the feed")
       Microformats2.parse(feed_url)
     end
 
@@ -34,6 +35,7 @@ class Entry < ActiveRecord::Base
     end
 
     def find_or_create_from_hentry(hentry)
+      Rails.logger("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
       find_or_create_by(uid: hentry.uid.to_s) do |entry|
         client = client(hentry)
         client_uid = client.uid.to_s
@@ -48,6 +50,7 @@ class Entry < ActiveRecord::Base
             organization: organization }
         end
       end
+      Rails.logger("ending find_or_create_from_hentry")
     end
 
     def client(hentry)
