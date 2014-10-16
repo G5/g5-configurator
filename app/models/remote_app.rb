@@ -87,6 +87,8 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def create_instruction
+    Rails.logger.info("Creating instruction in remote_app")
+    Rails.logger.info("client app creator: #{client_app_creator")
     Instruction.create(
       target_app_kind: client_app_creator.kind,
       target_app_ids: [client_app_creator.id],
