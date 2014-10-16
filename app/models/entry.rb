@@ -22,8 +22,7 @@ class Entry < ActiveRecord::Base
           Rails.logger.info("finding or creating from hentry: #{hentry}, 
                             Entry count: #{Entry.count}")
           Rails.logger.info("the uid is: #{hentry.uid.to_s}")
-          Rails.logger.info random_method
-          foo_find_or_create_from_hentry(hentry)
+          find_or_create_from_hentry(hentry)
           Rails.logger.info("done finding or creating from hentry. 
                             Entry count: #{Entry.count}")
         end
@@ -34,16 +33,28 @@ class Entry < ActiveRecord::Base
       end
     end
 
-    def random_method
-      "got here"
-    end
-
     def async_consume_feed
       Resque.enqueue(EntryConsumer)
     end
 
-    def foo
-      Rails.logger("test")
+    def find_or_create_from_hentry(hentry)
+      Rails.logger.info("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
+      find_or_create_by(uid: hentry.uid.to_s) do |entry|
+        Rails.logger.info("processing entry: #{entry}")
+        client = client(hentry)
+        client_uid = client.uid.to_s
+        client_name = client.name.to_s
+        organization = client.g5_organization.to_s
+
+        client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
+        entry.remote_apps_attributes = client_app_kinds.map do |kind|
+          { kind: kind,
+            client_uid: client_uid,
+            client_name: client_name,
+            organization: organization }
+        end
+      end
+      Rails.logger("ending find_or_create_from_hentry")
     end
 
     def client(hentry)
@@ -51,4 +62,3 @@ class Entry < ActiveRecord::Base
     end
   end # class << self
 end
-
