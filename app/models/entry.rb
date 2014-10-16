@@ -21,6 +21,7 @@ class Entry < ActiveRecord::Base
         feed.entries.map do |hentry|
           Rails.logger.info("finding or creating from hentry: #{hentry}, 
                             Entry count: #{Entry.count}")
+          Rails.logger.info("the uid is: #{hentry.uid.to_s}")
           find_or_create_from_hentry(hentry)
           Rails.logger.info("done finding or creating from hentry. 
                             Entry count: #{Entry.count}")
