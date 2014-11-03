@@ -12,7 +12,7 @@ class Entry < ActiveRecord::Base
 
     def feed
       Rails.logger.info("Grabbing and parsing the feed")
-      Microformats2.parse(feed_url)
+      JSON.parse(feed_url)
     end
 
     def consume_feed

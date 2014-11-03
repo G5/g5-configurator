@@ -1,16 +1,26 @@
 require 'spec_helper'
 
 describe Entry do
+  let(:feed_url) { "spec/support/g5-hub-entries.json" }
+
   before do
-    Entry.stub(:feed_url).and_return("spec/support/g5-hub-entries.html")
+    Entry.stub(:feed_url).and_return(feed_url)
     Instruction.any_instance.stub(:async_webhook_target_apps)
   end
 
   describe ".feed" do
-    it "returns a Microformats2::Collection" do
-      Entry.feed.should be_kind_of Microformats2::Collection
+    it "parses the json feed" do
+      expect(JSON).to receive(:parse).with(feed_url)
+      Entry.feed
     end
   end
+
+  describe ".consume_feed" do
+    it "returns an Array of ActiveRecord Entries" do
+      expect(Entry.consume_feed).to eq("foo")
+    end
+  end
+
   describe ".consume_feed" do
     it "returns an Array of ActiveRecord Entries" do
       Entry.consume_feed.first.should be_a_kind_of(Entry)
