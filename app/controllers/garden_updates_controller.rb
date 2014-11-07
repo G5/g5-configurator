@@ -9,7 +9,9 @@ class GardenUpdatesController < ApplicationController
   end
 
   def create
-    Resque.enqueue(GardenUpdater, params["garden_update_type"], params["target_app_names"])
+    Resque.enqueue(GardenUpdater,
+                   params["garden_update_type"],
+                   params["target_app_names"])
 
     flash[:notice] = "Your app(s) are being updated"
     redirect_to :back
@@ -18,6 +20,7 @@ class GardenUpdatesController < ApplicationController
   private
 
   def app_scope
-    RemoteApp.where(kind: "content-management-system").select([:client_name, :name])
+    RemoteApp.where(kind: "content-management-system").
+              select([:client_name, :name])
   end
 end
