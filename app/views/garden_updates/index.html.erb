@@ -1,0 +1,27 @@
+<% title "Garden Updater" %>
+
+<%= form_tag "/garden_updates", html: { class: "form-horizantal" } do %>
+  <fieldset class="well">
+    <div class="control-group js-garden_update_type">
+      <%= label :garden_update_type, "Target Updater", class: "control-label" %>
+      <div class="controls">
+        <%= select_tag :garden_update_type, options_for_select(@garden_update_types) %>
+      </div>
+      <span class="help-block"></span>
+    </div>
+
+    <div class="control-group js-target_apps">
+      <%= label :target_app_names, "Target Apps", class: "control-label" %>
+      <div class="controls">
+        <%= select_tag :target_app_names, options_for_select(@cms_apps), multiple: true %>
+      </div>
+      <span class="help-block"></span>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= submit_tag "Update", class: "btn btn-success" %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>
