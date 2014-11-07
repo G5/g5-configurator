@@ -16,8 +16,10 @@ gem "microformats2", "2.0.1"
 gem "sass-rails",   "~> 4.0.0"
 gem "coffee-rails", "~> 4.0.0"
 gem "uglifier", ">= 1.0.3"
+gem "httparty"
 
 group :development, :test do
+  gem "resque_spec"
   gem "dotenv-rails", "~> 0.10.0"
   gem "sqlite3"
   gem "simplecov", "~> 0.8.2", require: false

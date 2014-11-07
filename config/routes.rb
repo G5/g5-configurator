@@ -8,6 +8,7 @@ Configurator::Application.routes.draw do
   resources :tags, only: [:show]
   resources :instructions, only: [:index, :show, :new, :create]
   resources :apps, only: [:index, :show]
+  resources :garden_updates, only: [:index, :create]
 
   post "consume_feed" => "webhooks#consume_feed"
 
