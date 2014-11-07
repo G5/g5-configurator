@@ -8,13 +8,14 @@ describe GardenUpdater do
   end
 
   describe ".perform" do
-    let(:app_names) { ["foo"] }
+    let(:app_names) { ["foo-bar-baz-something-really-reallly-long"] }
     let(:update_type) { "garden_web_layout" }
 
     it "PUTs to the updater path in each selected app" do
       expect(HTTParty).to receive(:put).
-        with("https://foo.herokuapp.com/garden_updates/" \
-             "garden_web_layout?access_token=the_token")
+        with("https://foo-bar-baz-something-really-r.herokuapp.com" \
+             "/garden_updates/garden_web_layout?" \
+             "access_token=the_token")
 
       GardenUpdater.perform(update_type, app_names)
     end
