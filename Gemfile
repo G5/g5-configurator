@@ -16,6 +16,7 @@ gem "microformats2", "2.0.1"
 gem "sass-rails",   "~> 4.0.0"
 gem "coffee-rails", "~> 4.0.0"
 gem "uglifier", ">= 1.0.3"
+gem "httparty"
 
 group :development, :test do
   gem "dotenv-rails", "~> 0.10.0"
