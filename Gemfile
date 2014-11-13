@@ -20,7 +20,8 @@ gem "httparty"
 
 group :development, :test do
   gem "resque_spec"
-  gem "dotenv-rails", "~> 0.10.0"
+  gem "dotenv-rails"
+  gem "dotenv-deployment"
   gem "sqlite3"
   gem "simplecov", "~> 0.8.2", require: false
   gem "rspec-rails", "~> 2.14.1"
