@@ -14,13 +14,14 @@ describe RemoteApp do
   describe ".client_app_creator_deployer" do
 
     before do
-      @app = RemoteApp.client_app_creator_deployer
-      AppDefinition.create_and_register({kind: "fookind",
-                                         human_name: "foo kind",
-                                         prefix: "fix",
-                                         repo_url: "repo_url"})
+      AppDefinition.create_and_register(kind: "fookind",
+                                        human_name: "foo kind",
+                                        prefix: "fix",
+                                        repo_url: "repo_url")
 
-      @app = RemoteApp.create(kind: "fookind", client_name: "client-na-m-m-m", client_uid: "https://g5-hub.herokuapp.com/clients/g5-c-1t5cfga8-clientuid-1-1-1")
+      @app = RemoteApp.create(kind: "fookind",
+                              client_name: "client-na-m-m-m",
+                              client_uid: "https://g5-hub.herokuapp.com/clients/g5-c-1t5cfga8-clientuid-1-1-1")
 
     end
 
