@@ -21,11 +21,11 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def client_urn
-    @client_id ||= client_uid.split("/").last
+    @client_urn ||= client_uid.split("/").last
   end
 
   def client_id
-    @client_id ||= client_uid.split("/").last.split("-").third
+    @client_id ||= client_urn.split("-").third
   end
 
   def git_repo
