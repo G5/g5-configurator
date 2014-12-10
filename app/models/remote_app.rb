@@ -20,6 +20,10 @@ class RemoteApp < ActiveRecord::Base
     end
   end
 
+  def client_urn
+    @client_id ||= client_uid.split("/").last
+  end
+
   def client_id
     @client_id ||= client_uid.split("/").last.split("-").third
   end
@@ -72,9 +76,9 @@ class RemoteApp < ActiveRecord::Base
     self.name ||= if non_client_app?
       with_orion_namespace(kind)
     elsif client_name
-      with_orion_namespace(
-        "#{app_definition.prefix}-#{client_id}-#{client_name.parameterize}"
-      )
+      formatter = G5HerokuAppNameFormatter::Formatter.new(client_urn,
+                                                          app_definition.prefix)
+      formatter.send("#{app_definition.prefix}_app_name")
     end
   end
 

@@ -15,11 +15,24 @@ describe RemoteApp do
 
     before do
       @app = RemoteApp.client_app_creator_deployer
+      AppDefinition.create_and_register({kind: "fookind",
+                                         human_name: "foo kind",
+                                         prefix: "fix",
+                                         repo_url: "repo_url"})
+
+      @app = RemoteApp.create(kind: "fookind", client_name: "client-na-m-m-m", client_uid: "https://g5-hub.herokuapp.com/clients/g5-c-1t5cfga8-clientuid-1-1-1")
+
     end
 
     subject {@app}
     it {should be_present}
     its(:name) {should be_present}
+    it "should not have a heroku_app_name ending in a hyphen" do
+      subject.heroku_app_name.should_not end_with "-"
+    end
+    it "should be named g5-fix-1t5cfga8-clientiuid" do
+      subject.name.should eq "g5-fix-1t5cfga8-clientuid-1-1"
+    end
     its(:git_repo) {should be_present}
     its(:heroku_app_name) {should be_present}
   end
