@@ -97,7 +97,8 @@ GEM
       configlet (~> 2.1)
       modelish (~> 0.3)
       oauth2
-    guard (2.8.2)
+    g5_heroku_app_name_formatter (0.0.2)
+    guard (2.10.2)
       formatador (>= 0.2.4)
       listen (~> 2.7)
       lumberjack (~> 1.0)
@@ -131,7 +132,7 @@ GEM
     json (1.8.1)
     jwt (1.0.0)
     kgio (2.9.2)
-    listen (2.7.12)
+    listen (2.8.3)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -306,6 +307,7 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   g5_authenticatable
+  g5_heroku_app_name_formatter
   guard-rspec (~> 4.2.8)
   guard-spork
   heroku_resque_autoscaler (~> 0.1.0)
