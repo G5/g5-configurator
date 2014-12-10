@@ -78,7 +78,9 @@ class RemoteApp < ActiveRecord::Base
     elsif client_name
       formatter = G5HerokuAppNameFormatter::Formatter.new(client_urn,
                                                           app_definition.prefix)
-      formatter.send("#{app_definition.prefix}_app_name")
+      app_name = formatter.send("#{app_definition.prefix}_app_name")
+      app_name.slice!("g5-")
+      with_orion_namespace(app_name)
     end
   end
 

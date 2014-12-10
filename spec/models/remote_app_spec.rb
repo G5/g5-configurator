@@ -43,7 +43,7 @@ describe RemoteApp do
     @app = RemoteApp.create!(
       kind: "content-management-system",
       client_name: "mock client",
-      client_uid: "mock uid",
+      client_uid: "https://g5-hub.herokuapp.com/clients/g5-c-1t5cfga8-clientuid-1-1-1",
       organization: "heroku organization"
     )
   end
