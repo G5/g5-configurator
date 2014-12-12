@@ -31,6 +31,7 @@ group :development, :test do
   gem "rb-fsevent", "~> 0.9.2"
   gem "capybara", "~> 2.2.1"
   gem "foreman"
+  gem "pry"
 end
 
 gem "codeclimate-test-reporter", group: :test, require: nil

@@ -112,7 +112,7 @@ describe RemoteApp do
     let(:remote_app) do
       RemoteApp.create(
         kind: kind,
-        client_uid: "http://example.org/g5-c-abc123-test-client",
+        client_uid: "http://example.org/test-c-abc123-test-client",
         client_name: "Test Client"
       )
     end
@@ -126,7 +126,7 @@ describe RemoteApp do
 
       context "with a client AppDefinition" do
         let(:kind) { "content-management-system" }
-        it { should eq("g5-cms-abc123-test-client") }
+        it { should eq("test-cms-abc123-test-client") }
       end
     end
 
