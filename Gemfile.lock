@@ -318,6 +318,7 @@ DEPENDENCIES
   microformats2 (= 2.0.1)
   newrelic_rpm
   pg
+  pry
   quiet_assets (~> 1.0.1)
   rails (= 4.1.7)
   rails_12factor
