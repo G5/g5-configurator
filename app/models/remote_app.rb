@@ -31,7 +31,11 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def heroku_app_name
-    name_formatter.send("#{app_definition.prefix}_app_name")
+    if non_client_app?
+      with_orion_namespace(kind)
+    elsif client_name
+      name_formatter.send("#{app_definition.prefix}_app_name")
+    end
   end
 
   def heroku_repo
@@ -71,11 +75,7 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def assign_name
-    self.name ||= if non_client_app?
-      with_orion_namespace(kind)
-    elsif client_name
-      heroku_app_name
-    end
+    self.name ||= heroku_app_name
   end
 
   def with_orion_namespace(s)

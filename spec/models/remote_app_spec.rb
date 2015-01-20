@@ -61,7 +61,7 @@ describe RemoteApp do
   its(:organization) { should be_present }
 
   describe "#heroku_app_name" do
-    subject { RemoteApp.new(name: "test-cms-abc123-test-client", client_uid: "http://example.org/test-c-abc123-test-client", kind: "content-management-system")}
+    subject { RemoteApp.new(name: "test-cms-abc123-test-client", client_uid: "http://example.org/test-c-abc123-test-client", kind: "content-management-system", client_name: "foo")}
 
     it "remains untouched" do
       subject.heroku_app_name.should eq("test-cms-abc123-test-client")

@@ -8,7 +8,7 @@ describe Instruction do
     @client_hub = RemoteApp.create!(
       kind: "content-management-system",
       client_name: "mock client",
-      client_uid: "mock uid"
+      client_uid: "g5-c-mock-uid"
     )
 
     @instruction = Instruction.create!(
