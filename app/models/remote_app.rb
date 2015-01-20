@@ -76,9 +76,7 @@ class RemoteApp < ActiveRecord::Base
     self.name ||= if non_client_app?
       with_orion_namespace(kind)
     elsif client_name
-      formatter = G5HerokuAppNameFormatter::Formatter.new(client_urn,
-                                                          app_definition.prefix)
-      formatter.send("#{app_definition.prefix}_app_name")
+      heroku_app_name
     end
   end
 
