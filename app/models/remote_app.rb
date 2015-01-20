@@ -33,7 +33,7 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def heroku_app_name
-    @heroku_app_name ||= name[0...HEROKU_APP_NAME_MAX_LENGTH]
+    name_formatter.send("#{app_definition.prefix}_app_name")
   end
 
   def heroku_repo
@@ -101,6 +101,10 @@ class RemoteApp < ActiveRecord::Base
 
   def client_app_creator
     self.class.client_app_creator
+  end
+
+  def name_formatter
+    @name_formatter ||= G5HerokuAppNameFormatter::Formatter.new(client_urn, app_definition.prefix)
   end
 
   def self.client_app_creator
