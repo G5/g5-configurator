@@ -11,7 +11,7 @@ class RemoteApp < ActiveRecord::Base
   validates :client_uid, presence: true, unless: :non_client_app?
   validates :name, presence: true, uniqueness: true
 
-  before_create :assign_name
+  before_validation :assign_name
   after_create :create_instruction
 
   def self.grouped_by_kind_options
@@ -73,7 +73,7 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def assign_name
-    self.name = if non_client_app?
+    self.name ||= if non_client_app?
       with_orion_namespace(kind)
     elsif client_name
       formatter = G5HerokuAppNameFormatter::Formatter.new(client_urn,
