@@ -61,23 +61,17 @@ describe RemoteApp do
   its(:organization) { should be_present }
 
   describe "#heroku_app_name" do
-    subject { RemoteApp.new(name: name).heroku_app_name }
+    subject { RemoteApp.new(name: "test-cms-abc123-test-client", client_uid: "http://example.org/test-c-abc123-test-client", kind: "content-management-system")}
 
-    context "when shorter than HEROKU_APP_NAME_MAX_LENGTH" do
-      let(:name) { "test" }
-
-      it "remains untouched" do
-        should eq("test")
-      end
+    it "remains untouched" do
+      subject.heroku_app_name.should eq("test-cms-abc123-test-client")
     end
 
-    context "when longer than HEROKU_APP_NAME_MAX_LENGTH" do
-      let(:name) { "!"*(RemoteApp::HEROKU_APP_NAME_MAX_LENGTH + 1) }
-
-      it "is truncated" do
-        should eq("!"*RemoteApp::HEROKU_APP_NAME_MAX_LENGTH)
-      end
+    it "should truncate if too long" do
+      subject.client_uid = "test-cms-abc123-test-foooooclient-123-456"
+      subject.heroku_app_name.should eq("test-cms-abc123-test-fooooocli")
     end
+
   end
 
   describe "#heroku_repo" do

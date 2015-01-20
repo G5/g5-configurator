@@ -1,6 +1,4 @@
 class RemoteApp < ActiveRecord::Base
-  HEROKU_APP_NAME_MAX_LENGTH = 30
-
   belongs_to :entry
 
   # habtm
