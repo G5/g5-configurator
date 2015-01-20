@@ -1,6 +1,4 @@
 class RemoteApp < ActiveRecord::Base
-  HEROKU_APP_NAME_MAX_LENGTH = 30
-
   belongs_to :entry
 
   # habtm
@@ -33,7 +31,11 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def heroku_app_name
-    @heroku_app_name ||= name[0...HEROKU_APP_NAME_MAX_LENGTH]
+    if non_client_app?
+      with_orion_namespace(kind)
+    elsif client_name
+      name_formatter.send("#{app_definition.prefix}_app_name")
+    end
   end
 
   def heroku_repo
@@ -73,13 +75,7 @@ class RemoteApp < ActiveRecord::Base
   end
 
   def assign_name
-    self.name ||= if non_client_app?
-      with_orion_namespace(kind)
-    elsif client_name
-      formatter = G5HerokuAppNameFormatter::Formatter.new(client_urn,
-                                                          app_definition.prefix)
-      formatter.send("#{app_definition.prefix}_app_name")
-    end
+    self.name ||= heroku_app_name
   end
 
   def with_orion_namespace(s)
@@ -101,6 +97,10 @@ class RemoteApp < ActiveRecord::Base
 
   def client_app_creator
     self.class.client_app_creator
+  end
+
+  def name_formatter
+    @name_formatter ||= G5HerokuAppNameFormatter::Formatter.new(client_urn, app_definition.prefix)
   end
 
   def self.client_app_creator
