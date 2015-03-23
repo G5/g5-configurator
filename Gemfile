@@ -26,8 +26,6 @@ group :development, :test do
   gem "simplecov", "~> 0.8.2", require: false
   gem "rspec-rails", "~> 2.14.1"
   gem "guard-rspec", "~> 4.2.8"
-  gem "guard-spork"
-  gem "spork"
   gem "rb-fsevent", "~> 0.9.2"
   gem "capybara", "~> 2.2.1"
   gem "foreman"
