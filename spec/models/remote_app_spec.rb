@@ -14,20 +14,18 @@ describe RemoteApp do
   describe ".client_app_creator_deployer" do
 
     before do
-      @app_def = AppDefinition.create_and_register(kind: "fookind",
-                                                   human_name: "foo kind",
-                                                   prefix: "fix",
-                                                   repo_url: "repo_url")
+      app_def = AppDefinition.new(kind: "fookind",
+                                  human_name: "foo kind",
+                                  prefix: "fix",
+                                  repo_url: "repo_url")
+      stub_const('AppDefinition::ALL', AppDefinition::ALL.clone << app_def)
+      stub_const('AppDefinition::CLIENT_APP_DEFINITIONS',
+                 AppDefinition::CLIENT_APP_DEFINITIONS.clone << app_def)
 
       @app = RemoteApp.create(kind: "fookind",
                               client_name: "client-na-m-m-m",
                               client_uid: "https://g5-hub.herokuapp.com/clients/g5-c-1t5cfga8-clientuid-1-1-1")
 
-    end
-
-    after do
-      AppDefinition::ALL.delete(@app_def)
-      AppDefinition::CLIENT_APP_DEFINITIONS.delete(@app_def)
     end
 
     subject {@app}
