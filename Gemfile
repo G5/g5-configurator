@@ -23,19 +23,20 @@ group :development, :test do
   gem "resque_spec"
   gem "dotenv-rails", "~> 0.11.1"
   gem "sqlite3"
-  gem "simplecov", "~> 0.8.2", require: false
   gem "rspec-rails", "~> 2.14.1"
-  gem "guard-rspec", "~> 4.2.8"
-  gem "guard-spork"
-  gem "spork"
+  gem "guard-rspec", require: false
   gem "rb-fsevent", "~> 0.9.2"
-  gem "capybara", "~> 2.2.1"
   gem "foreman"
   gem "pry"
 end
 
-gem "codeclimate-test-reporter", group: :test, require: nil
-gem "factory_girl_rails", group: :test
+group :test do
+  gem "codeclimate-test-reporter", require: false
+  gem "simplecov", "~> 0.8.2", require: false
+  gem "capybara", "~> 2.2.1"
+  gem "factory_girl_rails"
+  gem "webmock", require: 'webmock/rspec'
+end
 
 group :production do
   gem "unicorn"

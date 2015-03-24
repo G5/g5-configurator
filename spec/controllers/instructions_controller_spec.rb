@@ -13,10 +13,7 @@ describe InstructionsController do
     response.should render_template(:index)
   end
 
-  context "authorized user" do
-    before do
-      spec_sign_in
-    end
+  context "authorized user", auth_controller: true do
     it "new action should render new template" do
       get :new
      response.should render_template(:new)
@@ -38,10 +35,7 @@ describe InstructionsController do
     response.should render_template(:show)
   end
 
-  context "authenticated" do
-    before do
-      spec_sign_in
-    end
+  context "authenticated", auth_controller: true do
     it "create action should render new template when model is invalid" do
       Instruction.any_instance.stub(:valid?).and_return(false)
       post :create
@@ -57,10 +51,7 @@ describe InstructionsController do
     end
   end
 
-  context "authenticated" do
-    before do
-      spec_sign_in
-    end
+  context "authenticated", auth_controller: true do
     it "create action should redirect when model is valid" do
       Instruction.any_instance.stub(:valid?).and_return(true)
       post :create
