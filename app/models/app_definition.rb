@@ -8,6 +8,10 @@ class AppDefinition
     @all_kinds ||= ALL.map(&:kind)
   end
 
+  def self.updatable_kinds
+    all_kinds.reject {|a| a.in? ["client-app-creator", "client-app-creator-deployer", "client-app-updater"] }
+  end
+
   def self.for_kind(kind)
     AppDefinition::ALL.detect { |a| a.kind == kind }
   end

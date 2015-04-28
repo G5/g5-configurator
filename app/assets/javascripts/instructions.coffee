@@ -1,32 +1,39 @@
 $ = jQuery
+
+showSelect = (selector) ->
+  $(selector).show()
+  $(selector + " select").removeAttr("disabled")
+
+hideSelect = (selector) ->
+  $(selector).hide()
+  $(selector + " select").attr("disabled", "disabled")
+
 $ ->
-  $targetAppsSelect = $(".js-target_apps select")
-  $targetAppsOptgroups = $targetAppsSelect.children()
-  # when target app type changes
+  # at this point, the target app select widget has options for every app
+  targetAppOptions = $(".js-target_apps select").children()
+
+  # returns a subset of target apps above based on target app kind
+  optionsFor = (targetAppKind) ->
+    targetAppOptions.filter('optgroup[label$="' + targetAppKind + '"]')
+
+  # selecting a different target app kind will modify the form
   $(".js-target_app_kind").change ->
+    # hide specific form widgets
+    hideSelect(".js-target_apps");
+    hideSelect(".js-remote_app");
+    hideSelect(".js-updated_app_kinds");
+
     # find selected target app kind
     targetAppKind = $(".js-target_app_kind option:selected").attr("value")
-    if targetAppKind == ""
-      # initially, hide target apps and remote app
-      $(".js-target_apps").hide()
-      $(".js-target_apps select").attr("disabled", "disabled")
-      $(".js-remote_app").hide()
-      $(".js-remote_app select").attr("disabled", "disabled")
-    else
-      # filter target app options
-      $targetAppsSelect.empty()
-      blank = $targetAppsOptgroups.filter('option[value=""]')
-      matching_optgroup_options = $targetAppsOptgroups.filter('optgroup[label$="' + targetAppKind + '"]')
-      $targetAppsSelect.append(blank).append(matching_optgroup_options).find('option').clone()
-      # display target apps
-      $(".js-target_apps").show()
-      $(".js-target_apps select").removeAttr("disabled")
-      # if client-app-creator then show remote app else hide
-      if targetAppKind == "client-app-creator"
-        $(".js-remote_app").show()
-        $(".js-remote_app select").removeAttr("disabled")
-      else
-        $(".js-remote_app").hide()
-        $(".js-remote_app select").attr("disabled", "disabled")
-  # trigger appropriated hide/shows on page load
+
+    # only show target apps which match target app kind
+    $(".js-target_apps select").empty()
+    $(".js-target_apps select").append optionsFor(targetAppKind)
+
+    # show form widgets specific to this target app
+    showSelect(".js-target_apps") unless targetAppKind == ""
+    showSelect(".js-remote_app") if targetAppKind == "client-app-creator"
+    showSelect(".js-updated_app_kinds") if targetAppKind == "client-app-updater"
+
+  # manually trigger initial form setup
   $(".js-target_app_kind").change()

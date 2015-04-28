@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819191024) do
+ActiveRecord::Schema.define(version: 20150427201404) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "entries", force: true do |t|
     t.string   "uid"
@@ -33,14 +36,15 @@ ActiveRecord::Schema.define(version: 20140819191024) do
     t.datetime "updated_at"
   end
 
-  add_index "g5_authenticatable_users", ["email"], name: "index_g5_authenticatable_users_on_email", unique: true
-  add_index "g5_authenticatable_users", ["provider", "uid"], name: "index_g5_authenticatable_users_on_provider_and_uid", unique: true
+  add_index "g5_authenticatable_users", ["email"], name: "index_g5_authenticatable_users_on_email", unique: true, using: :btree
+  add_index "g5_authenticatable_users", ["provider", "uid"], name: "index_g5_authenticatable_users_on_provider_and_uid", unique: true, using: :btree
 
   create_table "instructions", force: true do |t|
     t.integer  "remote_app_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "target_app_kind"
+    t.string   "updated_app_kinds", default: [], array: true
   end
 
   create_table "instructions_target_apps", force: true do |t|
