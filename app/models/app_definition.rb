@@ -9,7 +9,7 @@ class AppDefinition
   end
 
   def self.updatable_kinds
-    all_kinds.reject {|a| a.in? ["client-app-creator", "client-app-creator-deployer", "client-app-updater"] }
+    ALL.map(&:prefix).reject! {|a| a.in? ["cau", "nil"]}
   end
 
   def self.for_kind(kind)

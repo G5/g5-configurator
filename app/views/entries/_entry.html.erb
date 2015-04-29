@@ -49,6 +49,16 @@
           </li>
         <% end %>
       </ul>
+      <% if instruction.updated_app_kinds.present? %>
+        <h4>Updated Apps</h4>
+        <ul>
+          <% instruction.updated_app_kinds.each do |kind| %>
+            <li class="p-g5-updated-app-kind h-card">
+              <%= link_to kind, nil, class: "p-g5-kind" %>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
       <% if instruction.remote_app.present? %>
         <h4>App</h4>
         <div class="p-g5-app h-card">
