@@ -24,6 +24,15 @@ describe AppDefinition do
     it { should include("content-management-system") }
   end
 
+  describe ".updatable_kinds" do
+    subject { AppDefinition.updatable_kinds }
+
+    it { should_not be_empty }
+    it { should include("cms") }
+    it { should_not include("cau") }
+    it { should_not include(nil) }
+  end
+
   describe ".for_kind" do
     subject { AppDefinition.for_kind(kind) }
 

@@ -14,7 +14,8 @@ describe Instruction do
     @instruction = Instruction.create!(
       target_app_kind: @client_app_creator.kind,
       target_app_ids: [@client_app_creator.id],
-      remote_app_id: @client_hub.id
+      remote_app_id: @client_hub.id,
+      updated_app_kinds: [nil, "", "cau", "cms"]
     )
   end
   subject { @instruction }
@@ -23,6 +24,7 @@ describe Instruction do
   its(:target_app_kind) { should be_present }
   its(:target_app_ids) { should be_present }
   its(:remote_app_id) { should be_present }
+  its(:updated_app_kinds) { should eq(["cms"]) }
 
   describe "#name" do
     subject { Instruction.new(target_app_kind: kind).name }
