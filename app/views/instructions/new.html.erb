@@ -25,6 +25,13 @@
       </div>
       <span class="help-block">This is the app that the instruction will be performed on.</span>
     </div>
+    <div class="control-group js-updated_app_kinds">
+      <%= f.label :target_app_kind, "Updated App Kinds", class: "control-label" %>
+      <div class="controls">
+        <%= f.select :updated_app_kinds, AppDefinition.updatable_kinds, {}, multiple: true %>
+      </div>
+      <span class="help-block">This is the kind of app that will updated.</span>
+    </div>
     <div class="control-group">
       <div class="controls">
         <%= f.submit class: "btn btn-success" %></p>
