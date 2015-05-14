@@ -38,7 +38,7 @@ describe Entry do
     end
     it "creates four RemoteApps with appropriate attrs" do
       expect { Entry.find_or_create_from_hentry(@entry) }.to(
-        change(RemoteApp, :count).by(7))
+        change(RemoteApp, :count).by(9))
       expect(Entry.last.remote_apps.last.organization).to eq("Test-Organization")
     end
   end
