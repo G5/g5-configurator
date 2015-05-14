@@ -21,6 +21,9 @@ class Instruction < ActiveRecord::Base
 
   # webhooks make things speedy
   after_save :async_webhook_target_apps
+  before_validation do |i|
+    i.updated_app_kinds.select! { |k| k.in?(AppDefinition.updatable_kinds) }
+  end
 
   def created_at_computer_readable
     created_at.utc.to_s(:computer)

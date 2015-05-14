@@ -8,6 +8,10 @@ class AppDefinition
     @all_kinds ||= ALL.map(&:kind)
   end
 
+  def self.updatable_kinds
+    ALL.map(&:prefix).reject! {|a| a.in? ["cau", "nil"]}
+  end
+
   def self.for_kind(kind)
     AppDefinition::ALL.detect { |a| a.kind == kind }
   end
