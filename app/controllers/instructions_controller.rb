@@ -2,7 +2,7 @@ class InstructionsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create]
 
   def index
-    @instructions = Instruction.order('created_at desc').limit(100)
+    @instructions = Instruction.order('created_at desc').limit(50)
   end
 
   def show

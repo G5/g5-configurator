@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   def index
-    @instructions = Instruction.order('updated_at DESC').limit(100)
+    @instructions = Instruction.order('updated_at DESC').limit(50)
     fresh_when last_modified: @instructions.maximum(:updated_at)
   end
 
