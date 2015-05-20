@@ -12,9 +12,12 @@ class RemoteApp < ActiveRecord::Base
   before_validation :assign_name
   after_create :create_instruction
 
+  default_scope { order('client_name') }
+
   def self.grouped_by_kind_options
     AppDefinition.all_kinds.map do |kind|
-      [kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
+      remote_app = RemoteApp.where(kind: kind)
+      [kind, remote_app.map {|app| ["#{app.try(:client_name)} - #{app.name}", app.id] } ]
     end
   end
 
