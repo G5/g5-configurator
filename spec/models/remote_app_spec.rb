@@ -5,6 +5,18 @@ describe RemoteApp do
     Resque.stub(:enqueue)
   end
 
+  describe '.grouped_by_kind_options' do
+    subject(:options) { RemoteApp.grouped_by_kind_options }
+
+    let(:expected) do
+      ["bar - client-app-creator", [["g5-client-app-creator", 2152]]]
+    end
+
+    it 'displays the client name' do
+      expect(options.first.first).to eq(expected.first)
+    end
+  end
+
   describe ".client_app_creator" do
     it "exists" do
       RemoteApp.client_app_creator.should be_present
