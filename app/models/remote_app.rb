@@ -17,9 +17,7 @@ class RemoteApp < ActiveRecord::Base
   def self.grouped_by_kind_options
     AppDefinition.all_kinds.map do |kind|
       remote_app = RemoteApp.where(kind: kind)
-      client_name = remote_app.first.try(:client_name)
-
-      [kind, remote_app.map {|app| ["#{client_name} - #{app.name}", app.id] } ]
+      [kind, remote_app.map {|app| ["#{app.try(:client_name)} - #{app.name}", app.id] } ]
     end
   end
 
