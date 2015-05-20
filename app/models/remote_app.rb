@@ -14,12 +14,6 @@ class RemoteApp < ActiveRecord::Base
 
   default_scope { order('client_name') }
 
-  #def self.grouped_by_kind_options
-    #AppDefinition.all_kinds.map do |kind|
-      #[kind, RemoteApp.where(kind: kind).map {|app| [app.name, app.id] } ]
-    #end
-  #end
-
   def self.grouped_by_kind_options
     AppDefinition.all_kinds.map do |kind|
       remote_app = RemoteApp.where(kind: kind)
