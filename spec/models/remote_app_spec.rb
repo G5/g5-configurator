@@ -9,7 +9,7 @@ describe RemoteApp do
     subject(:options) { RemoteApp.grouped_by_kind_options }
 
     let(:expected) do
-      ["bar - client-app-creator", [["g5-client-app-creator", 2152]]]
+      ["foo - client-app-creator", [["g5-client-app-creator", 2152]]]
     end
 
     it 'displays the client name' do
