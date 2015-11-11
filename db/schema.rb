@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427201404) do
+ActiveRecord::Schema.define(version: 20151111135724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "entries", force: true do |t|
     t.string   "uid"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "g5_authenticatable_users", force: true do |t|
@@ -41,24 +41,24 @@ ActiveRecord::Schema.define(version: 20150427201404) do
 
   create_table "instructions", force: true do |t|
     t.integer  "remote_app_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "target_app_kind"
-    t.string   "updated_app_kinds", default: [], array: true
+    t.string   "updated_app_kinds", default: [],              array: true
   end
 
   create_table "instructions_target_apps", force: true do |t|
     t.integer  "instruction_id"
     t.integer  "target_app_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "remote_apps", force: true do |t|
     t.integer  "entry_id"
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "kind"
     t.string   "git_repo"
     t.string   "client_uid"
