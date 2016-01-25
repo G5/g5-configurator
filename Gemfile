@@ -17,7 +17,6 @@ gem 'sass-rails',   '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 gem 'httparty'
-gem 'g5_heroku_app_name_formatter'
 
 group :development, :test do
   gem 'resque_spec'
@@ -46,4 +45,8 @@ group :production do
   gem 'newrelic_rpm'
   gem 'honeybadger'
   gem 'lograge'
+end
+
+source "https://#{ENV['FURY_AUTH']}@gem.fury.io/g5dev/" do
+  gem 'g5_heroku_app_name_formatter'
 end
