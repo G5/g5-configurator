@@ -1,18 +1,22 @@
 language: ruby
 rvm:
-  - 2.1.5
+- 2.1.5
 script:
-  - RAILS_ENV=test bundle exec rake db:schema:load --trace
-  - RAILS_ENV=test bundle exec rake db:migrate
-  - bundle exec rspec
+- RAILS_ENV=test bundle exec rake db:schema:load --trace
+- RAILS_ENV=test bundle exec rake db:migrate
+- bundle exec rspec
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - psql -c 'create database g5_configurator_test;' -U postgres
+- cp config/database.travis.yml config/database.yml
+- psql -c 'create database g5_configurator_test;' -U postgres
 notifications:
   campfire:
     rooms:
       secure: aI6dyzNBa2lolmisnfJzW3tQn+6p3Fa6OT1Tf2SCI7pF5cgFot8Q2fh6rKWOZBPbjIs1iaJsAc8qcnajJkntuqQAk0NdgStzNvECjEdCDmmrwfBsVLbh58GosuQxCsiTDQs56oWTClQbYP025V2wr5U9qXy9KU9gKK5lS4tGMXg=
     template:
-          - "%{repository}#%{build_number} %{message} (%{branch} - %{commit} : %{author}) Change view : %{compare_url} Build details : %{build_url}"
+    - "%{repository}#%{build_number} %{message} (%{branch} - %{commit} : %{author})
+      Change view : %{compare_url} Build details : %{build_url}"
     on_success: change
     on_failure: always
+env:
+  matrix:
+    secure: CN+ZEBPi3OsXWUjf57gFSI9M6zU2qDrl3+WvFH1uW43UH6Np0moRK0HAtE/qeIbZy9SVLtUnAUpHz5Kh2lEURXz1BnOSSsaXOA7MU7k/hGLYbwgPG+sZKqIK+9zuJdjqZZ3f+uwpk6L6icWml+V8pDZFCIVfD42+UpRiDG7CnuQ=
