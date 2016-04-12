@@ -1,6 +1,7 @@
 require 'resque/server'
 
 Configurator::Application.routes.draw do
+  mount G5Updatable::Engine => '/g5_updatable'
   mount G5Authenticatable::Engine => '/g5_auth'
   mount Resque::Server, :at => "/resque"
 
