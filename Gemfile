@@ -49,5 +49,5 @@ end
 
 source "https://#{ENV['FURY_AUTH']}@gem.fury.io/g5dev/" do
   gem 'g5_heroku_app_name_formatter'
-  gem 'g5_updatable', '~> 0.16.beta'
+  gem 'g5_updatable', '~> 0.16.0'
 end

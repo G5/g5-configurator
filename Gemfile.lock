@@ -116,7 +116,7 @@ GEM
       g5_authentication_client (>= 0.2)
       httparty
     g5_heroku_app_name_formatter (0.3.6)
-    g5_updatable (0.16.beta)
+    g5_updatable (0.16.0)
       active_model_serializers (~> 0.8)
       activesupport
       g5_foundation_client (~> 0.4.0)
@@ -346,7 +346,7 @@ DEPENDENCIES
   foreman
   g5_authenticatable
   g5_heroku_app_name_formatter!
-  g5_updatable (~> 0.16.beta)!
+  g5_updatable (~> 0.16.0)!
   guard-rspec
   heroku_resque_autoscaler (~> 0.1.0)
   honeybadger
