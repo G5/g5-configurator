@@ -20,11 +20,11 @@ describe Entry do
       before { create_entry }
 
       it "doesn't create an entry" do
-        expect {create_entry}.not_to change{Entry.where(uid: updatable_client.uid).count}
+        expect {create_entry}.not_to change{Entry.count}
       end
 
       it "doesn't create remote apps" do
-        expect {create_entry}.not_to change{RemoteApp.where(client_uid: updatable_client.uid).count}
+        expect {create_entry}.not_to change{RemoteApp.count}
       end
     end
   end
