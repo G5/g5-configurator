@@ -18,10 +18,11 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 gem 'httparty'
 
+gem 'pg'
+
 group :development, :test do
   gem 'resque_spec'
   gem 'dotenv-rails', '~> 0.11.1'
-  gem 'sqlite3'
   gem 'rspec-rails', '~> 2.14.1'
   gem 'guard-rspec', require: false
   gem 'rb-fsevent', '~> 0.9.2'
@@ -40,7 +41,6 @@ end
 
 group :production do
   gem 'unicorn'
-  gem 'pg'
   gem 'rails_12factor'
   gem 'newrelic_rpm'
   gem 'honeybadger'
