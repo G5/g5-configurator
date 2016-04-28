@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/G5/g5-configurator.png?branch=master)](https://travis-ci.org/G5/g5-configurator)
 [![Code Climate](https://codeclimate.com/repos/5312aa1de30ba021d6012ce7/badges/2a9f87dd22b70fe994e4/gpa.png)](https://codeclimate.com/repos/5312aa1de30ba021d6012ce7/feed)
 
+### This app is no longer used or maintained. So, you're probably in the wrong spot.
+
 Deployment instructions are created manually by G5 and automagically from Client Feed.
 
 * Receives Webhook from Client Feed Publisher
