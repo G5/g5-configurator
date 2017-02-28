@@ -5,58 +5,15 @@ class Entry < ActiveRecord::Base
   validates :uid, uniqueness: true
   scope :recently_modified, -> { order("updated_at DESC") }
 
-  class << self
-    def feed_url
-      G5HubService.feed_url
-    end
-
-    def feed
-      Rails.logger.info("Grabbing and parsing the feed")
-      Microformats2.parse(feed_url)
-    end
-
-    def consume_feed
-      begin
-        Rails.logger.info("begin consume_feed from #{feed_url}")
-        feed.entries.map do |hentry|
-          Rails.logger.info("entries count: #{Entry.count}")
-          entry = find_or_create_from_hentry(hentry)
-          Rails.logger.info("entries count: #{Entry.count}")
-          entry
-        end
-      rescue OpenURI::HTTPError => e
-        Rails.logger.info("rescuing from: #{e}")
-        raise e unless /304 Not Modified/ =~ e.message
-        []
+  def self.create_from_updatable_client(g5_updatable_client)
+    find_or_create_by(uid: g5_updatable_client.uid) do |entry|
+      client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
+      entry.remote_apps_attributes = client_app_kinds.map do |kind|
+        { kind: kind,
+          client_uid: g5_updatable_client.uid,
+          client_name: g5_updatable_client.name,
+          organization: g5_updatable_client.organization }
       end
     end
-
-    def async_consume_feed
-      Resque.enqueue(EntryConsumer)
-    end
-
-    def find_or_create_from_hentry(hentry)
-      Rails.logger.info("begin find_or_create_from_hentry, find_or_create_by: #{hentry.uid.to_s}")
-      find_or_create_by(uid: hentry.uid.to_s) do |entry|
-        Rails.logger.info("processing entry: #{entry}")
-        client = client(hentry)
-        client_uid = client.uid.to_s
-        client_name = client.name.to_s
-        organization = client.g5_organization.to_s
-
-        client_app_kinds = AppDefinition::CLIENT_APP_DEFINITIONS.map(&:kind)
-        entry.remote_apps_attributes = client_app_kinds.map do |kind|
-          { kind: kind,
-            client_uid: client_uid,
-            client_name: client_name,
-            organization: organization }
-        end
-        Rails.logger.info("Entry setup complete. Valid?: #{entry.valid?}")
-      end
-    end
-
-    def client(hentry)
-      Microformats2.parse(hentry.content.to_s).card
-    end
-  end # class << self
+  end
 end
