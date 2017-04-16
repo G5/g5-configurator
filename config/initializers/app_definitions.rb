@@ -1,5 +1,5 @@
-CLIENT_APP_CREATOR_KIND = "client-app-creator"
-CLIENT_APP_CREATOR_DEPLOYER_KIND = "client-app-creator-deployer"
+CLIENT_APP_CREATOR_KIND = ENV["CLIENT_APP_CREATOR_KIND"] || "client-app-creator"
+CLIENT_APP_CREATOR_DEPLOYER_KIND = ENV["CLIENT_APP_CREATOR_DEPLOYER_KIND"] || "client-app-creator-deployer"
 
 app_definitions_path = Rails.root.join("config", "app_definitions.yml.erb")
 parsed_app_definitions = ERB.new(File.read(app_definitions_path)).result
